@@ -5,3 +5,14 @@
 # Altre cartelle macOS comuni
 .AppleDouble
 .LSOverride
+# Project Hub specific
+*.pyc
+__pycache__/
+.env
+app/backend/*.db
+.vscode/
+.idea/
+node_modules/
+
+# OS specific (aggiuntivi)
+Thumbs.db

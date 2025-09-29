@@ -1,0 +1,6 @@
+{
+  "app_name": "Claude Project Hub",
+  "version": "1.0.0",
+  "projects_dir": "projects/",
+  "templates_dir": "templates/"
+}
