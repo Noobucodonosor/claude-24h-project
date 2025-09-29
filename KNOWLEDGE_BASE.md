@@ -1,511 +1,251 @@
-# 🧠 Knowledge Base - Claude Project Hub
+# 🎯 Claude Project Hub - Knowledge Base
 
-**Context globale per Claude AI - Da caricare all'inizio di ogni sessione**
-
----
-
-## 🎯 CONCETTO CORE
-
-### Cos'è Claude Project Hub
-**Meta-ambiente per sviluppo progetti multipli con assistenza AI integrata**
-
-**NON È**:
-- ❌ Un singolo progetto con deadline
-- ❌ Un tracker task generico
-- ❌ Un sistema limitato a 3 obiettivi
-
-**È**:
-- ✅ Piattaforma permanente per gestire N progetti
-- ✅ Sistema standardizzato per sottomettere nuovi progetti
-- ✅ Hub centrale con Claude contestualizzato per ogni progetto
-- ✅ Framework scalabile per infiniti progetti futuri
-
-### Analogia
-```
-Spotify = piattaforma per ascoltare musica
-Claude Hub = piattaforma per sviluppare progetti con AI
-```
+**QUICK CONTEXT**: Meta-system for managing unlimited AI-assisted projects with standardized workflows.
 
 ---
 
-## 🏗️ ARCHITETTURA SISTEMA
+## ⚡ CLAUDE QUICK START
 
-### Layer 1: Project Storage
-**Funzione**: Repository strutturato di tutti i progetti
+### What You Need to Know Immediately
+- **🎯 PURPOSE**: I manage multiple projects (MTG, Cucina, Università, etc.) using standardized PROJECT.md files
+- **📂 STRUCTURE**: Each project in `projects/[name]/PROJECT.md` with complete context
+- **🤖 YOUR ROLE**: Read PROJECT.md, understand current phase, generate production code
+- **🚀 WORKFLOW**: Context → Code → Iterate → Deliverables
 
-```
-projects/
-├── mtg-webapp/          ← Progetto Magic: The Gathering
-├── cucina-vegana/       ← Sistema gestione cucina
-├── universita/          ← Tools studio universitario
-└── [futuro-progetto]/   ← Infiniti progetti possibili
-```
-
-**Ogni progetto contiene**:
-- `PROJECT.md` - Definizione completa (obiettivi, stack, fasi)
-- `context/` - File supporto specifici progetto
-- `deliverables/` - Output e risultati
-
-### Layer 2: Claude Integration
-**Funzione**: AI contestualizzato per ogni progetto
-
-**Workflow**:
-1. User apre progetto X
-2. System carica `PROJECT.md` + context files
-3. Claude riceve knowledge base specifica progetto
-4. User lavora con Claude "esperto" del progetto
-5. Output salvato in `deliverables/`
-
-**Modalità Integration**:
-- **Manuale**: Copia-incolla PROJECT.md in chat Claude
-- **GitHub**: Claude legge intero repository
-- **API** (futuro): Claude integrato direttamente nell'app
-
-### Layer 3: User Interface
-**Funzione**: Dashboard per navigare/gestire progetti
-
-**Features**:
-- Lista progetti con status (Active/Paused/Completed)
-- Progress tracking per progetto
-- Quick access a context files
-- Export knowledge base per Claude
-- Template generator per nuovi progetti
+### Current Active Projects (3)
+1. **🎮 MTG Web App** (Planning, 40%) - AI deck generator + live referee
+2. **🥗 Cucina Vegana** (Active, 65%) - Meal planning system  
+3. **📚 Università** (Active, 30%) - Study optimization tools
 
 ---
 
-## 📋 FORMATO STANDARD PROGETTO
+## 📋 PROJECT STANDARD FORMAT
 
-### Struttura PROJECT.md
-```markdown
-# [Nome Progetto]
-
-## META
-- **Tipo**: [WebApp/Study/Creative/Research/Other]
-- **Priorità**: [Alta/Media/Bassa]
-- **Durata Stimata**: [X ore/giorni/settimane]
-- **Status**: [Planning/Active/Paused/Completed]
-- **Data Inizio**: [YYYY-MM-DD]
-- **Deadline**: [YYYY-MM-DD o N/A]
-
-## CONTEXT
-[Problema da risolvere / Obiettivo da raggiungere]
-[Background necessario per capire il progetto]
-
-## OBIETTIVI
-
-### Primario
-[L'obiettivo principale del progetto]
-
-### Secondari
-- [Obiettivo 2]
-- [Obiettivo 3]
-
-## STACK/TOOLS
-[Tecnologie, linguaggi, framework, metodologie]
-
-**Tech Stack**:
-- Backend: [...]
-- Frontend: [...]
-- Database: [...]
-- AI/ML: [...]
-
-**Tools**:
-- Development: [...]
-- Design: [...]
-- Other: [...]
-
-## FASI SVILUPPO
-
-### Fase 1: [Nome Fase]
-**Obiettivo**: [Cosa si raggiunge]
-**Deliverable**: [Output concreti]
-**Duration**: [Stima tempo]
-**Status**: [Not Started/In Progress/Completed]
-
-### Fase 2: [Nome Fase]
-[...]
-
-## DELIVERABLE FINALI
-- [ ] [Output 1]
-- [ ] [Output 2]
-- [ ] [Output 3]
-
-## NOTE/VINCOLI
-[Limitazioni tecniche, vincoli di budget, requisiti speciali]
-
-## RISORSE
-- [Link documentazione]
-- [Tutorial rilevanti]
-- [API docs]
-
-## LOG PROGETTO
-### [Data] - [Evento]
-[Descrizione progresso/decisioni]
+Every project follows this structure:
+```
+projects/[name]/
+├── PROJECT.md          ← Complete specification (follows template)
+├── context/            ← Supporting files
+└── deliverables/       ← Generated outputs/code
 ```
 
-### Vantaggi Formato Standard
-1. **Claude legge velocemente** - Struttura prevedibile
-2. **Context completo** - Tutte info in un documento
-3. **Riutilizzabile** - Template per nuovi progetti
-4. **Tracciabile** - Status e progress chiari
-5. **Versionabile** - Git-friendly
+### PROJECT.md Contains
+- **META**: Type, priority, status, timeline
+- **CONTEXT**: Problem, background, goals
+- **TECH STACK**: Specific technologies, constraints
+- **PHASES**: Development steps with deliverables
+- **CURRENT STATUS**: Where we are, next steps
 
 ---
 
-## 🔄 WORKFLOW OPERATIVO
+## 🤖 CLAUDE INTEGRATION RULES
 
-### Scenario A: Nuovo Progetto
+### When Starting Work
+1. **Read PROJECT.md completely** for context
+2. **Identify current phase** and progress
+3. **Generate complete code** (no placeholders/TODOs)
+4. **Validate against project constraints**
+5. **Suggest next logical steps**
 
-#### Step 1: Creazione
+### Code Generation Standards
+- ✅ **Complete implementations** ready to run
+- ✅ **Error handling** included
+- ✅ **Comments** for complex logic
+- ✅ **File/folder structure** specified
+- ❌ **No placeholders** or TODO comments
+
+### Session Format
+```
+"📋 Project: [Name]
+🎯 Goal: [Primary objective]
+📍 Phase: [Current phase]
+🔧 Stack: [Key technologies]
+
+What should we build/fix/optimize?"
+```
+
+---
+
+## 🏗️ SYSTEM ARCHITECTURE
+
+### 3-Layer Design
+1. **Storage Layer**: Structured file system (`projects/`, `templates/`, `docs/`)
+2. **Integration Layer**: Claude context loading + code generation
+3. **Interface Layer**: Dashboard HTML app for project management
+
+### Workflow Loop
+```
+Select Project → Load Context → Work with Claude → Save Deliverables → Update Progress → Commit
+```
+
+---
+
+## 📊 PROJECT TYPES & TEMPLATES
+
+### Available Templates
+- **WebApp**: Full-stack applications (FastAPI, React, etc.)
+- **Study**: Academic/learning projects (Obsidian, methodologies)
+- **Creative**: Lifestyle/design projects (recipes, planning)
+- **Tool**: Utilities and automation scripts
+
+### Project Status Levels
+- **Planning**: Defining scope, architecture
+- **Active**: Development in progress  
+- **Paused**: Temporarily on hold
+- **Completed**: Delivered and documented
+
+---
+
+## 🎯 PROJECT EXAMPLES
+
+### 🎮 MTG Web App (Complex)
+- **Goal**: AI deck generator + live audio referee
+- **Stack**: FastAPI + React + MLX (Apple Silicon)
+- **Phase**: Environment setup (dependencies, MLX config)
+- **Complexity**: High (ML, real-time audio, monetization)
+
+### 🥗 Cucina Vegana (Medium)  
+- **Goal**: Complete vegan kitchen management
+- **Stack**: HTML/JS + JSON database
+- **Phase**: Recipe database completion
+- **Complexity**: Medium (data processing, UI)
+
+### 📚 Università (Medium)
+- **Goal**: Evidence-based study system
+- **Stack**: Obsidian + Claude + Anki
+- **Phase**: Note system templates
+- **Complexity**: Medium (methodology, workflow)
+
+---
+
+## 🚀 COMMON COMMANDS
+
+### Project Selection
 ```bash
-# Crea cartella progetto
-mkdir projects/nome-nuovo-progetto
+# Navigate to project
+cd projects/[project-name]/
 
-# Copia template
-cp PROJECT_TEMPLATE.md projects/nome-nuovo-progetto/PROJECT.md
+# Load in Claude
+"Work on [project-name]. Read projects/[name]/PROJECT.md for context."
 ```
 
-#### Step 2: Definizione con Claude
-```
-User → Claude:
-"Ho un'idea per un progetto [descrizione breve].
-Aiutami a compilare il PROJECT.md seguendo il template standard."
-
-Claude → User:
-[Genera PROJECT.md completo basato su template]
-```
-
-#### Step 3: Sviluppo
-```
-User apre dashboard → Seleziona progetto → "Open in Claude"
-Claude carica context → Inizia sviluppo assistito
-Output salvato in deliverables/
-```
-
-### Scenario B: Sessione Lavoro Progetto Esistente
-
-#### Preparazione Sessione
-1. **Carica Repository in Claude**:
-   - Chat Claude → "Add from GitHub"
-   - URL: `https://github.com/[user]/claude-project-hub`
-   
-2. **Specifica Progetto**:
-   ```
-   "Oggi lavoriamo sul progetto [nome].
-   Leggi projects/[nome]/PROJECT.md per il context completo."
-   ```
-
-3. **Claude Conferma**:
-   ```
-   "Ho letto il progetto [nome]. Obiettivo: [X].
-   Fase attuale: [Y]. Cosa sviluppiamo?"
-   ```
-
-#### Durante Sviluppo
-- User chiede features/codice/documenti
-- Claude genera basandosi su context progetto
-- User salva output in `deliverables/`
-- Aggiorna `PROJECT.md` con log progresso
-
-#### Fine Sessione
+### New Project Creation
 ```bash
-git add projects/[nome]/
-git commit -m "Progetto [nome]: [descrizione progresso]"
+# Create structure
+mkdir -p projects/new-project/{context,deliverables}
+cp PROJECT_TEMPLATE.md projects/new-project/PROJECT.md
+
+# Ask Claude to compile template
+"New project: [idea]. Help compile PROJECT_TEMPLATE.md"
+```
+
+### Progress Updates
+```bash
+# After work session
+git add projects/[name]/
+git commit -m "[Project]: [what accomplished]"
 git push
 ```
 
-### Scenario C: Context Switch Rapido
+---
 
-**Problema**: Lavorare su più progetti nella stessa giornata
+## ⚙️ TECHNICAL CONSTRAINTS
 
-**Soluzione**:
-```
-Session 1 (MTG): "Focus su projects/mtg-webapp/PROJECT.md"
-[...sviluppo...]
+### Development Environment
+- **OS**: macOS (Apple Silicon M1/M2/M3)
+- **Python**: 3.12+ for all Python projects
+- **Git**: All projects version controlled
+- **Editor**: VS Code recommended
 
-Session 2 (Cucina): "Context switch: projects/cucina-vegana/PROJECT.md"
-[...sviluppo...]
+### AI/ML Specific (Apple Silicon)
+- **Framework**: MLX for local model optimization
+- **Models**: Llama-3-8B, Whisper, local deployment preferred
+- **Memory**: 16GB unified memory limit consideration
+- **Performance**: CPU + Neural Engine, no external GPU
 
-Session 3 (MTG): "Ritorno a MTG, recap ultimo stato"
-```
-
-Claude mantiene context separato per progetto grazie a PROJECT.md strutturato.
+### General Principles
+- **Local-first**: Offline capability preferred
+- **Privacy**: Sensitive data stays local
+- **Open source**: Favor FOSS tools when possible
+- **Simplicity**: Working solution > perfect architecture
 
 ---
 
-## 🤖 REGOLE INTERAZIONE CLAUDE
+## 🎯 SUCCESS METRICS
 
-### All'inizio Sessione
-**Claude DEVE**:
-1. Confermare progetto su cui lavorare
-2. Leggere `PROJECT.md` completo
-3. Identificare fase attuale
-4. Proporre next step o chiedere direzione
+### For Claude Sessions
+- **Context Load Time**: <30 seconds to understand project
+- **Code Quality**: Production-ready, complete implementations
+- **Progress**: Measurable advancement each session
+- **Documentation**: Updated PROJECT.md logs
 
-**Formato Conferma**:
-```
-"📋 Progetto: [Nome]
-🎯 Obiettivo: [Obiettivo primario]
-📍 Fase Attuale: [X]
-✅ Status: [Y]
-
-Cosa sviluppiamo oggi?"
-```
-
-### Durante Sviluppo
-**Claude DEVE**:
-- Generare codice completo (no placeholder)
-- Usare artifacts per codice >20 righe
-- Validare output rispetto a obiettivi progetto
-- Suggerire prossimi step
-- Mantenere coerenza con stack tech dichiarato
-
-**Claude NON DEVE**:
-- Chiedere info già in PROJECT.md
-- Proporre tech non nel stack dichiarato (senza chiedere)
-- Generare codice incompleto
-- Dimenticare vincoli/note del progetto
-
-### Fine Sessione
-**Claude DEVE**:
-- Riassumere cosa completato
-- Suggerire aggiornamento PROJECT.md (log, status)
-- Indicare next step per prossima sessione
+### For Projects
+- **Completion Rate**: Projects reach "Completed" status
+- **Time Efficiency**: Faster development with AI assistance
+- **Code Quality**: Maintainable, well-documented outputs
+- **Learning**: Skills/knowledge gained per project
 
 ---
 
-## 📂 PROGETTI ATTIVI
+## 📚 QUICK REFERENCE
 
-### 🎮 MTG Web App
-**Path**: `projects/mtg-webapp/`
+### Key Files
+- `KNOWLEDGE_BASE.md` ← This file (system overview)
+- `PROJECT_TEMPLATE.md` ← Standard template for new projects  
+- `README.md` ← Repository overview and setup
+- `app/frontend/index.html` ← Project dashboard
 
-**Quick Context**:
-- Tipo: Web Application complessa
-- Stack: FastAPI + React + Claude API + Llama-3-8B
-- Obiettivo: Generatore mazzi MTG + Arbitro AI live con audio
-- Fase: 1 - Setup Ambiente
-- Priorità: Alta
+### Git Workflow
+- `main` branch for stable versions
+- Feature branches for experiments
+- Frequent commits with descriptive messages
+- Push regularly for backup
 
-**Peculiarità**:
-- Usa Apple Silicon optimization (MLX)
-- Integrazione audio real-time (Faster-Whisper)
-- Monetizzazione via Stripe
-- Fine-tuning LLM locale
-
-**Quando lavori su MTG**: Focus su performance, ML optimization, audio pipeline
-
-### 🥗 Cucina Vegana
-**Path**: `projects/cucina-vegana/`
-
-**Quick Context**:
-- Tipo: Creative/Lifestyle
-- Tools: Recipe database, meal planner, shopping list
-- Obiettivo: Sistema completo gestione cucina vegana
-- Fase: Definizione features
-- Priorità: Media
-
-**Peculiarità**:
-- Database ricette personalizzato
-- Calcoli nutrizionali automatici
-- Integration con shopping (API possibili)
-
-**Quando lavori su Cucina**: Focus su UX semplice, praticità quotidiana
-
-### 📚 Università
-**Path**: `projects/universita/`
-
-**Quick Context**:
-- Tipo: Study/Research
-- Tools: Note synthesis, exam prep, study planner
-- Obiettivo: Ottimizzare studio e preparazione esami
-- Fase: Definizione metodologie
-- Priorità: Media-Alta
-
-**Peculiarità**:
-- Claude per sintesi materiali
-- Flashcard generation automatica
-- Study schedule optimizer
-
-**Quando lavori su Università**: Focus su efficacia studio, retention, metodologie
+### Dashboard Usage
+1. Open `app/frontend/index.html`
+2. View project cards with status/progress
+3. Click "🤖 Claude" to copy context
+4. Paste in Claude session to start working
 
 ---
 
-## 🎨 TEMPLATE DISPONIBILI
+## 🔧 TROUBLESHOOTING
 
-### webapp_template.md
-Per: Applicazioni web (frontend + backend)
-Include: Stack tech, architettura API, deployment
+### Context Loading Issues
+- **Problem**: Claude doesn't understand project
+- **Solution**: Ensure PROJECT.md is complete and current
+- **Check**: All sections filled, current phase clear
 
-### study_template.md
-Per: Progetti studio/ricerca
-Include: Metodologie, risorse, schedule
+### Code Generation Problems  
+- **Problem**: Generated code doesn't work
+- **Solution**: Verify tech stack constraints in PROJECT.md
+- **Check**: Dependencies, environment, platform specifics
 
-### creative_template.md
-Per: Progetti creativi (design, content, lifestyle)
-Include: Mood board, style guide, deliverables creativi
-
-### generic_template.md
-Per: Progetti che non rientrano in categorie sopra
-Include: Solo struttura base adattabile
-
----
-
-## 🔧 BEST PRACTICES
-
-### Per l'User
-1. **Un PROJECT.md completo** = Claude lavora meglio
-2. **Commit frequenti** = Tracciamento progress
-3. **Log aggiornato** = Context storico preservato
-4. **Status realistico** = No over-commitment
-5. **Deliverables organizzati** = Facile recupero output
-
-### Per Claude
-1. **Leggi PROJECT.md per intero** prima di iniziare
-2. **Rispetta stack tech** dichiarato
-3. **Codice completo sempre** (no TODO/placeholder)
-4. **Valida output** rispetto obiettivi
-5. **Suggerisci aggiornamenti** PROJECT.md quando appropriato
+### Progress Tracking
+- **Problem**: Lost track of what's done
+- **Solution**: Update PROJECT.md log section after each session
+- **Check**: Status percentages, completed tasks marked
 
 ---
 
-## 🚀 FEATURE ROADMAP
+## 📋 CURRENT SYSTEM STATUS
 
-### v1.0 (Current) ✅
-- [x] Struttura repository
-- [x] Template standard
-- [x] Knowledge base
-- [x] Dashboard HTML base
+**Repository**: claude-project-hub (structured, documented)  
+**Projects**: 3 active, all with complete PROJECT.md files  
+**Templates**: WebApp, Study, Creative available  
+**Dashboard**: Functional HTML interface  
+**Documentation**: Complete (setup, workflow, guides)
 
-### v1.1 (Next) 🚧
-- [ ] Dashboard interattiva completa
-- [ ] Progress bars real-time
-- [ ] Document parser automatico
-- [ ] Template wizard
-
-### v2.0 (Future) 💡
-- [ ] Claude API integration in-app
-- [ ] In-app chat con context auto-load
-- [ ] Git integration automatica
-- [ ] Export/Import progetti
-- [ ] Multi-user support
-
----
-
-## 📊 METRICHE SISTEMA
-
-### Efficacia
-- **Time to Context**: <30 secondi (caricare progetto in Claude)
-- **Context Accuracy**: 95%+ (Claude capisce progetto)
-- **Overhead Management**: <5 minuti/giorno (aggiornamenti)
-
-### Scalabilità
-- **Progetti Simultanei**: Illimitati (dipende da user)
-- **Progetti Totali**: Testato fino a 10, scalabile a 100+
-- **Storage**: ~1-5MB per progetto (dipende da deliverables)
-
----
-
-## 🆘 TROUBLESHOOTING
-
-### Claude non capisce il progetto
-**Causa**: PROJECT.md incompleto o ambiguo
-**Soluzione**: Rivedi sezioni CONTEXT e OBIETTIVI, aggiungi dettagli
-
-### Troppi context switch
-**Causa**: Lavorare su 5+ progetti nello stesso giorno
-**Soluzione**: Focus su 1-2 progetti per sessione, usa log per riprendere
-
-### Deliverables disorganizzati
-**Causa**: Salvare output senza struttura
-**Soluzione**: Usa sottocartelle in deliverables/ (code/, docs/, assets/)
-
-### Git conflicts
-**Causa**: Modifiche simultanee (raro in uso singolo)
-**Soluzione**: Pull prima di push, usa branch per esperimenti
-
----
-
-## 🔐 SICUREZZA & PRIVACY
-
-### Dati Sensibili
-- **Non committare**: API keys, passwords, token
-- **Usa**: File `.env` (già in .gitignore)
-- **Encrypt**: Dati personali sensibili prima di commit
-
-### Repository Pubblico/Privato
-- **Pubblico**: OK per progetti open source
-- **Privato**: Raccomandato se contiene IP o dati personali
-
-### Claude Context
-- **Claude API**: Dati processati da Anthropic, vedi loro privacy policy
-- **Claude Web**: Conversazioni salvate, revisionabili/eliminabili
-
----
-
-## 📚 RISORSE ESTERNE
-
-### Claude/AI
-- [Anthropic Claude](https://claude.ai)
-- [Claude API Docs](https://docs.anthropic.com)
-- [Prompt Engineering Guide](https://docs.anthropic.com/claude/docs/prompt-engineering)
-
-### Development
-- [FastAPI Docs](https://fastapi.tiangolo.com)
-- [React Docs](https://react.dev)
-- [MDN Web Docs](https://developer.mozilla.org)
-
-### Git/GitHub
-- [GitHub Docs](https://docs.github.com)
-- [Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
-
----
-
-## 🎯 FILOSOFIA DESIGN
-
-### Principi Core
-1. **Standardizzazione** - Formato uniforme = efficienza
-2. **Modularità** - Progetti indipendenti = scalabilità
-3. **AI-First** - Tutto ottimizzato per Claude
-4. **Zero Friction** - Minimo overhead = massima produttività
-5. **Iterativo** - Miglioramento continuo sistema
-
-### Anti-Pattern Evitati
-- ❌ Monolith knowledge base (confuso, lento)
-- ❌ Progetti senza struttura (dispersione info)
-- ❌ Context switching manuale (time waste)
-- ❌ Codice senza organizzazione (difficile manutenere)
-- ❌ Over-engineering (complessità inutile)
-
----
-
-## 📝 CHANGELOG
-
-### 2025-09-29 - v1.0.0
-- ✅ Setup repository structure
-- ✅ Creazione knowledge base
-- ✅ Template standard progetti
-- ✅ Dashboard HTML base
-- ✅ Documentazione completa
-
----
-
-## 🎓 LEARNING NOTES
-
-### Cosa Ho Imparato Sviluppando Questo Sistema
-1. **Context è tutto** - Claude lavora 10x meglio con PROJECT.md completo
-2. **Standardizzazione paga** - Template riducono cognitive load
-3. **Modularità scala** - Progetti separati = gestione semplice
-4. **Git è amico** - Commit frequenti = tranquillità mentale
-5. **Iterazione > Perfezione** - Meglio v1.0 funzionante che v2.0 perfetto mai finito
+**Ready for**: Development work on any active project or creation of new projects using established templates and workflows.
 
 ---
 
 <div align="center">
 
-**🧠 Knowledge Base v1.0**
+**🎯 KNOWLEDGE BASE v2.0**
 
-*Context ottimale per Claude AI*
+*Optimized for rapid Claude context loading*
 
-Last Updated: 2025-09-29
+*Quick start → Full context in <30 seconds*
 
 </div>
