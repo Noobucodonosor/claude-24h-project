@@ -43,6 +43,17 @@
         .header p {
             color: #4a5568;
             font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .repo-status {
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
 
         .stats-grid {
@@ -106,6 +117,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            text-decoration: none;
         }
 
         .btn-primary {
@@ -128,9 +140,20 @@
             box-shadow: 0 8px 20px rgba(86, 171, 47, 0.4);
         }
 
+        .btn-outline {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 25px;
         }
 
@@ -158,6 +181,10 @@
 
         .project-card.paused {
             border-left-color: #718096;
+        }
+
+        .project-card.completed {
+            border-left-color: #38a169;
         }
 
         .project-header {
@@ -194,6 +221,11 @@
             color: #4a5568;
         }
 
+        .status-completed {
+            background: #b2f5ea;
+            color: #2c7a7b;
+        }
+
         .project-title {
             font-size: 1.5rem;
             font-weight: bold;
@@ -213,6 +245,7 @@
             margin-bottom: 15px;
             font-size: 0.85rem;
             color: #718096;
+            flex-wrap: wrap;
         }
 
         .meta-item {
@@ -221,119 +254,53 @@
             gap: 5px;
         }
 
+        .progress-section {
+            margin-bottom: 15px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+
         .progress-bar {
             width: 100%;
             height: 8px;
             background: #e2e8f0;
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 15px;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
             transition: width 0.3s ease;
+        }
+
+        .progress-fill.active {
+            background: linear-gradient(90deg, #56ab2f, #a8e6cf);
+        }
+
+        .progress-fill.planning {
+            background: linear-gradient(90deg, #ed8936, #fbd38d);
+        }
+
+        .progress-fill.paused {
+            background: linear-gradient(90deg, #718096, #a0aec0);
         }
 
         .project-actions {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .btn-small {
             padding: 8px 16px;
             font-size: 0.85rem;
             border-radius: 8px;
-        }
-
-        .btn-outline {
-            background: white;
-            border: 2px solid #667eea;
-            color: #667eea;
-        }
-
-        .btn-outline:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 1.8rem;
-            color: #2d3748;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #718096;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            color: #2d3748;
-            font-weight: 600;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        textarea.form-input {
-            resize: vertical;
-            min-height: 100px;
         }
 
         @media (max-width: 768px) {
@@ -358,13 +325,29 @@
                 justify-content: center;
             }
         }
+
+        .success-message {
+            background: #c6f6d5;
+            color: #276749;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="success-message" id="successMessage">
+            ✅ Repository ristrutturato con successo!
+        </div>
+
         <div class="header">
             <h1>🎯 Claude Project Hub</h1>
-            <p>Meta-ambiente per gestire progetti multipli con Claude AI</p>
+            <p>Meta-ambiente intelligente per gestire progetti multipli con Claude AI</p>
+            <div class="repo-status">
+                📂 Repository: claude-project-hub • Struttura standardizzata ✅
+            </div>
         </div>
 
         <div class="stats-grid">
@@ -379,304 +362,381 @@
                 <div class="stat-label">Attivi</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon">⏸️</div>
+                <div class="stat-icon">📋</div>
                 <div class="stat-number" id="planningProjects">1</div>
                 <div class="stat-label">In Planning</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📈</div>
-                <div class="stat-number" id="avgProgress">40%</div>
+                <div class="stat-number" id="avgProgress">45%</div>
                 <div class="stat-label">Progress Medio</div>
             </div>
         </div>
 
         <div class="actions-bar">
-            <button class="btn btn-primary" onclick="openNewProjectModal()">
+            <button class="btn btn-primary" onclick="createNewProject()">
                 ➕ Nuovo Progetto
             </button>
             <button class="btn btn-secondary" onclick="openClaudeContext()">
-                🤖 Apri Context Claude
+                🤖 Context Claude Globale
             </button>
-            <button class="btn btn-outline btn-small" onclick="window.location.href='../KNOWLEDGE_BASE.md'">
+            <a href="../KNOWLEDGE_BASE.md" class="btn btn-outline btn-small" target="_blank">
                 📚 Knowledge Base
-            </button>
-            <button class="btn btn-outline btn-small" onclick="window.location.href='../PROJECT_TEMPLATE.md'">
+            </a>
+            <a href="../PROJECT_TEMPLATE.md" class="btn btn-outline btn-small" target="_blank">
                 📋 Template
+            </a>
+            <button class="btn btn-outline btn-small" onclick="showSuccessMessage()">
+                🎉 Test
             </button>
         </div>
 
-        <div class="projects-grid" id="projectsGrid">
-            <!-- Progetti caricati dinamicamente -->
-        </div>
-    </div>
-
-    <!-- Modal Nuovo Progetto -->
-    <div class="modal" id="newProjectModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">➕ Nuovo Progetto</h2>
-                <button class="close-btn" onclick="closeModal()">✕</button>
+        <div class="projects-grid">
+            <!-- MTG WebApp -->
+            <div class="project-card planning">
+                <div class="project-header">
+                    <div class="project-icon">🎮</div>
+                    <span class="project-status status-planning">Planning</span>
+                </div>
+                <div class="project-title">MTG Web App</div>
+                <div class="project-description">
+                    Generatore mazzi Magic: The Gathering + Arbitro AI con audio real-time. 
+                    Stack avanzato con ML locale e fine-tuning.
+                </div>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <span>🏗️</span>
+                        <span>WebApp</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>⚡</span>
+                        <span>Priorità Alta</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>💻</span>
+                        <span>FastAPI + React</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span>Fase 1 - Setup Ambiente</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill planning" style="width: 40%"></div>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <button class="btn btn-primary btn-small" onclick="openProject('mtg-webapp')">
+                        📂 Apri Progetto
+                    </button>
+                    <button class="btn btn-secondary btn-small" onclick="openInClaude('mtg-webapp')">
+                        🤖 Sessione Claude
+                    </button>
+                    <button class="btn btn-outline btn-small" onclick="editProject('mtg-webapp')">
+                        ✏️ Edit
+                    </button>
+                </div>
             </div>
-            <form onsubmit="createProject(event)">
-                <div class="form-group">
-                    <label class="form-label">Nome Progetto</label>
-                    <input type="text" class="form-input" id="projectName" required placeholder="es. My Awesome App">
+
+            <!-- Cucina Vegana -->
+            <div class="project-card active">
+                <div class="project-header">
+                    <div class="project-icon">🥗</div>
+                    <span class="project-status status-active">Active</span>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Tipo</label>
-                    <select class="form-input" id="projectType">
-                        <option value="webapp">Web App</option>
-                        <option value="study">Studio/Research</option>
-                        <option value="creative">Creative</option>
-                        <option value="tool">Tool</option>
-                        <option value="other">Other</option>
-                    </select>
+                <div class="project-title">Cucina Vegana</div>
+                <div class="project-description">
+                    Sistema completo gestione cucina vegana con recipe database, 
+                    meal planner automatico e shopping list intelligente.
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Descrizione Breve</label>
-                    <textarea class="form-input" id="projectDesc" placeholder="Descrivi brevemente il progetto..."></textarea>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <span>🎨</span>
+                        <span>Creative/Lifestyle</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>⚡</span>
+                        <span>Priorità Media</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>💾</span>
+                        <span>HTML + JSON</span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Priorità</label>
-                    <select class="form-input" id="projectPriority">
-                        <option value="media">Media</option>
-                        <option value="alta">Alta</option>
-                        <option value="bassa">Bassa</option>
-                    </select>
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span>Fase 2 - Recipe Database</span>
+                        <span>65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill active" style="width: 65%"></div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    Crea Progetto
-                </button>
-            </form>
+                <div class="project-actions">
+                    <button class="btn btn-primary btn-small" onclick="openProject('cucina-vegana')">
+                        📂 Apri Progetto
+                    </button>
+                    <button class="btn btn-secondary btn-small" onclick="openInClaude('cucina-vegana')">
+                        🤖 Sessione Claude
+                    </button>
+                    <button class="btn btn-outline btn-small" onclick="editProject('cucina-vegana')">
+                        ✏️ Edit
+                    </button>
+                </div>
+            </div>
+
+            <!-- Università -->
+            <div class="project-card active">
+                <div class="project-header">
+                    <div class="project-icon">📚</div>
+                    <span class="project-status status-active">Active</span>
+                </div>
+                <div class="project-title">Università - Studio System</div>
+                <div class="project-description">
+                    Sistema ottimizzazione studio con metodologie evidence-based, 
+                    Obsidian PKM e integrazione Claude per sintesi e comprensione.
+                </div>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <span>📖</span>
+                        <span>Study/Research</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>⚡</span>
+                        <span>Priorità Alta</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🧠</span>
+                        <span>Obsidian + Claude</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span>Fase 2 - Note System Setup</span>
+                        <span>30%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill active" style="width: 30%"></div>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <button class="btn btn-primary btn-small" onclick="openProject('universita')">
+                        📂 Apri Progetto
+                    </button>
+                    <button class="btn btn-secondary btn-small" onclick="openInClaude('universita')">
+                        🤖 Sessione Claude
+                    </button>
+                    <button class="btn btn-outline btn-small" onclick="editProject('universita')">
+                        ✏️ Edit
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Database progetti (in memoria, sostituire con backend reale)
-        let projects = [
-            {
-                id: 1,
-                name: "MTG Web App",
-                icon: "🎮",
-                type: "webapp",
-                status: "planning",
-                priority: "alta",
-                description: "Generatore mazzi Magic: The Gathering + Arbitro AI con audio real-time",
-                progress: 40,
-                phase: "Fase 1 - Setup Ambiente",
-                stack: "FastAPI + React + Claude API",
-                folder: "projects/mtg-webapp/"
-            },
-            {
-                id: 2,
-                name: "Cucina Vegana",
-                icon: "🥗",
-                type: "creative",
-                status: "active",
-                priority: "media",
-                description: "Sistema completo gestione cucina vegana con recipe DB e meal planner",
-                progress: 65,
-                phase: "Fase 2 - Recipe Database",
-                stack: "HTML/JS + JSON Database",
-                folder: "projects/cucina-vegana/"
-            },
-            {
-                id: 3,
-                name: "Università",
-                icon: "📚",
-                type: "study",
-                status: "active",
-                priority: "alta",
-                description: "Tools studio universitario: note synthesis, exam prep, study planner",
-                progress: 30,
-                phase: "Fase 1 - Definizione metodologie",
-                stack: "Markdown + Claude",
-                folder: "projects/universita/"
-            }
-        ];
-
-        function renderProjects() {
-            const grid = document.getElementById('projectsGrid');
-            grid.innerHTML = projects.map(project => `
-                <div class="project-card ${project.status}">
-                    <div class="project-header">
-                        <div class="project-icon">${project.icon}</div>
-                        <span class="project-status status-${project.status}">
-                            ${project.status}
-                        </span>
-                    </div>
-                    <div class="project-title">${project.name}</div>
-                    <div class="project-description">${project.description}</div>
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <span>📂</span>
-                            <span>${project.type}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span>⚡</span>
-                            <span>${project.priority}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span>🔧</span>
-                            <span>${project.stack.split('+')[0].trim()}</span>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 8px; font-size: 0.85rem; color: #4a5568;">
-                        ${project.phase}
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${project.progress}%"></div>
-                    </div>
-                    <div style="text-align: right; margin-bottom: 15px; font-size: 0.9rem; font-weight: 600; color: #667eea;">
-                        ${project.progress}%
-                    </div>
-                    <div class="project-actions">
-                        <button class="btn btn-primary btn-small" onclick="openProject(${project.id})">
-                            📂 Apri
-                        </button>
-                        <button class="btn btn-secondary btn-small" onclick="openInClaude(${project.id})">
-                            🤖 Claude
-                        </button>
-                        <button class="btn btn-outline btn-small" onclick="editProject(${project.id})">
-                            ✏️
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-
-            updateStats();
+        function showSuccessMessage() {
+            const msg = document.getElementById('successMessage');
+            msg.style.display = 'block';
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 3000);
         }
 
-        function updateStats() {
-            const total = projects.length;
-            const active = projects.filter(p => p.status === 'active').length;
-            const planning = projects.filter(p => p.status === 'planning').length;
-            const avgProgress = Math.round(projects.reduce((sum, p) => sum + p.progress, 0) / total);
-
-            document.getElementById('totalProjects').textContent = total;
-            document.getElementById('activeProjects').textContent = active;
-            document.getElementById('planningProjects').textContent = planning;
-            document.getElementById('avgProgress').textContent = avgProgress + '%';
-        }
-
-        function openNewProjectModal() {
-            document.getElementById('newProjectModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('newProjectModal').classList.remove('active');
-        }
-
-        function createProject(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('projectName').value;
-            const type = document.getElementById('projectType').value;
-            const desc = document.getElementById('projectDesc').value;
-            const priority = document.getElementById('projectPriority').value;
-
-            const newProject = {
-                id: projects.length + 1,
-                name: name,
-                icon: getIconForType(type),
-                type: type,
-                status: 'planning',
-                priority: priority,
-                description: desc,
-                progress: 0,
-                phase: 'Fase 1 - Planning',
-                stack: 'Da definire',
-                folder: `projects/${name.toLowerCase().replace(/\s+/g, '-')}/`
+        function openProject(projectId) {
+            const projectInfo = {
+                'mtg-webapp': {
+                    name: 'MTG Web App',
+                    path: 'projects/mtg-webapp/',
+                    description: 'Generatore mazzi MTG + Arbitro AI',
+                    phase: 'Setup Ambiente',
+                    stack: 'FastAPI + React + Claude API + Llama-3-8B'
+                },
+                'cucina-vegana': {
+                    name: 'Cucina Vegana',
+                    path: 'projects/cucina-vegana/',
+                    description: 'Sistema gestione cucina vegana completo',
+                    phase: 'Recipe Database',
+                    stack: 'HTML/JS + JSON Database'
+                },
+                'universita': {
+                    name: 'Università',
+                    path: 'projects/universita/',
+                    description: 'Sistema ottimizzazione studio',
+                    phase: 'Note System Setup',
+                    stack: 'Obsidian + Markdown + Claude'
+                }
             };
 
-            projects.push(newProject);
-            renderProjects();
-            closeModal();
+            const project = projectInfo[projectId];
+            if (!project) return;
 
-            alert(`✅ Progetto "${name}" creato!\n\n📋 Next steps:\n1. Crea cartella: ${newProject.folder}\n2. Copia PROJECT_TEMPLATE.md nella cartella\n3. Compila con Claude il template\n4. Commit e push`);
+            alert(`📂 PROGETTO: ${project.name}\n\n` +
+                  `📍 Path: ${project.path}\n` +
+                  `🎯 Obiettivo: ${project.description}\n` +
+                  `📋 Fase: ${project.phase}\n` +
+                  `💻 Stack: ${project.stack}\n\n` +
+                  `💡 Apri VS Code e naviga a ${project.path}PROJECT.md`);
         }
 
-        function getIconForType(type) {
-            const icons = {
-                webapp: '🎮',
-                study: '📚',
-                creative: '🎨',
-                tool: '🔧',
-                other: '📦'
-            };
-            return icons[type] || '📦';
-        }
+        function openInClaude(projectId) {
+            const contexts = {
+                'mtg-webapp': `📋 CONTEXT PROGETTO: MTG Web App
 
-        function openProject(id) {
-            const project = projects.find(p => p.id === id);
-            alert(`📂 Apertura progetto: ${project.name}\n\n📍 Percorso: ${project.folder}\n\n💡 Apri il file PROJECT.md nella cartella per vedere i dettagli completi!`);
-        }
+🎯 Obiettivo: Generatore mazzi Magic: The Gathering + Arbitro AI con audio real-time
 
-        function openInClaude(id) {
-            const project = projects.find(p => p.id === id);
-            const context = `📋 CONTEXT PROGETTO: ${project.name}
+📂 Path: projects/mtg-webapp/
 
-🎯 Obiettivo: ${project.description}
+📍 Fase Attuale: Fase 1 - Setup Ambiente (40%)
 
-📂 Path: ${project.folder}
+💻 Stack: FastAPI + React + Claude API + Llama-3-8B (Apple Silicon optimized)
 
-📍 Fase Attuale: ${project.phase}
+🔧 Features Core:
+- Generazione mazzi competitivi da collezione utente
+- Arbitro AI live con trascrizione audio real-time  
+- Monetizzazione con sistema crediti + Stripe
+- Fine-tuning LLM locale per regole MTG
 
-💻 Stack: ${project.stack}
-
-📊 Progress: ${project.progress}%
+📊 Progress: Setup ambiente e definizione architettura
 
 ---
 
-Per context completo, leggi il file ${project.folder}PROJECT.md
+Per context completo, leggi projects/mtg-webapp/PROJECT.md
 
-Come posso aiutarti con questo progetto?`;
+Come posso aiutarti con questo progetto?`,
+                
+                'cucina-vegana': `📋 CONTEXT PROGETTO: Cucina Vegana
 
-            // Copia nel clipboard
+🎯 Obiettivo: Sistema completo gestione cucina vegana con recipe DB e meal planner
+
+📂 Path: projects/cucina-vegana/
+
+📍 Fase Attuale: Fase 2 - Recipe Database (65%)
+
+💻 Stack: HTML/JS + JSON Database + USDA Nutritional API
+
+🔧 Features Core:
+- Database 50+ ricette vegane personalizzate
+- Generazione automatica menu settimanale bilanciato
+- Shopping list auto-generata da menu
+- Calcoli nutrizionali per bilanciamento macro
+
+📊 Progress: 10/30 ricette inserite, schema JSON definito
+
+---
+
+Per context completo, leggi projects/cucina-vegana/PROJECT.md
+
+Come posso aiutarti con questo progetto?`,
+
+                'universita': `📋 CONTEXT PROGETTO: Università - Studio System
+
+🎯 Obiettivo: Sistema ottimizzazione studio con metodologie evidence-based + Claude
+
+📂 Path: projects/universita/
+
+📍 Fase Attuale: Fase 2 - Note System Setup (30%)
+
+💻 Stack: Obsidian + Markdown + Claude + Anki (spaced repetition)
+
+🔧 Metodologie:
+- Active Recall + Zettelkasten connections
+- Claude per sintesi materiali e Q&A  
+- Workflow: Lezione → Note → Sintesi → Flashcards
+- Templates standardizzati per note-taking
+
+📊 Progress: Obsidian vault setup, primi templates creati
+
+---
+
+Per context completo, leggi projects/universita/PROJECT.md
+
+Come posso aiutarti con questo progetto?`
+            };
+
+            const context = contexts[projectId];
+            if (!context) return;
+
             navigator.clipboard.writeText(context).then(() => {
-                alert(`✅ Context copiato!\n\nApri Claude e incolla il context per iniziare la sessione.\n\nOpzionale: Carica l'intero repository GitHub per context completo.`);
+                alert(`✅ Context specifico copiato!\n\n` +
+                      `🚀 Ora:\n` +
+                      `1. Apri nuova chat Claude\n` +
+                      `2. Incolla il context (Cmd+V)\n` +
+                      `3. Inizia a lavorare sul progetto!\n\n` +
+                      `💡 Opzionale: Carica intero repo GitHub per context completo`);
+            }).catch(() => {
+                prompt('Context copiato - Ctrl+C per copiare:', context);
             });
+        }
+
+        function editProject(projectId) {
+            alert(`✏️ EDIT PROGETTO\n\n` +
+                  `Per modificare il progetto:\n\n` +
+                  `1. 📝 Apri: projects/${projectId}/PROJECT.md\n` +
+                  `2. ✏️ Modifica sezioni (META, progress, log)\n` +
+                  `3. 💾 Salva modifiche\n` +
+                  `4. 🔄 Commit e push\n\n` +
+                  `🤖 Tip: Usa Claude per aiutarti con gli aggiornamenti!`);
+        }
+
+        function createNewProject() {
+            alert(`➕ NUOVO PROGETTO\n\n` +
+                  `Steps per creare nuovo progetto:\n\n` +
+                  `1. 📁 Crea cartella: projects/nome-progetto/\n` +
+                  `2. 📂 Crea sottocartelle: context/, deliverables/\n` +
+                  `3. 📋 Copia PROJECT_TEMPLATE.md → PROJECT.md\n` +
+                  `4. 🤖 Chiedi a Claude di compilare il template\n` +
+                  `5. 💾 Commit e push\n\n` +
+                  `💡 Usa il PROJECT_TEMPLATE.md come base!`);
         }
 
         function openClaudeContext() {
-            const allProjects = projects.map(p => 
-                `${p.icon} ${p.name} (${p.status} - ${p.progress}%)`
-            ).join('\n');
-
             const globalContext = `🎯 CLAUDE PROJECT HUB - Context Globale
 
-📊 Progetti Attivi (${projects.length}):
-${allProjects}
+📊 Repository Status: claude-project-hub ✅ Ristrutturato
 
-📚 Repository: claude-project-hub/
+📋 Progetti Attivi (3):
+🎮 MTG Web App (Planning - 40%) - Generatore mazzi + Arbitro AI
+🥗 Cucina Vegana (Active - 65%) - Sistema gestione cucina vegana  
+📚 Università (Active - 30%) - Sistema ottimizzazione studio
 
-📋 Documenti Chiave:
+📁 Struttura Standardizzata:
+- projects/[nome]/PROJECT.md (formato uniforme)
+- projects/[nome]/context/ (file supporto)
+- projects/[nome]/deliverables/ (output)
+
+📚 Documenti Sistema:
+- KNOWLEDGE_BASE.md - Context completo per Claude
+- PROJECT_TEMPLATE.md - Template standard progetti
 - README.md - Overview sistema
-- KNOWLEDGE_BASE.md - Context completo
-- PROJECT_TEMPLATE.md - Template standard
+- app/frontend/index.html - Dashboard progetti
 
-💡 Per lavorare su un progetto specifico, usa il pulsante "🤖 Claude" sulla card del progetto.
+🔧 Sistema Funzionante:
+- Template standardizzati ✅
+- Struttura modulare ✅  
+- Context ottimizzato Claude ✅
+- Dashboard operativo ✅
 
-Come posso assisterti oggi?`;
+💡 Per lavorare su progetto specifico, usa pulsante "🤖 Sessione Claude" sulla card.
+
+Come posso assisterti oggi con il Project Hub?`;
 
             navigator.clipboard.writeText(globalContext).then(() => {
-                alert('✅ Context globale copiato!\n\nIncolla in Claude per iniziare una sessione generale.\n\nPer progetti specifici usa il bottone Claude sulla card progetto.');
+                alert(`✅ Context globale copiato!\n\n` +
+                      `🌟 Questo context include:\n` +
+                      `• Status completo tutti progetti\n` +
+                      `• Struttura repository\n` +
+                      `• Documenti chiave sistema\n\n` +
+                      `🚀 Incolla in Claude per sessione generale!`);
+            }).catch(() => {
+                prompt('Context globale - Ctrl+C:', globalContext);
             });
         }
 
-        function editProject(id) {
-            const project = projects.find(p => p.id === id);
-            alert(`✏️ Edit progetto: ${project.name}\n\n🚧 Feature in sviluppo\n\nPer ora modifica manualmente il file:\n${project.folder}PROJECT.md`);
-        }
-
-        // Initialize
-        renderProjects();
-
-        // Close modal on outside click
-        document.getElementById('newProjectModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+        // Show success on load to indicate everything works
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(showSuccessMessage, 500);
         });
     </script>
 </body>
