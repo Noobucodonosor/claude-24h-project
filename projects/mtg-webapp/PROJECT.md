@@ -1,250 +1,343 @@
-# Progetto MTG Web App - Magic: The Gathering Assistant
+# MTG Web App - AI-Powered Magic Assistant
 
-## Context
-**Progetto**: Applicazione web avanzata per Magic: The Gathering che combina generazione intelligente di mazzi, simulazione di partite con arbitro AI, e assistenza live durante match reali tramite trascrizione audio real-time.
-
-**Ruoli**:
-- **Cliente**: Definisce requisiti, obiettivi, fornisce feedback sulle feature
-- **Developer**: Esegue comandi minimi su MacBook (Apple Silicon)
-- **AI Assistant**: Sviluppa codice completo, fornisce script pronti, minimizza gesti richiesti
-
-**Filosofia**: Massima automazione, codice pronto da incollare, istruzioni a passo unico, correzioni automatiche basate su feedback.
+> 🎮 **CONTEXT**: Advanced MTG web app combining deck generation + live AI referee with real-time audio transcription
 
 ---
 
-## Stack Tecnologico (Ottimizzato MacBook Apple Silicon)
+## 📊 META
 
-### Backend & Core
-- **Framework**: FastAPI con WebSockets per comunicazione real-time
-- **Database**: SQLite (prototipo) → PostgreSQL (produzione)
-- **Server**: Uvicorn (ASGI server)
+- **Type**: WebApp (Complex ML Pipeline)
+- **Priority**: High
+- **Duration**: 3-4 weeks
+- **Status**: Phase 1 - Environment Setup (40%)
+- **Started**: 2025-09-29
+- **Deadline**: Flexible
+- **Budget**: €0 (local development)
 
-### AI & Machine Learning
-- **LLM**: Llama-3-8B con fine-tuning locale tramite MLX (ottimizzato Apple Silicon)
-- **Tool LLM**: Ollama per gestione modelli locali
-- **STT (Speech-to-Text)**: Faster-Whisper per trascrizione real-time
-- **TTS (Text-to-Speech)**: gTTS (free tier) / ElevenLabs (premium)
-- **ML Framework**: HuggingFace per gestione modelli, batch inference per efficienza
+---
+
+## 🎯 CORE OBJECTIVES
+
+### Primary Goal
+**Create production-ready MTG web app with AI deck generation + live audio referee, optimized for Apple Silicon, with €/credit monetization.**
+
+### Key Features
+- **🃏 Deck Generator**: Collection → Optimized 60/100-card decks (1 credit)
+- **🎮 Live AI Referee**: Real-time audio → Rule enforcement + alerts (5 credits)
+- **💰 Stripe Integration**: €1=100 credits, webhook automation
+- **⚡ Apple Silicon**: MLX-optimized Llama-3-8B local inference
+
+### Success Criteria
+- Deck generation: <30s response time
+- Audio pipeline: <500ms latency (mic → alert)
+- Monetization: Functional Stripe checkout + webhook
+- Local ML: Works offline on MacBook M-series
+
+---
+
+## 🛠️ TECH STACK (Apple Silicon Optimized)
+
+### Backend Core
+- **FastAPI**: WebSocket real-time communication
+- **Database**: SQLite (dev) → PostgreSQL (prod)
+- **Server**: Uvicorn ASGI
+
+### AI/ML Pipeline
+- **LLM**: Llama-3-8B + MLX fine-tuning (Apple Silicon native)
+- **STT**: Faster-Whisper (CPU-optimized, no GPU needed)
+- **TTS**: gTTS (free) / ElevenLabs (premium)
+- **Model Management**: Ollama (local deployment)
 
 ### Frontend
-- **Prototipo**: Streamlit (sviluppo rapido)
-- **Produzione**: React (interfaccia scalabile)
-- **Audio**: JavaScript WebAudio API + WebSockets per streaming microfono
+- **Prototype**: Streamlit (rapid development)
+- **Production**: React (scalable UI)
+- **Audio**: WebAudio API + WebSocket streaming
 
-### Dati & APIs
-- **Carte MTG**: Scryfall API (database completo carte)
-- **Mazzi Competitivi**: TopDeck.gg API (meta-game, deck lists)
+### External APIs
+- **Cards**: Scryfall API (complete MTG database)
+- **Meta**: TopDeck.gg API (competitive decklists)
+- **Payments**: Stripe Checkout + Webhooks
 
-### Monetizzazione & Pagamenti
-- **Sistema Crediti**: €1 = 100 crediti
-- **Payment Gateway**: Stripe Checkout + Webhooks
-- **Compliance**: PCI-DSS per pagamenti, GDPR per dati audio
-
-### Ambiente Sviluppo
-- **Python**: 3.12+ (best practices 2025)
-- **Tool Unificato**: ServBay (ambiente sviluppo integrato)
+### Development
+- **Python**: 3.12+
+- **Environment**: venv + pip
 - **Version Control**: Git + GitHub
 
 ---
 
-## Obiettivi & Funzionalità
+## 📋 DEVELOPMENT PHASES
 
-### 1. GENERAZIONE MAZZI COMPETITIVI 🃏
-**Input**: Lista carte disponibili (collezione utente)
-**Output**: Mazzo ottimizzato (60 carte Standard / 100 Commander)
-**Features**:
-- Analisi curva di mana ottimale
-- Rilevamento sinergie tra carte
-- Suggerimenti strategici basati su meta-game
-- Validazione regole formato (Standard/Modern/Commander)
-**Costo**: 1 credito per generazione
+### Phase 1: Environment Setup ⚙️ (Current - 40%)
+**Goal**: Apple Silicon development environment ready
 
-### 2. ARBITRO AI - SIMULAZIONE MATCH 🎮
-**Modalità Testo**: 
-- Input partita descritta testualmente
-- Validazione azioni secondo regole MTG ufficiali
-- Rilevamento errori comuni (sequenza turni, priority, stack)
+**Tasks**:
+- [x] Python 3.12 virtual environment
+- [ ] Core dependencies installation
+- [ ] MLX framework setup
+- [ ] Ollama local model deployment
+- [ ] Test imports verification
 
-**Modalità Live Audio**:
-- Stream audio da microfono via WebSocket
-- Trascrizione real-time con Faster-Whisper
-- Rilevamento trigger persi, errori di sequenza, violazioni regole
-- Intervento immediato con alert vocali (TTS) e testuali
-- Log completo partita con timestamp
-**Costo**: 5 crediti per sessione live
-
-### 3. MONETIZZAZIONE 💰
-**Free Tier**:
-- 10 crediti iniziali gratuiti
-- 1 generazione mazzo gratis/settimana
-
-**Sistema Crediti**:
-- Pacchetti: 100 crediti (€1), 500 (€4), 1000 (€7)
-- Integrazione Stripe per checkout sicuro
-- Webhook per conferma pagamento automatica
-
-### 4. SICUREZZA & COMPLIANCE 🔒
-- **GDPR**: Nessun storage audio senza consenso esplicito utente
-- **PCI-DSS**: Gestione pagamenti tramite Stripe (no dati carte su server)
-- **Privacy**: Trascrizioni anonimizzate, cancellazione automatica post-sessione
-
----
-
-## Fasi di Sviluppo (Step-by-Step)
-
-### Fase 1: Setup Ambiente ⚙️
-**Obiettivo**: Configurare ambiente sviluppo ottimizzato MacBook
-- Installazione dipendenze core: `pip install fastapi uvicorn faster-whisper gtts stripe sqlalchemy websockets soundfile`
-- Setup Ollama per gestione LLM locali
-- Configurazione MLX per fine-tuning su Apple Silicon
-- Test ambiente: verifica import librerie
-
-### Fase 2: Raccolta Dati 📊
-**Obiettivo**: Costruire dataset MTG per LLM
-- Script fetch da Scryfall API (tutte le carte, formati, legality)
-- Script fetch da TopDeck.gg (mazzi competitivi, meta-game)
-- Struttura database SQLite per cache locale
-- Parsing regole MTG comprehensive (PDF ufficiali → dataset)
-
-### Fase 3: Fine-Tuning LLM 🧠
-**Obiettivo**: Adattare Llama-3-8B alle regole MTG
-- Preparazione dataset: regole + interazioni comuni
-- Fine-tuning con MLX (ottimizzato Apple Silicon, basso consumo)
-- Validazione modello: test casi d'uso reali (trigger, stack, priority)
-- Deploy modello locale via Ollama
-
-### Fase 4: Backend FastAPI 🚀
-**Endpoints Core**:
-- `POST /api/deck/generate`: generazione mazzo da collezione
-- `POST /api/match/simulate`: simulazione match testuale
-- `WS /api/live/audio`: WebSocket per streaming audio real-time
-- `POST /api/payment/checkout`: creazione sessione Stripe
-- `POST /api/payment/webhook`: gestione conferme pagamento
-
-**Features Backend**:
-- Integrazione Faster-Whisper per STT in WebSocket
-- Pipeline: Audio → Trascrizione → LLM (analisi) → TTS (risposta)
-- Sistema crediti con transazioni atomiche
-- Rate limiting per API
-
-### Fase 5: Frontend 🎨
-**Prototipo Streamlit**:
-- Form input collezione carte
-- Visualizzazione mazzo generato con curva mana
-- Interfaccia sessione live con pulsante microfono
-- Display trascrizione + alert arbitro in tempo reale
-
-**Produzione React** (fase successiva):
-- Dashboard completa con gestione crediti
-- Storico mazzi generati e match simulati
-- WebAudio API per streaming microfono ottimizzato
-
-### Fase 6: Monetizzazione Stripe 💳
-- Setup account Stripe (test mode → production)
-- Implementazione Checkout Session con redirect
-- Webhook handler per conferma pagamento
-- Aggiornamento crediti utente automatico
-- Gestione errori pagamento e refund
-
-### Fase 7: Test & Deploy 🧪
-**Test Locale**:
-- Unit test endpoint FastAPI
-- Test integrazione Stripe (webhook simulation)
-- Test audio pipeline latenza <500ms
-- Load testing WebSocket (50+ connessioni simultanee)
-
-**Deploy Cloud**:
-- Backend su Render / Railway (Docker container)
-- Frontend su Vercel (React build ottimizzato)
-- Database PostgreSQL managed (Supabase / Render)
-
-### Fase 8: Completamento & Ottimizzazione ✨
-- Monitoring (logs, errori, performance)
-- Ottimizzazione query database
-- Caching risposte LLM frequenti
-- Documentazione API (Swagger/OpenAPI)
-- User guide e tutorial
-
----
-
-## Regole di Interazione AI ↔ Developer
-
-### Minimizzazione Gesti
-- **Codice**: Sempre in blocchi Markdown completi e pronti da incollare
-- **Istruzioni**: Comandi diretti eseguibili in Terminale
-- **Errori**: Su feedback "Errore X", fornire codice corretto in risposta successiva
-- **No modifiche manuali**: L'AI corregge tutto, il developer esegue solo comandi
-
-### Struttura Risposte AI
-1. **Checklist concisa** (3-7 punti concettuali)
-2. **Aggiornamento requisiti** (se applicabile)
-3. **Piano attuale + next steps**
-4. **Codice/Script** completo e testato
-5. **Istruzioni test** (comando singolo)
-6. **Richiesta feedback** specifica
-
-### Validazione Output
-Dopo ogni codice/proposta: validare in 1-2 righe efficacia e decidere se proseguire o autocorreggere.
-
-### Tool Esterni
-Prima di ogni chiamata: dichiarare motivo e input minimi in una riga.
-
----
-
-## Status Progetto
-
-- **Fase Corrente**: ⚙️ Fase 1 - Setup Ambiente
-- **Prossimo Step**: Installazione dipendenze core Python
-- **Ultimo Update**: 2025-09-29
-- **Priorità**: Alta (24h project)
-
----
-
-## Quick Start (Developer)
-
-### Prima Sessione
+**Commands**:
 ```bash
-# 1. Setup ambiente virtuale
+python3.12 -m venv venv_mtg
+source venv_mtg/bin/activate
+pip install fastapi uvicorn faster-whisper gtts stripe sqlalchemy websockets soundfile mlx torch
+```
+
+**Deliverables**: Working Python environment with all libraries importable
+**Duration**: 2 days
+
+---
+
+### Phase 2: MTG Data Pipeline 📊
+**Goal**: Complete MTG knowledge base for LLM
+
+**Tasks**:
+- [ ] Scryfall API scraper (all cards + formats)
+- [ ] TopDeck.gg meta-game data
+- [ ] MTG rules parsing (official PDFs → JSON)
+- [ ] SQLite schema + data import
+
+**Commands**:
+```bash
+python scripts/scrape_scryfall.py
+python scripts/fetch_topdecks.py
+python scripts/process_rules.py
+```
+
+**Deliverables**: Local MTG database with 25k+ cards + current meta
+**Duration**: 3 days
+
+---
+
+### Phase 3: Local LLM Fine-tuning 🧠
+**Goal**: Llama-3-8B specialized for MTG rules
+
+**Tasks**:
+- [ ] Dataset preparation (rules + interactions)
+- [ ] MLX fine-tuning script (Apple Silicon optimized)
+- [ ] Model validation (test cases)
+- [ ] Ollama deployment
+
+**Commands**:
+```bash
+python fine_tune/prepare_dataset.py
+python fine_tune/mlx_finetune.py --model llama-3-8b
+ollama create mtg-referee ./fine_tune/Modelfile
+```
+
+**Deliverables**: Local MTG-expert LLM accessible via Ollama
+**Duration**: 1 week
+
+---
+
+### Phase 4: FastAPI Backend 🚀
+**Goal**: Production-ready API with WebSocket audio
+
+**Endpoints**:
+- `POST /api/deck/generate` - Deck generation from collection
+- `POST /api/match/simulate` - Text match simulation
+- `WS /api/live/audio` - Real-time audio processing
+- `POST /api/payment/stripe` - Credit purchase
+- `POST /api/webhook/stripe` - Payment confirmation
+
+**Audio Pipeline**: Mic → WebSocket → Faster-Whisper → LLM → TTS → Alert
+
+**Deliverables**: Complete backend with audio processing
+**Duration**: 1 week
+
+---
+
+### Phase 5: Streamlit Prototype 🎨
+**Goal**: Functional UI for testing all features
+
+**Features**:
+- Collection input form
+- Generated deck visualization
+- Live audio session interface
+- Credit balance display
+
+**Deliverables**: Working prototype for user testing
+**Duration**: 3 days
+
+---
+
+### Phase 6: Stripe Integration 💳
+**Goal**: Functional monetization system
+
+**Tasks**:
+- [ ] Stripe account setup (test → prod)
+- [ ] Credit system database
+- [ ] Webhook handler (payment → credit update)
+- [ ] Error handling + refunds
+
+**Deliverables**: Complete payment flow
+**Duration**: 2 days
+
+---
+
+### Phase 7: Production Deploy 🚀
+**Goal**: Cloud deployment with monitoring
+
+**Infrastructure**:
+- Backend: Render/Railway (Docker)
+- Frontend: Vercel (React build)
+- Database: Supabase/Render PostgreSQL
+
+**Deliverables**: Live production app
+**Duration**: 3 days
+
+---
+
+## 🎁 SUCCESS DELIVERABLES
+
+### Must Have (MVP)
+- [x] Environment setup (Apple Silicon optimized)
+- [ ] MTG card database (Scryfall integration)
+- [ ] Deck generation algorithm
+- [ ] Audio transcription pipeline
+- [ ] Basic rule enforcement
+- [ ] Stripe payment system
+
+### Should Have
+- [ ] Advanced rule validation
+- [ ] Match history logging
+- [ ] Mobile-responsive UI
+- [ ] Performance monitoring
+
+### Could Have
+- [ ] Tournament mode
+- [ ] Multiplayer support
+- [ ] Advanced analytics
+- [ ] AI deck recommendations
+
+### Won't Have (v1.0)
+- ❌ Video analysis
+- ❌ Card recognition (computer vision)
+- ❌ Social features
+- ❌ Multi-language support
+
+---
+
+## 🚨 CRITICAL CONSTRAINTS
+
+### Apple Silicon Requirements
+- **MLX Framework**: Native M1/M2/M3 optimization mandatory
+- **Memory Limit**: 16GB unified memory → model quantization required
+- **No External GPU**: CPU/Neural Engine only
+
+### Performance Targets
+- **Deck Generation**: <30 seconds
+- **Audio Pipeline**: <500ms end-to-end latency
+- **Concurrent Users**: 50+ (local testing), 1000+ (production)
+
+### Business Constraints
+- **GDPR Compliance**: No audio storage without explicit consent
+- **PCI-DSS**: Stripe handles all payment data
+- **Free Tier**: 10 credits initial + 1 weekly deck generation
+
+---
+
+## 📊 CURRENT STATUS
+
+### Phase 1 Progress: 40%
+- ✅ Virtual environment created
+- ✅ Basic dependencies identified
+- 🟡 MLX installation pending
+- 🟡 Ollama setup pending
+- ❌ Full import test pending
+
+### Immediate Next Steps
+1. **Complete dependency installation**
+2. **Test MLX on Apple Silicon**
+3. **Setup Ollama with base Llama model**
+4. **Create first test script**
+
+---
+
+## 🔧 APPLE SILICON SPECIFICS
+
+### MLX Optimization
+- **Framework**: Apple's MLX for native M-series acceleration
+- **Memory**: Unified memory architecture exploitation
+- **Quantization**: 4-bit/8-bit for memory efficiency
+- **Inference**: CPU + Neural Engine hybrid processing
+
+### Performance Expectations
+- **Model Loading**: ~30 seconds (Llama-3-8B quantized)
+- **Inference**: 20-50 tokens/second (depending on M-series chip)
+- **Audio Processing**: Real-time transcription without GPU
+
+---
+
+## 📚 KEY RESOURCES
+
+### APIs & Data
+- **Scryfall API**: https://scryfall.com/docs/api (MTG cards database)
+- **TopDeck.gg**: https://www.topdeckgg.com/ (competitive meta)
+- **MTG Rules**: https://magic.wizards.com/en/rules (official comprehensive rules)
+
+### Technical Documentation
+- **MLX Framework**: https://github.com/ml-explore/mlx
+- **Faster-Whisper**: https://github.com/guillaumekln/faster-whisper
+- **Stripe API**: https://stripe.com/docs/api
+- **FastAPI**: https://fastapi.tiangolo.com/
+
+---
+
+## 🚀 QUICK START COMMANDS
+
+### Environment Setup (Run Now)
+```bash
+# Create and activate virtual environment
 python3.12 -m venv venv_mtg
 source venv_mtg/bin/activate
 
-# 2. Installa dipendenze
+# Install core dependencies
 pip install fastapi uvicorn faster-whisper gtts stripe sqlalchemy websockets soundfile
 
-# 3. Verifica installazione
-python -c "import fastapi, faster_whisper, gtts; print('Setup OK')"
+# Test basic imports
+python -c "import fastapi, faster_whisper, gtts; print('✅ Basic setup OK')"
+
+# Install MLX (Apple Silicon specific)
+pip install mlx mlx-lm
+
+# Test MLX
+python -c "import mlx.core as mx; print('✅ MLX ready')"
 ```
 
-### Conferma Inizio Sessione AI
-"Pronto a sviluppare il progetto MTG. Fase attuale: [1 - Setup Ambiente]. Istruzioni: [comandi di installazione sopra]."
+### Verify Apple Silicon Optimization
+```bash
+# Check chip architecture
+uname -m  # Should output: arm64
+
+# Test MLX with simple operation
+python -c "import mlx.core as mx; print('MLX device:', mx.default_device())"
+```
 
 ---
 
-## Note Tecniche
+## 💡 CLAUDE INSTRUCTIONS
 
-### Ottimizzazioni MacBook Apple Silicon
-- **MLX**: Framework ML ottimizzato per chip M1/M2/M3
-- **Memory Efficiency**: Unified memory architecture sfruttata da MLX
-- **Faster-Whisper**: Inferenza ottimizzata CPU, no GPU esterna richiesta
-- **Ollama**: Gestione modelli con quantizzazione automatica per ridurre RAM
+**When working on this project:**
 
-### Latenza Audio Pipeline
-**Target**: <500ms end-to-end (audio → trascrizione → risposta TTS)
-- Faster-Whisper: ~100-200ms per chunk audio
-- LLM inference (locale): ~200-300ms per risposta breve
-- TTS generazione: ~50-100ms con gTTS
+1. **Generate complete, production-ready code** (no TODOs/placeholders)
+2. **Prioritize Apple Silicon optimization** in all ML code
+3. **Include error handling** and logging in all functions
+4. **Provide exact terminal commands** for immediate execution
+5. **Validate against MTG rules** when implementing game logic
+6. **Focus on performance** (<500ms audio pipeline requirement)
 
-### Scalabilità
-- **Prototipo**: 10-50 utenti simultanei (MacBook locale)
-- **Produzione**: 1000+ utenti (cloud deployment + load balancing)
+**Current priority**: Complete Phase 1 environment setup with full MLX validation.
 
 ---
 
-## Risorse Esterne
+<div align="center">
 
-- **Scryfall API**: https://scryfall.com/docs/api
-- **TopDeck.gg**: https://www.topdeckgg.com/
-- **MTG Rules**: https://magic.wizards.com/en/rules
-- **Stripe Docs**: https://stripe.com/docs/api
-- **MLX Framework**: https://github.com/ml-explore/mlx
-- **Faster-Whisper**: https://github.com/guillaumekln/faster-whisper
+**🎮 MTG WEB APP v1.0**
+
+*AI-Powered Magic: The Gathering Assistant*
+
+*Optimized for Apple Silicon • MLX Native • Real-time Audio*
+
+</div>
