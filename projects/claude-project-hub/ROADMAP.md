@@ -58,10 +58,10 @@ Complete all 5 tasks, see app running on iPhone
 **Est**: 2-4h
 
 #### Checkpoint 0.3: GitHub Integration 📂
-**Goal**: Load PROJECT.md files from GitHub  
-**Tasks**: Octokit setup, fetch projects, parse and display  
-**Deliverable**: See list of 4 projects from repo  
-**Est**: 2-3h
+**Goal**: Bidirectional GitHub sync (read + write)  
+**Tasks**: Octokit setup, fetch projects, parse display, **test commit API**  
+**Deliverable**: See list of 4 projects + can commit test file  
+**Est**: 3-4h
 
 ---
 
@@ -74,12 +74,21 @@ Complete all 5 tasks, see app running on iPhone
 **Est**: 3-5h  
 **Prerequisites**: 0.3 complete
 
-#### Checkpoint 1.2: First Automation ⚡
-**Goal**: One autonomous operation working  
-**Tasks**: n8n setup, webhook workflow, trigger from Hub  
-**Deliverable**: Click button → notification received  
-**Est**: 3-4h  
-**Prerequisites**: 1.1 complete
+#### Checkpoint 1.2: Basic Automation (n8n Setup) ⚡
+**Goal**: n8n on Render (free tier), test with simple workflow  
+**Tasks**: 
+- [ ] Deploy n8n to Render free tier (1-click from render.com)
+- [ ] Setup webhook URL: `https://your-n8n.onrender.com/webhook/test`
+- [ ] Create test workflow: Webhook → Claude API → Response
+- [ ] Test from Hub: trigger workflow via HTTP call
+- [ ] Accept 30s cold start after 15min inactivity
+
+**Deliverable**: Cloud n8n operational, one working test workflow  
+**Est**: 2-3h (easier than local Docker)  
+**Prerequisites**: 1.1 complete  
+**Cost**: $0/month
+
+**Why now**: Enables dogfooding with Università PDF processing early
 
 #### Checkpoint 1.3: Context Optimization 📊
 **Goal**: Smart token management  
@@ -114,10 +123,10 @@ Complete all 5 tasks, see app running on iPhone
 **Prerequisites**: 2.1 complete
 
 #### Checkpoint 2.4: Git Manager Plugin 📝
-**Goal**: Auto-commit PROJECT.md updates  
-**Tasks**: GitHub API write, commit message generation  
-**Deliverable**: Hub updates PROJECT.md automatically  
-**Est**: 3-4h  
+**Goal**: Auto-commit code + PROJECT.md to GitHub  
+**Tasks**: GitHub API write, commit message generation, **code artifact detection**  
+**Deliverable**: Code generated → auto-committed to deliverables/code/  
+**Est**: 4-5h  
 **Prerequisites**: 2.1 complete
 
 ---
@@ -174,11 +183,11 @@ Complete all 5 tasks, see app running on iPhone
 
 ### **PHASE 5: PWA Polish** 📱
 
-#### Checkpoint 5.1: Service Worker ⚡
-**Goal**: Offline capability  
-**Tasks**: Workbox setup, caching strategy, background sync  
-**Deliverable**: App works offline for reading  
-**Est**: 4-5h  
+#### Checkpoint 5.1: Connection Management ⚡
+**Goal**: Graceful handling of connectivity loss  
+**Tasks**: Network detection, reconnect logic, user notifications  
+**Deliverable**: Shows "Reconnecting..." when offline, resumes when back  
+**Est**: 2-3h  
 **Prerequisites**: 4.3 complete
 
 #### Checkpoint 5.2: Mobile UX Optimization 📲

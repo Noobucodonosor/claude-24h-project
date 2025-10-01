@@ -25,24 +25,25 @@
 - Code artifacts require manual file creation
 - No memory between sessions (context reset)
 - Can't work from iPhone (claude.ai mobile UX limited)
-- No integration with local dev workflow
+- **No cloud-native workflow** (code stuck in browser, not in GitHub)
 
 **Impact**: ~30% time wasted on "context management overhead" instead of actual development.
 
 ### Opportunity
-**Target State**: Hub = web-based development platform where:
+**Target State**: Hub = cloud-native development platform where:
 - Claude API access with **automatic context injection**
 - In-browser chat with **persistent session memory**
-- Code generation → **downloadable artifacts**
+- Code generation → **automatic GitHub commit** (no downloads!)
 - PROJECT.md **auto-updates** via GitHub API
 - **Mobile-optimized** (iPhone Safari PWA)
-- **Offline-capable** (service worker caching)
-- **Cross-device sync** (same account, any device)
+- **5G-first design** (always online, cloud storage)
+- **Zero local filesystem** (everything on GitHub)
 
 **Expected Impact**: 
 - Context switching: 5 min → 10 seconds (97% reduction)
 - Time to productivity: 10 min → instant
 - Work from anywhere: iPhone, iPad, Mac
+- Code delivery: Browser → GitHub (no manual steps)
 - Development velocity: 2-3x improvement
 
 ### Success Criteria
@@ -51,12 +52,11 @@
 - ✅ Installable as PWA (Add to Home Screen)
 - ✅ Connects to Claude API successfully
 - ✅ Selecting project auto-loads complete context
-- ✅ Chat generates code → one-click download
+- ✅ Chat generates code → **auto-commits to GitHub**
 - ✅ PROJECT.md updates via GitHub API commits
 - ✅ Session memory persists (refresh = continue conversation)
-- ✅ Works offline (cached data, queue API calls)
+- ✅ **No downloads required** (cloud-to-cloud workflow)
 - ✅ Used exclusively for 1 complete project cycle
-
 ---
 
 ## 🛠️ TECH STACK (Web-First)
