@@ -396,6 +396,6 @@ source ~/.zshrc
 
 ---
 
-*Updated as system evolves*
+*Updated as system evolves again*
 
 </div>
