@@ -318,6 +318,89 @@ Attualmente: approccio frammentato, materiali dispersi, sintesi manuali time-con
 
 ---
 
+---
+
+## 🔄 SESSION HANDOFF
+
+### Current Working Context
+**Phase**: Phase 2 - Note System Setup  
+**Progress**: 60%
+**File**: Obsidian vault templates (`Templates/` folder)
+**Last Action**: Created lecture notes and chapter summary templates
+
+### What Works
+- ✅ Obsidian vault created with folder structure
+- ✅ Template "Lecture Notes" completed and tested
+- ✅ Template "Chapter Summary" completed
+- ✅ Tag system defined (#materia, #topic, #status)
+- ✅ Workflow defined (Lezione → Inbox → Rework → Sintesi)
+
+### What's Missing
+- ❌ Consistent tagging system not fully implemented
+- ❌ Script for parsing PDF slides not written
+- ❌ Claude integration prompts not created
+- ❌ Workflow not tested on real course material yet
+- ❌ Anki setup not started (Phase 4)
+
+### Immediate Next Steps
+```
+1. Test current workflow on one real lecture
+   - Attend lecture or watch recording
+   - Take quick notes in 00-Inbox/
+   - Use Lecture Notes template to rework
+   - Time the process, identify pain points
+
+2. Refine templates based on real use
+   - Adjust sections as needed
+   - Simplify if too complex
+   - Add missing elements discovered during use
+
+3. Create tagging guidelines document
+   File: Templates/tagging-guide.md
+   Content: When to use which tags, examples
+   Goal: Consistent tagging for future searchability
+
+4. Move to Phase 3: Claude Integration
+   - Create prompt templates for:
+     * Material synthesis (PDF → summary)
+     * Concept explanation (Feynman technique)
+     * Flashcard generation (notes → Anki cards)
+   - Test with 1-2 real examples
+
+5. Setup weekly review habit
+   - Sunday evening: Process inbox
+   - Review week's notes
+   - Create weekly synthesis
+   - Prepare flashcards for spaced repetition
+```
+
+### Blockers/Decisions Needed
+- [ ] **Obsidian plugins**: Install any? (Dataview, Calendar, etc.) or stay vanilla?
+- [ ] **PDF workflow**: Manual copy-paste or automate with Python script?
+- [ ] **Claude context**: Create separate Claude Project per course or one general "Study" project?
+- [ ] **Anki timing**: Start Anki now (parallel) or wait for Phase 4?
+
+### Context for Next Session
+```
+"Continue Università - Phase 2 Note System Setup.
+
+Current: Templates ready (60%), need real-world validation.
+Next: Test workflow on real lecture material, refine based on actual use.
+
+Priority: Don't over-optimize the system - use it to validate.
+Goal: Move to Phase 3 (Claude Integration) within 1 week.
+
+Obsidian vault structure:
+- 00-Inbox/ (quick capture)
+- 01-Lectures/ (processed notes)
+- 02-Summaries/ (weekly synthesis)
+- Templates/ (lecture notes, chapter summary)
+
+Templates work - now need to USE them with real content."
+```
+
+---
+
 ## 📊 PROGRESS TRACKING
 
 ### Current Phase

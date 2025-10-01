@@ -285,6 +285,77 @@ Attualmente questo processo è manuale, dispersivo e richiede troppo tempo. Un s
 
 ---
 
+---
+
+## 🔄 SESSION HANDOFF
+
+### Current Working Context
+**Phase**: Phase 2 - Recipe Database  
+**Progress**: 30%
+**File**: `deliverables/data/recipes.json`
+**Last Action**: Inserted 10 recipes with complete data structure
+
+### What Works
+- ✅ JSON schema defined and validated
+- ✅ 10 recipes fully inserted with ingredients + nutrition
+- ✅ Recipe categorization system working (colazione, pranzo, cena, snack)
+- ✅ Tag system defined (veloce, economico, protein-rich)
+- ✅ USDA API tested and functional
+
+### What's Missing
+- ❌ 20 more recipes needed (target: 30 total for Phase 2)
+- ❌ Ingredient EN→IT mapping file not created yet
+- ❌ Batch nutrition calculation script not written
+- ❌ Recipe search/filter not implemented
+- ❌ Portion scaling logic not implemented
+
+### Immediate Next Steps
+```
+1. Continue adding recipes to recipes.json
+   Target: 20 more recipes (pasta, legumes, vegetables, desserts)
+   Focus: Quick recipes (<30 min prep+cook)
+
+2. Create ingredient_mapping.json
+   File: deliverables/data/ingredient_mapping.json
+   Format: {"tomato": "pomodoro", "onion": "cipolla", ...}
+   Purpose: USDA API uses English, need Italian names
+
+3. Write Python script for batch nutrition calculation
+   File: scripts/calculate_nutrition.py
+   Input: recipes.json
+   Output: Updated recipes.json with nutrition per serving
+
+4. Test USDA API with common ingredients
+   Verify: "pasta", "rice", "beans", "tomatoes"
+   Handle: 1000 req/hour rate limit (add delays)
+
+5. Update progress in PROJECT.md
+   New progress: 30% → 50% when 20 recipes added
+```
+
+### Blockers/Decisions Needed
+- [ ] **USDA API Italian ingredients**: Many Italian products not in USDA database (use closest equivalent)
+- [ ] **Nutrition accuracy**: Accept ±10% approximation or invest time in precise data?
+- [ ] **Recipe input method**: Continue manual JSON editing or build simple input form?
+- [ ] **Photo database**: Add recipe photos now or defer to Phase 5?
+
+### Context for Next Session
+```
+"Continue Cucina Vegana - Phase 2 Recipe Database.
+
+Current: 10/30 recipes completed (30%).
+Next: Add 20 more recipes, create EN→IT ingredient mapping, write nutrition calculation script.
+
+Priority: Reach 30 recipes minimum to start Phase 3 (Menu Generator).
+
+Focus on quick recipes (<30 min) for weeknight cooking.
+Categories needed: 10 pasta, 5 legumes, 10 vegetables, 5 snacks.
+
+JSON schema working - just need more data."
+```
+
+---
+
 ## 📊 PROGRESS TRACKING
 
 ### Current Phase

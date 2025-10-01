@@ -2,9 +2,9 @@
 
 **The AI-powered project management system that scales from 1 to 100+ projects without chaos.**
 
-![Status](https://img.shields.io/badge/status-production_ready-success)
-![Version](https://img.shields.io/badge/version-2.0-blue)
-![Projects](https://img.shields.io/badge/active_projects-3-orange)
+![Status](https://img.shields.io/badge/status-active_development-success)
+![Version](https://img.shields.io/badge/version-2.1-blue)
+![Projects](https://img.shields.io/badge/active_projects-4-orange)
 ![Optimization](https://img.shields.io/badge/claude_optimized-yes-brightgreen)
 
 ---
@@ -20,12 +20,14 @@
 - 📝 Each new project = starting from scratch  
 - 🤖 Claude forgets your project every session
 - ⚡ No standardized way to work with AI on complex projects
+- 📱 Can't work from mobile (limited claude.ai mobile UX)
 
 ### The Solution  
 - 🎯 **Standardized PROJECT.md** → Claude understands instantly
 - 🚀 **Template system** → New projects in 10 minutes
-- 📊 **Unified dashboard** → All projects at a glance
+- 📊 **Unified interfaces** → Legacy dashboard + Hub PWA (in development)
 - 🤖 **AI-optimized workflows** → Maximum productivity with Claude
+- 📱 **Mobile-first Hub** → Work from iPhone, iPad, anywhere
 
 ---
 
@@ -33,14 +35,14 @@
 
 ### 1. Clone & Setup
 ```bash
-git clone https://github.com/[username]/claude-project-hub
-cd claude-project-hub
-open app/frontend/index.html  # Launch dashboard
+git clone https://github.com/Noobucodonosor/claude-24h-project
+cd claude-24h-project
+open app/frontend/index.html  # Launch legacy dashboard
 ```
 
 ### 2. Load in Claude
 ```
-"Add from GitHub: https://github.com/[username]/claude-project-hub
+"Add from GitHub: https://github.com/Noobucodonosor/claude-24h-project
 
 I use Claude Project Hub to manage multiple AI-assisted projects. 
 What projects do you see and what should we work on?"
@@ -55,7 +57,19 @@ Choose any project from dashboard → Copy context → Work with Claude → Ship
 
 <table>
 <tr>
-<td width="33%">
+<td width="25%">
+
+### 🌐 **Claude Project Hub**
+**PWA for Project Management**
+
+🔧 React + Vercel + GitHub API  
+📈 Active Development (30%)  
+📱 Mobile-First PWA  
+
+**Next**: Phase 1 - Basic web app + Claude API
+
+</td>
+<td width="25%">
 
 ### 🎮 **MTG Web App**
 **AI Deck Generator + Live Referee**
@@ -67,7 +81,7 @@ Choose any project from dashboard → Copy context → Work with Claude → Ship
 **Next**: Environment setup + dependencies
 
 </td>
-<td width="33%">
+<td width="25%">
 
 ### 🥗 **Cucina Vegana** 
 **Complete Kitchen Management**
@@ -79,7 +93,7 @@ Choose any project from dashboard → Copy context → Work with Claude → Ship
 **Next**: Complete 30-recipe database
 
 </td>
-<td width="33%">
+<td width="25%">
 
 ### 📚 **Università**
 **AI-Enhanced Study System**
@@ -105,16 +119,21 @@ graph TB
     C --> D[Claude Context Loading]
     D --> E[AI-Assisted Development]
     E --> F[Deliverables Output]
-    F --> G[Dashboard Tracking]
+    F --> G[Progress Tracking]
     
     H[KNOWLEDGE_BASE.md] --> D
     I[Templates Library] --> B
+    
+    J[Legacy Dashboard] --> D
+    K[Hub PWA - In Dev] --> D
 ```
 
 **3 Core Layers:**
 - 📂 **Storage**: Structured projects with standardized docs
 - 🤖 **AI Integration**: Optimized Claude context loading
-- 🎨 **Interface**: Dashboard for project management
+- 🎨 **Interface**: 
+  - **Legacy Dashboard** (functional, static HTML)
+  - **Hub PWA V1.0** (in development, React + Claude API)
 
 ---
 
@@ -123,42 +142,47 @@ graph TB
 ### ✅ **Currently Available**
 - **📋 Standardized PROJECT.md Format** - Claude understands any project instantly
 - **🎨 Project Templates** - WebApp, Study, Creative, Research ready-to-use
-- **📊 Visual Dashboard** - All projects status at a glance  
-- **🧠 Optimized Knowledge Base** - 75% smaller, 10x faster Claude loading
+- **📊 Legacy Dashboard** - All projects status at a glance  
+- **🧠 Optimized Knowledge Base** - Fast Claude context loading
 - **🔄 Git Workflow Integration** - Version control everything
-- **📱 Mobile-Friendly Dashboard** - Works on all devices
+- **📱 Mobile-Friendly** - Legacy dashboard works on all devices
 
-### 🚧 **In Development**
-- **⚡ Dynamic Dashboard** - Auto-read projects from filesystem
-- **🤖 Claude API Integration** - In-app AI assistance
-- **📈 Progress Analytics** - Time tracking and productivity metrics
-- **🔧 Automation Scripts** - One-command project setup
+### 🚧 **In Active Development**
+- **🌐 Hub PWA** - Progressive Web App with Claude API integration
+- **📱 Mobile-First UX** - iPhone + desktop optimized interface
+- **🤖 Direct Claude Integration** - In-app chat with auto-context
+- **🔄 GitHub Auto-Sync** - Auto-read/write PROJECT.md files
+- **💾 Offline Mode** - Work without internet, sync later
+- **🔐 Session Persistence** - Conversations saved locally
 
 ### 💡 **Planned Features** 
 - **👥 Multi-User Collaboration** - Share projects with team
 - **☁️ Cloud Sync** - Cross-device project access
-- **📱 Mobile App** - Native iOS/Android companion
-- **🔌 Plugin System** - Extend functionality
+- **🎙️ Voice Input** - Voice-to-text for mobile
+- **🔌 Workflow Automation** - n8n/Zapier integrations
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### **Core System**
-- **Frontend**: HTML5 + CSS3 + Vanilla JS (zero dependencies)
 - **Storage**: File system + Git (human-readable, version controlled)
-- **AI**: Claude API integration (current) + local LLMs (planned)
+- **Legacy Dashboard**: HTML5 + CSS3 + Vanilla JS (zero dependencies)
+- **Hub PWA**: React 18 + TypeScript + Vite
+- **Backend**: Vercel Serverless Functions
+- **AI**: Claude API integration + local LLMs (planned)
 
 ### **Project Technologies**
-- **Web Apps**: FastAPI + React + PostgreSQL
-- **AI/ML**: MLX (Apple Silicon) + Ollama + HuggingFace  
-- **Study Tools**: Obsidian + Markdown + Anki
-- **Creative Projects**: Custom HTML/JS + JSON databases
+- **Web Apps**: React, FastAPI, Next.js, PostgreSQL
+- **AI/ML**: MLX (Apple Silicon), Ollama, HuggingFace  
+- **Study Tools**: Obsidian, Markdown, Anki
+- **Creative Projects**: Custom HTML/JS, JSON databases
 
 ### **Development**
 - **Version Control**: Git + GitHub
 - **Editor**: VS Code (recommended)
 - **Platform**: macOS optimized (Apple Silicon native)
+- **Deployment**: Vercel (Hub), local (other projects)
 
 ---
 
@@ -166,7 +190,7 @@ graph TB
 
 | Template | Use Case | Example | Tech Stack |
 |----------|----------|---------|------------|
-| 🌐 **WebApp** | Full-stack applications | MTG Web App | FastAPI + React |
+| 🌐 **WebApp** | Full-stack applications | Hub PWA, MTG Web App | React, FastAPI |
 | 📚 **Study** | Learning & research | University System | Obsidian + AI |
 | 🎨 **Creative** | Design & lifestyle | Vegan Kitchen | HTML/JS |
 | 🔧 **Tool** | Utilities & automation | Scripts & CLIs | Python |
@@ -175,11 +199,26 @@ graph TB
 - ✅ Complete PROJECT.md structure
 - ✅ Folder organization
 - ✅ Development phases
+- ✅ SESSION_HANDOFF for continuity
 - ✅ Claude integration guides
 
 ---
 
 ## 🔄 Workflow Examples
+
+### **Using Legacy Dashboard (Current)**
+```bash
+open app/frontend/index.html
+# Click project → Copy context → Paste in claude.ai → Work
+```
+
+### **Using Hub PWA (When V1.0 Ready - Nov 2025)**
+```bash
+# Open hub.yourname.vercel.app
+# Install to home screen (iPhone/desktop)
+# Select project → Context auto-loads
+# Chat with Claude in-app → Code auto-saves
+```
 
 ### **New Project (10 Minutes)**
 ```bash
@@ -188,13 +227,8 @@ cp PROJECT_TEMPLATE.md projects/my-app/PROJECT.md
 # Ask Claude to help fill template → Start building!
 ```
 
-### **Work Session (30 Seconds)**
-```
-Dashboard → Select Project → Copy Context → Paste in Claude → Code!
-```
-
 ### **Project Completion**
-```
+```bash
 Update PROJECT.md → Commit deliverables → Mark completed → Celebrate! 🎉
 ```
 
@@ -202,10 +236,10 @@ Update PROJECT.md → Commit deliverables → Mark completed → Celebrate! 🎉
 
 ## 📊 System Stats
 
-- **📂 Projects Managed**: 3 active + unlimited capacity
+- **📂 Projects Managed**: 4 active + unlimited capacity
 - **⚡ Setup Time**: <5 minutes first time, <30 seconds per session
 - **📝 Documentation**: 100+ pages optimized for AI consumption
-- **🤖 Claude Efficiency**: 10x faster context loading after optimization
+- **🤖 Claude Efficiency**: 10x faster context loading with SESSION_HANDOFF
 - **💾 Storage**: ~50MB per project average (including deliverables)
 
 ---
@@ -217,29 +251,74 @@ Update PROJECT.md → Commit deliverables → Mark completed → Celebrate! 🎉
 - ❌ Recreating project structure every time
 - ❌ Claude confused about project context
 - ❌ Lost track of what was built where
+- ❌ Can't work from mobile effectively
 
 ### **After Claude Project Hub**  
 - ✅ **30 seconds** to switch project context
 - ✅ **10 minutes** to start any new project
 - ✅ **Claude instantly** understands project scope
 - ✅ **Zero projects abandoned** - all tracked and organized
+- ✅ **Work from anywhere** - Hub PWA enables mobile workflow
+
+---
+
+## 🌐 Hub PWA - The Future (V1.0 Target: Nov 2025)
+
+### What Makes Hub Special
+
+**Progressive Web App**:
+- 📱 Install on iPhone home screen
+- 💻 Works on desktop browsers
+- 🔌 Offline-capable with service worker
+- ⚡ Fast, native-like performance
+
+**Claude API Integration**:
+- 🤖 Chat with Claude directly in-app
+- 📂 Auto-load PROJECT.md context
+- 💾 Auto-save generated code
+- 🔄 Auto-update PROJECT.md via GitHub API
+
+**Mobile-Optimized**:
+- 👆 Touch-friendly interface
+- 📲 Bottom navigation (iPhone-friendly)
+- 🎨 Responsive design (mobile-first)
+- 🌙 Dark mode support
+
+**Session Persistence**:
+- 💬 Conversations saved locally (IndexedDB)
+- 🔄 Refresh browser = continue conversation
+- 📊 History accessible across devices
+
+### Current Hub Development Status
+
+```
+Phase 0: Repo Optimization    [██████░░░░░░░░░░░░░░]  30% ← Current
+Phase 1: Basic Web App         [░░░░░░░░░░░░░░░░░░░░]   0%
+Phase 2: GitHub + Context      [░░░░░░░░░░░░░░░░░░░░]   0%
+Phase 3: Code Artifacts        [░░░░░░░░░░░░░░░░░░░░]   0%
+Phase 4: Auto-Commit + Memory  [░░░░░░░░░░░░░░░░░░░░]   0%
+Phase 5: PWA + Mobile Polish   [░░░░░░░░░░░░░░░░░░░░]   0%
+```
+
+**Next Milestone**: Setup React + Vite project, Claude API integration
 
 ---
 
 ## 🚀 Get Started Now
 
 ### **For Individual Developers**
-1. **Fork this repository**
-2. **Clone locally** 
-3. **Open dashboard** (`app/frontend/index.html`)
-4. **Load in Claude** (copy repo URL)
-5. **Start your first project!**
+1. **Fork/Clone this repository**
+2. **Open legacy dashboard** (`app/frontend/index.html`)
+3. **Load in Claude** (copy repo URL)
+4. **Start your first project!**
+5. **Watch for Hub V1.0** (November 2025)
 
-### **For Teams** (Coming Soon)
-- Multi-user project sharing
-- Collaborative development workflows  
-- Team dashboard with assignments
-- Shared template libraries
+### **For Hub Development** (Contribute!)
+```bash
+cd hub/deliverables/frontend
+# Setup coming in Phase 1 (Week 2)
+# React + Vite + Claude API integration
+```
 
 ---
 
@@ -250,13 +329,14 @@ Update PROJECT.md → Commit deliverables → Mark completed → Celebrate! 🎉
 - 💡 **Feature Requests**: Suggest new functionality
 - 📋 **Template Contributions**: Share your project templates
 - 📝 **Documentation**: Improve guides and examples
+- 🌐 **Hub Development**: Help build the PWA (Phase 1+)
 
 ### **Development Setup**
 ```bash
-git clone https://github.com/[username]/claude-project-hub
-cd claude-project-hub
-# No build process needed - pure HTML/CSS/JS!
-open app/frontend/index.html
+git clone https://github.com/Noobucodonosor/claude-24h-project
+cd claude-24h-project
+# Legacy dashboard: No build needed - open index.html
+# Hub PWA: Coming in Phase 1
 ```
 
 ---
@@ -267,6 +347,7 @@ open app/frontend/index.html
 - **[🧠 KNOWLEDGE_BASE.md](KNOWLEDGE_BASE.md)** - Complete system context for Claude  
 - **[🔄 docs/WORKFLOW.md](docs/WORKFLOW.md)** - Detailed usage workflows
 - **[⚙️ docs/SETUP.md](docs/SETUP.md)** - Technical setup guide
+- **[🚀 project-creation-guide.md](project-creation-guide.md)** - How to create new projects
 
 ---
 
@@ -279,10 +360,31 @@ open app/frontend/index.html
 - **📈 Compound Productivity**: Each optimization benefits all future projects
 
 ### **Battle-Tested**
-- **✅ 3 diverse projects** successfully managed
-- **✅ 75% reduction** in knowledge base size without loss of functionality
+- **✅ 4 diverse projects** successfully managed (including meta-project Hub)
+- **✅ SESSION_HANDOFF** enables perfect continuity between sessions
 - **✅ 10x improvement** in Claude context loading speed
 - **✅ Zero abandoned projects** since implementation
+- **✅ Mobile-first** approach validated for Hub development
+
+---
+
+## 🔮 Roadmap
+
+### **Q4 2025**
+- ✅ Repository optimization complete
+- 🚧 Hub Phase 1: Basic web app + Claude API
+- 🚧 Hub Phase 2: GitHub integration + context engine
+
+### **Q1 2026**
+- 🎯 Hub V1.0 Release (PWA with full features)
+- 🎯 Legacy dashboard retired (gracefully)
+- 🎯 Mobile-first workflow validated
+
+### **Q2 2026+**
+- 💡 Multi-user features
+- 💡 Voice input (Whisper integration)
+- 💡 Workflow automation (n8n/Zapier)
+- 💡 Template marketplace
 
 ---
 
@@ -310,10 +412,14 @@ If Claude Project Hub helps you build faster and manage projects better, give it
 
 *From Chaos to Clarity • From Ideas to Shipped Products*
 
-**[🚀 Get Started Now](#-get-started-now) • [📊 See Projects](#-active-projects) • [📋 Use Templates](PROJECT_TEMPLATE.md)**
+**Legacy Dashboard** (Available Now) • **Hub PWA** (Nov 2025)
+
+**[🚀 Get Started](#-get-started-now) • [📊 See Projects](#-active-projects) • [📋 Use Templates](PROJECT_TEMPLATE.md)**
 
 ---
 
 *Built with ❤️ and 🤖 for developers who ship*
+
+*Now evolving into a mobile-first Progressive Web App* 📱
 
 </div>

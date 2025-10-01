@@ -255,6 +255,77 @@ ollama create mtg-referee ./fine_tune/Modelfile
 
 ---
 
+## 🔄 SESSION HANDOFF
+
+### Current Working Context
+**Phase**: Phase 1 - Environment Setup  
+**Progress**: 40%
+**File**: N/A (environment setup, no specific file yet)
+**Last Action**: Identified dependencies and setup requirements
+
+### What Works
+- ✅ Virtual environment created (`venv_mtg`)
+- ✅ Python 3.12+ available
+- ✅ Basic dependencies identified (FastAPI, MLX, Whisper, etc.)
+- ✅ Apple Silicon optimization strategy defined
+
+### What's Missing
+- ❌ MLX framework not installed yet
+- ❌ Ollama not configured
+- ❌ Dependencies not fully installed
+- ❌ Import tests not run
+- ❌ No test scripts created yet
+
+### Immediate Next Steps
+```bash
+# 1. Activate environment
+source venv_mtg/bin/activate
+
+# 2. Install core dependencies
+pip install fastapi uvicorn faster-whisper gtts stripe sqlalchemy websockets soundfile
+
+# 3. Install MLX (Apple Silicon specific)
+pip install mlx mlx-lm
+
+# 4. Test basic imports
+python -c "import fastapi, faster_whisper, gtts; print('✅ Basic setup OK')"
+
+# 5. Test MLX
+python -c "import mlx.core as mx; print('✅ MLX ready')"
+
+# 6. Install Ollama
+# Visit: https://ollama.ai/download
+# Then: ollama pull llama3
+
+# 7. Create first test script
+# File: tests/test_mlx.py
+# Test MLX operations on Apple Silicon
+```
+
+### Blockers/Decisions Needed
+- [ ] **MLX version compatibility**: Verify MLX works on your specific M-series chip
+- [ ] **Ollama vs Direct MLX**: Decide if using Ollama wrapper or direct MLX (recommend Ollama for simplicity)
+- [ ] **Model size**: 8B vs 13B model (8B recommended for 16GB RAM)
+- [ ] **Scryfall API rate limits**: Need to implement throttling (100ms between requests)
+
+### Context for Next Session
+```
+"Continue MTG Web App - Phase 1 Environment Setup.
+
+Current status: Dependencies identified, virtual environment ready.
+Next: Install MLX framework, test Apple Silicon optimization, setup Ollama.
+
+Priority: Get MLX working with simple test before moving to Phase 2.
+Commands ready in SESSION_HANDOFF section.
+
+Apple Silicon specific: M1/M2/M3 with 16GB unified memory.
+Goal: Verify <30s model load, 20-50 tokens/sec inference."
+```
+
+---
+
+---
+
 ## 🔧 APPLE SILICON SPECIFICS
 
 ### MLX Optimization
