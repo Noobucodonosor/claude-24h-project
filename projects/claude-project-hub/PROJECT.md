@@ -1,18 +1,18 @@
-# Claude Project Hub - Development Platform
+# Claude Project Hub - Web Platform
 
-> 🎯 **VISION**: Local development environment with integrated Claude API, eliminating need for claude.ai web interface for project work.
+> 🎯 **VISION**: Progressive Web App with Claude API integration - accessible from desktop and mobile (iPhone), eliminating need for claude.ai web interface.
 
 ---
 
 ## 📊 META
 
-- **Type**: Tool / Platform / Meta-System
+- **Type**: Web App (PWA - Progressive Web App)
 - **Priority**: 🔴 CRITICAL (Blocks all other project efficiency)
-- **Duration**: 6-8 weeks (phased rollout)
+- **Duration**: 4-6 weeks (phased rollout)
 - **Status**: 🏗️ Phase 0 - Repository Optimization
-- **Started**: 2025-09-29
+- **Started**: 2025-10-01
 - **Target V1.0**: 2025-11-15
-- **Budget**: €50 (Claude API credits for testing)
+- **Budget**: €10/month (hosting) + €50/month (Claude API)
 
 ---
 
@@ -22,294 +22,268 @@
 **Current State**: Developing projects using claude.ai web interface is inefficient:
 - Manual context copy/paste every session (2-5 min overhead)
 - No automatic PROJECT.md updates (manual editing)
-- Code artifacts require manual file creation/editing
+- Code artifacts require manual file creation
 - No memory between sessions (context reset)
-- No integration with local dev workflow (git, IDE, automation)
+- Can't work from iPhone (claude.ai mobile UX limited)
+- No integration with local dev workflow
 
 **Impact**: ~30% time wasted on "context management overhead" instead of actual development.
 
 ### Opportunity
-**Target State**: Hub = integrated development environment where:
+**Target State**: Hub = web-based development platform where:
 - Claude API access with **automatic context injection**
-- In-app chat with **persistent session memory**
-- Code generation → **auto-save to deliverables/**
-- PROJECT.md **auto-updates** (progress, logs)
-- **n8n/Zapier integrations** for workflow automation
-- **Zero manual overhead** for context management
+- In-browser chat with **persistent session memory**
+- Code generation → **downloadable artifacts**
+- PROJECT.md **auto-updates** via GitHub API
+- **Mobile-optimized** (iPhone Safari PWA)
+- **Offline-capable** (service worker caching)
+- **Cross-device sync** (same account, any device)
 
 **Expected Impact**: 
 - Context switching: 5 min → 10 seconds (97% reduction)
 - Time to productivity: 10 min → instant
+- Work from anywhere: iPhone, iPad, Mac
 - Development velocity: 2-3x improvement
 
 ### Success Criteria
 **V1.0 Complete When**:
-- ✅ Desktop app launches and connects to Claude API
+- ✅ Web app loads on desktop + iPhone Safari
+- ✅ Installable as PWA (Add to Home Screen)
+- ✅ Connects to Claude API successfully
 - ✅ Selecting project auto-loads complete context
-- ✅ Chat generates code → saves directly to filesystem
-- ✅ PROJECT.md updates automatically (progress, logs)
-- ✅ Session memory persists (close app, reopen = continue conversation)
-- ✅ Git integration (auto-commit on milestones)
-- ✅ Used exclusively for 1 complete project cycle (no claude.ai needed)
+- ✅ Chat generates code → one-click download
+- ✅ PROJECT.md updates via GitHub API commits
+- ✅ Session memory persists (refresh = continue conversation)
+- ✅ Works offline (cached data, queue API calls)
+- ✅ Used exclusively for 1 complete project cycle
 
 ---
 
-## 🛠️ TECH STACK
+## 🛠️ TECH STACK (Web-First)
 
-### Frontend (Desktop App)
-**Primary Choice**: **Tauri** (Rust + Web)
-- **Why**: Lightweight (~10MB vs Electron ~150MB), native performance, modern
-- **Web Tech**: React + TypeScript (UI components)
-- **Styling**: Tailwind CSS (consistency with current dashboard)
-- **Alternative**: Electron (if Tauri learning curve too steep)
+### Frontend (Single Page Application)
+**Framework**: **React 18 + TypeScript**
+- **Why**: Component reusability, ecosystem, mobile-friendly
+- **Styling**: Tailwind CSS (responsive, mobile-first)
+- **State**: Zustand (lightweight state management)
+- **PWA**: Workbox (service worker, offline support)
+- **Mobile**: Touch-optimized, responsive design
 
-### Backend (API Server)
-**Framework**: **FastAPI** (Python 3.12+)
-- **Why**: Async support, WebSocket for streaming, fast, well-documented
-- **Database**: SQLite (local caching, metadata)
-- **ORM**: SQLAlchemy (database abstraction)
-- **Background Tasks**: Celery (optional, for heavy processing)
+**Build Tool**: Vite (fast, modern)
+**Deployment**: Vercel / Netlify (free tier, auto HTTPS)
 
-### Context Engine (Core Innovation)
-**Language**: Python (module)
-- **Components**:
-  - PROJECT.md parser (extract context, structure data)
-  - SESSION_HANDOFF injector (system prompt builder)
-  - Smart truncation (prioritize relevant context when >128K tokens)
-  - Embedding cache (semantic search for relevant past sessions)
-- **Libraries**:
-  - LangChain (optional, for advanced RAG if needed)
-  - tiktoken (token counting)
-  - sentence-transformers (embeddings for semantic cache)
+### Backend (Serverless)
+**Platform**: **Vercel Serverless Functions** (or Netlify Functions)
+- **Why**: No server management, auto-scaling, free tier
+- **Language**: Node.js / TypeScript
+- **Database**: Vercel KV (Redis-compatible, serverless)
+- **Alternative**: Supabase (PostgreSQL + Auth + Storage)
 
-### Claude API Integration
-**SDK**: anthropic-sdk-python
-- **Features Used**:
-  - Messages API (chat completions)
-  - Streaming responses (real-time typing effect)
-  - Function calling (for PROJECT.md updates, file operations)
-  - Token counting (cost optimization)
+### APIs & Integrations
+**Claude API**: Direct integration (anthropic-sdk-js)
+**GitHub API**: For reading/writing PROJECT.md files
+**Storage**: Browser IndexedDB (offline data) + Cloud sync
 
-### Automation Integrations
-**n8n**: Self-hosted workflow automation
-- **Use Cases**:
-  - Project milestone reached → Notion database update
-  - Daily summary → Email/Slack notification
-  - Backup trigger → Cloud storage sync
-**Zapier**: Webhook triggers (if n8n not feasible)
+### Context Engine (Client-Side)
+**Implementation**: JavaScript module
+- PROJECT.md parser (fetch from GitHub → parse → structure)
+- Context builder (format for Claude system prompt)
+- Token counter (tiktoken-js)
+- Smart truncation (prioritize SESSION_HANDOFF)
 
-### Development Tools
-- **Editor**: VS Code (for Hub development itself)
-- **Git**: Version control (Hub code + all projects)
-- **API Testing**: Postman / Insomnia
-- **UI Design**: Figma (wireframes)
+### Mobile Optimization
+**PWA Features**:
+- Add to Home Screen (icon, splash screen)
+- Offline mode (service worker)
+- Push notifications (optional)
+- Touch gestures (swipe, long-press)
+
+**Responsive Design**:
+- Mobile-first CSS (Tailwind breakpoints)
+- Bottom navigation (iPhone-friendly)
+- Large tap targets (44px minimum)
+- Pull-to-refresh
 
 ---
 
-## 📋 DEVELOPMENT PHASES (6 Sprints)
+## 📋 DEVELOPMENT PHASES (5 Sprints)
 
 ### Phase 0: Repository Optimization 🏗️ (CURRENT - Week 1)
-**Goal**: Prepare repository structure to support Hub development & usage
+**Goal**: Prepare repository structure to support Hub development
 
 **Tasks**:
-- [x] Define Hub vision & architecture
-- [ ] Restructure repository (new folders: hub/, system/, etc.)
-- [ ] Create Hub PROJECT.md (this document)
-- [ ] Create ARCHITECTURE.md (technical deep-dive)
-- [ ] Create API_DESIGN.md (endpoint specifications)
-- [ ] Create ROADMAP.md (sprint breakdown with dates)
-- [ ] Update KNOWLEDGE_BASE.md (include Hub context)
-- [ ] Add SESSION_HANDOFF sections to all active projects
+- [x] Define Hub vision (web app, not desktop)
+- [ ] Create hub/ folder with subfolders
+- [ ] Create comprehensive PROJECT.md (this document)
+- [ ] Create ARCHITECTURE.md (web app architecture)
+- [ ] Create API_DESIGN.md (serverless functions spec)
+- [ ] Add SESSION_HANDOFF to all project PROJECT.md files
+- [ ] Update KNOWLEDGE_BASE.md
 
 **Deliverables**: 
 - Optimized repository structure
 - Complete Hub documentation suite
 - Ready for Phase 1 development
 
-**Duration**: 3 days (2025-10-01 to 2025-10-03)  
-**Status**: 🟡 In Progress (20%)
+**Duration**: 2 days (2025-10-01 to 2025-10-02)  
+**Status**: 🟡 In Progress (30%)
 
 ---
 
-### Phase 1: Backend Core + Claude API 🔌 (Week 2)
-**Goal**: Working FastAPI server with Claude integration
+### Phase 1: Basic Web App + Claude API 🔌 (Week 2)
+**Goal**: Working web app with Claude chat
 
 **Tasks**:
-- [ ] Setup FastAPI project structure
-- [ ] Implement `/api/health` endpoint (basic test)
-- [ ] Integrate Claude API SDK
-- [ ] Implement `/api/chat` endpoint (streaming)
-- [ ] Environment config (API keys, settings.json)
-- [ ] Error handling & logging
-- [ ] Unit tests (pytest)
+- [ ] Setup React + Vite project
+- [ ] Basic UI layout (header, sidebar, chat panel)
+- [ ] Claude API integration (serverless function)
+- [ ] Simple chat interface (send message, receive response)
+- [ ] Environment config (.env for API keys)
+- [ ] Deploy to Vercel (staging environment)
 
 **Deliverables**:
-- FastAPI server running on `localhost:8000`
-- Postman collection with test requests
-- Can send message to Claude API and receive response
+- Web app accessible at hub.yourname.vercel.app
+- Can chat with Claude (no context yet)
+- Works on desktop + iPhone
+
+**Duration**: 4 days  
+**Status**: 🔴 Not Started
+
+**Definition of Done**:
+```
+1. Open hub.yourname.vercel.app on iPhone Safari
+2. Type message to Claude
+3. Receive response
+4. ✅ Basic chat works!
+```
+
+---
+
+### Phase 2: GitHub Integration + Context Engine 🧠 (Week 3)
+**Goal**: Automatic PROJECT.md loading from GitHub
+
+**Tasks**:
+- [ ] GitHub API integration (Octokit.js)
+- [ ] Fetch PROJECT.md from repository
+- [ ] PROJECT.md parser (JavaScript)
+- [ ] Context builder module
+- [ ] Context injection in Claude calls
+- [ ] Project selector UI (list from GitHub)
+- [ ] Cache layer (IndexedDB for offline)
+
+**Deliverables**:
+- Can select any project from GitHub
+- PROJECT.md auto-loads and parses
+- Context automatically injected in chat
+- Works offline (cached contexts)
 
 **Duration**: 5 days  
 **Status**: 🔴 Not Started
 
 **Definition of Done**:
-```bash
-# Start server
-python hub/deliverables/backend/main.py
-
-# Test endpoint (works!)
-curl -X POST http://localhost:8000/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Hello Claude"}'
+```
+1. Select "MTG Web App" from project list
+2. Context loads (12K tokens)
+3. Ask Claude: "What's the current phase?"
+4. Claude responds with context awareness
+5. ✅ Context engine works!
 ```
 
 ---
 
-### Phase 2: Context Engine 🧠 (Week 3)
-**Goal**: Automatic PROJECT.md loading & context injection
+### Phase 3: Code Artifacts + Downloads 💾 (Week 4)
+**Goal**: Generated code downloadable with one click
 
 **Tasks**:
-- [ ] PROJECT.md parser (extract meta, context, current phase)
-- [ ] SESSION_HANDOFF extractor
-- [ ] Context builder (format for Claude system prompt)
-- [ ] Token counter (ensure <128K context window)
-- [ ] Smart truncation (if context too large)
-- [ ] `/api/projects` endpoint (list all projects)
-- [ ] `/api/projects/{id}/context` endpoint (load project context)
-- [ ] Integration tests
+- [ ] Code block detection in responses
+- [ ] Syntax highlighting (Prism.js)
+- [ ] Download button for code blocks
+- [ ] Copy to clipboard functionality
+- [ ] File naming suggestions
+- [ ] Multi-file downloads (ZIP)
+- [ ] Mobile-optimized code viewer
 
 **Deliverables**:
-- `context_engine/` Python module
-- API endpoints for project management
-- Can load any project and extract full context
+- Code blocks highlighted and downloadable
+- Works smoothly on iPhone
+- Can download multiple files as ZIP
 
-**Duration**: 7 days  
-**Status**: 🔴 Not Started
-
-**Definition of Done**:
-```python
-# Load project context
-from context_engine import ContextBuilder
-
-context = ContextBuilder.load_project("mtg-webapp")
-print(context.system_prompt)  # Full PROJECT.md formatted for Claude
-print(context.token_count)    # e.g. 12,450 tokens
-```
-
----
-
-### Phase 3: Basic Frontend (Tauri) 🎨 (Week 4)
-**Goal**: Desktop app with chat interface
-
-**Tasks**:
-- [ ] Setup Tauri project (Rust + React)
-- [ ] Basic UI layout (sidebar + chat panel)
-- [ ] Project selector (connect to `/api/projects`)
-- [ ] Chat interface (connect to `/api/chat`)
-- [ ] Streaming response rendering (typing effect)
-- [ ] Settings panel (API key configuration)
-- [ ] Build & packaging (macOS .dmg)
-
-**Deliverables**:
-- Tauri app builds and runs
-- Can select project from list
-- Can chat with Claude in-app
-- Context automatically loaded
-
-**Duration**: 7 days  
-**Status**: 🔴 Not Started
-
-**Definition of Done**:
-- Double-click `Hub.app` on macOS
-- Select "MTG Webapp" from sidebar
-- Type "What's the current phase?" → Claude responds with context awareness
-- Screenshot saved in `hub/deliverables/frontend/demos/`
-
----
-
-### Phase 4: File Operations & Auto-Save 💾 (Week 5)
-**Goal**: Code generation auto-saves to deliverables/
-
-**Tasks**:
-- [ ] File system watcher (monitor changes)
-- [ ] Artifact detector (identify code blocks in Claude responses)
-- [ ] Auto-save handler (prompt user: "Save to deliverables/code/xyz.py?")
-- [ ] PROJECT.md updater (modify progress %, add log entries)
-- [ ] Git integration (auto-commit on save)
-- [ ] Conflict detection (if file exists)
-- [ ] Rollback mechanism (undo last save)
-
-**Deliverables**:
-- Code generated in chat → auto-saved to correct location
-- PROJECT.md progress updates automatically
-- Git commits created with meaningful messages
-
-**Duration**: 7 days  
+**Duration**: 4 days  
 **Status**: 🔴 Not Started
 
 **Definition of Done**:
 ```
-1. Chat with Claude: "Generate FastAPI endpoint for user auth"
-2. Claude responds with code artifact
-3. Hub prompts: "Save to hub/deliverables/backend/auth.py?"
-4. Click "Yes"
-5. File created, PROJECT.md updated, git commit made
-6. No manual file operations needed
+1. Ask Claude: "Generate FastAPI endpoint"
+2. Claude responds with code
+3. Click "Download" button
+4. File saves: auth.py
+5. ✅ Artifact download works!
 ```
 
 ---
 
-### Phase 5: Session Memory & Advanced Features 🧠 (Week 6)
-**Goal**: Persistent conversations, advanced context management
+### Phase 4: GitHub Auto-Commit + Session Memory 🔄 (Week 5)
+**Goal**: Auto-update PROJECT.md on GitHub, persistent sessions
 
 **Tasks**:
-- [ ] Session database (SQLite schema)
-- [ ] Conversation persistence (save/load chat history)
-- [ ] Multi-project tabs (work on multiple projects simultaneously)
-- [ ] Context search (semantic search past sessions)
-- [ ] Code diff viewer (compare versions)
-- [ ] Keyboard shortcuts (power user features)
+- [ ] GitHub API write operations
+- [ ] Auto-commit functionality (update PROJECT.md)
+- [ ] Session persistence (IndexedDB)
+- [ ] Conversation history (load past chats)
+- [ ] Progress auto-update logic
+- [ ] Log entry generation
+- [ ] Conflict detection
+
+**Deliverables**:
+- PROJECT.md updates automatically on GitHub
+- Sessions persist (refresh browser = continue chat)
+- Conversation history accessible
+
+**Duration**: 5 days  
+**Status**: 🔴 Not Started
+
+**Definition of Done**:
+```
+1. Complete task in chat
+2. Hub auto-commits to GitHub
+3. Check GitHub: PROJECT.md updated ✅
+4. Refresh browser
+5. Conversation still there ✅
+```
+
+---
+
+### Phase 5: PWA + Mobile Optimization + Polish 🚀 (Week 6)
+**Goal**: Production-ready PWA, perfect mobile UX
+
+**Tasks**:
+- [ ] PWA manifest (icons, splash screens)
+- [ ] Service worker (offline support)
+- [ ] Install prompt (Add to Home Screen)
+- [ ] Touch gestures (swipe, long-press)
+- [ ] Bottom navigation (iPhone-friendly)
 - [ ] Dark mode toggle
+- [ ] Performance optimization
+- [ ] Error handling + recovery
+- [ ] User onboarding flow
+- [ ] Beta testing
 
 **Deliverables**:
-- Close app → reopen → conversation continues
-- Can switch between 3 projects in tabs
-- Search: "when did we implement authentication?" → finds session
+- Installable PWA on iPhone
+- Works offline
+- Perfect mobile UX
+- Production deployment
 
 **Duration**: 7 days  
-**Status**: 🔴 Not Started
-
----
-
-### Phase 6: Automation & Polish 🚀 (Week 7-8)
-**Goal**: n8n integration, final polish, V1.0 release
-
-**Tasks**:
-- [ ] n8n self-hosted setup
-- [ ] Webhook endpoints for automation triggers
-- [ ] Example workflows (Notion sync, email notifications)
-- [ ] Performance optimization (caching, lazy loading)
-- [ ] Error recovery (offline mode, API failures)
-- [ ] User documentation (in-app help, guides)
-- [ ] Beta testing (dogfood on 2 projects)
-- [ ] Bug fixes from testing
-- [ ] V1.0 release build
-
-**Deliverables**:
-- Hub V1.0 production-ready
-- n8n workflows functional
-- Complete documentation
-- Used successfully for 1 full project without claude.ai
-
-**Duration**: 10-14 days  
 **Status**: 🔴 Not Started
 
 **V1.0 Release Criteria**:
-- [ ] All Phase 1-5 features working
+- [ ] Installable as PWA (iPhone + desktop)
+- [ ] All Phase 1-4 features working
 - [ ] Zero critical bugs
-- [ ] Documentation complete
-- [ ] Validated with 2 projects (e.g., Cucina Vegana + Università)
-- [ ] Backup/restore functionality
-- [ ] Claude API cost tracking (<€20/month for normal usage)
+- [ ] Works offline
+- [ ] Validated with 2 projects
+- [ ] Lighthouse score >90 (performance, accessibility)
 
 ---
 
@@ -317,78 +291,82 @@ print(context.token_count)    # e.g. 12,450 tokens
 
 ### V1.0 - MVP (Target: 2025-11-15)
 **Must Have**:
-- [x] Optimized repository structure
-- [ ] Desktop app (Tauri build)
-- [ ] Claude API integration (chat interface)
+- [x] Repository structure optimized
+- [ ] Web app deployed (Vercel/Netlify)
+- [ ] Claude API integration (chat)
+- [ ] GitHub API integration (read/write PROJECT.md)
 - [ ] Context engine (auto-load PROJECT.md)
-- [ ] File operations (auto-save artifacts)
-- [ ] PROJECT.md auto-updates
-- [ ] Session persistence
-- [ ] Git integration (auto-commit)
+- [ ] Code artifacts downloadable
+- [ ] SESSION_HANDOFF auto-injection
+- [ ] Session persistence (IndexedDB)
+- [ ] PWA installable (iPhone + desktop)
+- [ ] Mobile-optimized UI
 
 **Won't Have (Defer to V1.5+)**:
-- ❌ Mobile app
-- ❌ Multi-user collaboration
-- ❌ Cloud sync
-- ❌ Voice input (Whisper integration)
-- ❌ Visual code editor (use external for now)
+- ❌ Multi-user accounts (single user V1.0)
+- ❌ Real-time collaboration
+- ❌ Voice input (Whisper)
+- ❌ Visual code editor (use external)
+- ❌ n8n/Zapier integration
 
 ### V1.5 - Enhanced (Target: 2025-12-15)
 **Add**:
-- Advanced RAG (semantic search entire repo)
-- LangChain integration (multi-step workflows)
-- Visual PROJECT.md editor (in-app editing)
-- Code review mode (Claude suggests improvements)
+- Multi-user authentication (Supabase Auth)
+- Team collaboration (share projects)
+- Advanced code editor (Monaco)
+- Voice input (Speech-to-Text API)
 
 ### V2.0 - Platform (Target: 2026-01)
 **Add**:
-- Plugin system (community extensions)
-- Template marketplace (share project templates)
-- Team collaboration (multi-user)
-- Web version (browser-based Hub)
+- Template marketplace
+- Plugin system
+- Automation workflows (n8n)
+- Native mobile app (React Native)
 
 ---
 
 ## 📝 CONSTRAINTS & TECHNICAL NOTES
 
 ### Technical Constraints
-- **Context Window**: Claude 3.5 Sonnet = 200K tokens, but keep <128K for cost
-- **API Rate Limits**: Tier 1 = 50 requests/min (throttle if needed)
-- **Tauri Rust**: Learning curve if new to Rust (fallback: Electron)
-- **Desktop Only V1.0**: No mobile, no web (focus on power users)
+- **Claude API Context**: 200K tokens max, keep <128K for cost
+- **GitHub API Rate Limit**: 60 req/hour (unauthenticated), 5000 (authenticated)
+- **Browser Storage**: IndexedDB ~50MB typical, plan compression
+- **Mobile Performance**: Target <3s load time on 3G
+- **Offline Mode**: Queue API calls, sync when online
 
 ### Cost Constraints
-- **Claude API**: ~$3/1M input tokens, $15/1M output tokens
-- **Expected Usage**: ~10-20M tokens/month = ~$50-100/month
-- **Optimization**: Cache contexts, minimize redundant API calls
+- **Hosting**: Vercel free tier (100GB bandwidth/month)
+- **Claude API**: ~$50-100/month for normal usage
+- **GitHub**: Free (public repository)
+- **Total**: ~$60/month operational cost
 
 ### Development Constraints
-- **Time**: Solo developer, ~10-15 hours/week available
-- **Complexity**: Minimize scope creep, V1.0 = functional MVP only
-- **Testing**: Manual testing acceptable for V1.0 (automate in V1.5)
+- **Time**: Solo developer, ~10-15 hours/week
+- **Complexity**: Web-first, simpler than desktop app
+- **Testing**: Manual testing + Lighthouse audits
+- **Mobile**: Test on real iPhone (Safari quirks)
 
 ### Key Architectural Decisions
 
-**1. Tauri vs Electron**
-- **Decision**: Start with Tauri
-- **Rationale**: 10x smaller binary, faster, modern
-- **Fallback**: Switch to Electron if Rust learning curve blocks progress
-- **Timeline**: Decide by end of Phase 3
+**1. Web App vs Desktop App**
+- **Decision**: Web App (PWA)
+- **Rationale**: Cross-platform (iPhone!), no install friction, easier deployment
+- **Trade-off**: No filesystem access (downloads instead)
 
-**2. Local-First Architecture**
-- **Decision**: SQLite + filesystem, no cloud dependencies
-- **Rationale**: Privacy, offline-capable, simpler
-- **Future**: Cloud sync optional in V2.0
+**2. Serverless vs Traditional Backend**
+- **Decision**: Serverless Functions (Vercel)
+- **Rationale**: Zero maintenance, auto-scaling, free tier
+- **Trade-off**: Cold starts (~300ms), stateless
 
-**3. Context Engine Approach**
-- **Decision**: Deterministic parsing (no ML initially)
-- **Rationale**: PROJECT.md is structured → regex/parsing works
-- **Future**: Add embeddings for semantic search in V1.5
+**3. GitHub as Database**
+- **Decision**: GitHub repository = source of truth
+- **Rationale**: Already using it, version control, free
+- **Trade-off**: Rate limits, slower than real database
 
-**4. Git Integration**
-- **Decision**: Auto-commit on significant changes (not every edit)
-- **Rationale**: Balance automation vs commit clutter
-- **Implementation**: Configurable (user can disable)
+**4. Client-Side Context Engine**
+- **Decision**: Parse PROJECT.md in browser
+- **Rationale**: Reduce server load, works offline
+- **Trade-off**: Initial load slightly slower
 
 ---
 
@@ -396,39 +374,34 @@ print(context.token_count)    # e.g. 12,450 tokens
 
 ### Current Working Context
 **Phase**: Phase 0 - Repository Optimization  
-**File**: Multiple (repository restructure)  
-**Last Action**: Defined Hub complete vision, started PROJECT.md creation
+**Task**: Regenerating PROJECT.md for web app (not desktop)  
+**Last Action**: Defined complete vision for PWA with mobile support
 
 ### What Works
-- ✅ Vision clear (local Claude IDE)
-- ✅ Architecture defined (Tauri + FastAPI + Context Engine)
-- ✅ Phases planned (6 sprints, realistic timeline)
+- ✅ Clear vision (web app, PWA, iPhone accessible)
+- ✅ Tech stack decided (React + Vercel + GitHub API)
+- ✅ 5-phase roadmap realistic
 
 ### What's Missing
-- ❌ Repository restructure not applied yet (folders not created)
-- ❌ ARCHITECTURE.md not created (technical deep-dive)
-- ❌ API_DESIGN.md not created (endpoint specs)
-- ❌ ROADMAP.md not created (sprint details with dates)
+- ❌ Repository folders not created yet (hub/, hub/deliverables/, etc.)
+- ❌ ARCHITECTURE.md not created (web app specific)
+- ❌ API_DESIGN.md not created (serverless functions)
+- ❌ SESSION_HANDOFF sections not added to other projects
 
-### Immediate Next Steps (Copy-Paste to Resume)
+### Immediate Next Steps
 ```
-Continue Hub Phase 0 optimization.
-
-Tasks:
-1. Create new folder structure (hub/, system/, reorganize app/)
-2. Generate ARCHITECTURE.md (technical details: Tauri setup, FastAPI structure, Context Engine design)
-3. Generate API_DESIGN.md (all backend endpoints with request/response examples)
-4. Generate ROADMAP.md (sprint planning with dates, dependencies)
-5. Add SESSION_HANDOFF sections to MTG/Cucina/Università PROJECT.md files
-6. Update KNOWLEDGE_BASE.md (include Hub as meta-project)
-
-Priority: Items 1-2 (structure + architecture doc) to unblock development start.
+1. User saves this PROJECT.md to: projects/claude-project-hub/PROJECT.md
+2. User commits to GitHub
+3. Next session: Create hub/ folder structure
+4. Generate ARCHITECTURE.md (web app architecture)
+5. Generate API_DESIGN.md (serverless API spec)
+6. Add SESSION_HANDOFF to MTG/Cucina/Università projects
 ```
 
 ### Blockers/Decisions Needed
-- [ ] **Tauri vs Electron**: Research Tauri learning curve (2h) before Phase 3
-- [ ] **LangChain**: Evaluate necessity for V1.0 (may be overkill, defer to V1.5)
-- [ ] **n8n vs Zapier**: Test n8n self-hosting feasibility (Phase 6)
+- [ ] **Hosting choice**: Vercel vs Netlify (recommend Vercel - better DX)
+- [ ] **Database**: Vercel KV vs Supabase (start with IndexedDB, add cloud later)
+- [ ] **Authentication**: Defer to V1.5 (single user V1.0)
 
 ---
 
@@ -436,113 +409,107 @@ Priority: Items 1-2 (structure + architecture doc) to unblock development start.
 
 ### Overall Progress
 ```
-Phase 0: Repo Optimization    [████░░░░░░░░░░░░░░░░]  20%
-Phase 1: Backend Core          [░░░░░░░░░░░░░░░░░░░░]   0%
-Phase 2: Context Engine        [░░░░░░░░░░░░░░░░░░░░]   0%
-Phase 3: Frontend (Tauri)      [░░░░░░░░░░░░░░░░░░░░]   0%
-Phase 4: File Operations       [░░░░░░░░░░░░░░░░░░░░]   0%
-Phase 5: Session Memory        [░░░░░░░░░░░░░░░░░░░░]   0%
-Phase 6: Automation & Polish   [░░░░░░░░░░░░░░░░░░░░]   0%
+Phase 0: Repo Optimization    [██████░░░░░░░░░░░░░░]  30%
+Phase 1: Basic Web App         [░░░░░░░░░░░░░░░░░░░░]   0%
+Phase 2: GitHub + Context      [░░░░░░░░░░░░░░░░░░░░]   0%
+Phase 3: Code Artifacts        [░░░░░░░░░░░░░░░░░░░░]   0%
+Phase 4: Auto-Commit + Memory  [░░░░░░░░░░░░░░░░░░░░]   0%
+Phase 5: PWA + Mobile Polish   [░░░░░░░░░░░░░░░░░░░░]   0%
 
-🎯 V1.0 Completion: 3% (2 of 6 phases done)
+🎯 V1.0 Completion: 5% (Phase 0 in progress)
 ```
 
 ### Sprint Calendar
-- **Week 1** (Oct 1-3): Phase 0 ← WE ARE HERE
-- **Week 2** (Oct 7-11): Phase 1
+- **Week 1** (Oct 1-2): Phase 0 ← WE ARE HERE
+- **Week 2** (Oct 7-10): Phase 1
 - **Week 3** (Oct 14-18): Phase 2
-- **Week 4** (Oct 21-25): Phase 3
+- **Week 4** (Oct 21-24): Phase 3
 - **Week 5** (Oct 28-Nov 1): Phase 4
-- **Week 6** (Nov 4-8): Phase 5
-- **Week 7-8** (Nov 11-22): Phase 6
-- **Buffer** (Nov 25-Dec 1): Testing & fixes
+- **Week 6** (Nov 4-10): Phase 5
+- **Buffer** (Nov 11-15): Testing & fixes
 
-**Target V1.0 Release**: December 1, 2025 🚀
+**Target V1.0 Release**: November 15, 2025 🚀
 
 ---
 
 ## 📖 PROJECT LOG
 
-### 2025-09-29 - Project Inception
-- Created initial PROJECT.md (basic structure)
-- Recognized Hub as meta-project
-- Started documenting as own project in system
-
-**Learnings**:
-- Self-referential approach validates framework
-- Hub itself tests the methodology
-
----
-
-### 2025-10-01 - Vision Refinement & Architecture
-**Progress**:
-- Complete vision statement (eliminate claude.ai web dependency)
-- Tech stack decisions (Tauri + FastAPI + Context Engine)
-- 6-phase roadmap with realistic timeline
-- Created comprehensive PROJECT.md
+### 2025-10-01 - Vision Pivot: Desktop → Web App
+**Context**: User needs iPhone access, not just desktop
 
 **Decisions**:
-- **Tauri over Electron**: Lightweight, modern (with Electron fallback)
-- **Local-first**: No cloud dependencies V1.0 (privacy + simplicity)
-- **Context Engine = Core Innovation**: Auto-load PROJECT.md + smart injection
-- **Phased rollout**: 6 sprints, each self-contained (agile approach)
+- **Web App (PWA)** instead of Tauri desktop app
+- **Serverless backend** (Vercel Functions) instead of FastAPI
+- **GitHub API** for PROJECT.md read/write (no local filesystem)
+- **Mobile-first design** (iPhone Safari primary target)
 
-**Key Insight**:
-Hub is not just a "chat wrapper" - it's a **development orchestration platform**. The Context Engine is what makes it transformative (vs just another Electron app).
+**Key Changes from Desktop Vision**:
+- ✅ Accessible from any device (iPhone, iPad, Mac)
+- ✅ No installation needed (browser-based)
+- ✅ Easier deployment (Vercel auto-deploy)
+- ❌ No direct filesystem access (downloads instead)
+- ❌ Slightly higher latency (GitHub API calls)
 
-**Blockers**:
-- None currently
-- Potential: Tauri learning curve (mitigated by Electron fallback plan)
+**Rationale**:
+Web app wins because:
+1. **Accessibility**: Work from anywhere, any device
+2. **Simplicity**: No native app maintenance
+3. **Iteration speed**: Push updates instantly
+4. **Cost**: Free hosting (Vercel/Netlify free tier)
 
-**Next Session**:
-1. Create repository folder structure
-2. Write ARCHITECTURE.md (technical deep-dive)
-3. Write API_DESIGN.md (backend spec)
-4. Begin Phase 1 development (backend scaffold)
+**Trade-offs Accepted**:
+- Code generated → download (can't auto-save to local filesystem)
+- GitHub API rate limits (5000/hour authenticated - sufficient)
+- Requires internet (offline mode limited to cached data)
+
+**Next Steps**:
+1. Complete Phase 0 (repository structure)
+2. Prototype Phase 1 (basic React app + Claude chat)
+3. Test on real iPhone (Safari quirks, PWA install)
 
 ---
 
 ## 🎓 LEARNINGS & ANTI-PATTERNS
 
 ### What Worked (Design Principles)
-- **Local-first approach**: Privacy + simplicity wins
-- **Context Engine innovation**: Differentiation from "yet another Claude wrapper"
-- **Phased rollout**: Each phase = usable increment (agile)
-- **Dogfooding**: Hub manages itself (ultimate validation)
+- **Mobile-first thinking**: Forces simplicity, benefits desktop too
+- **Serverless architecture**: Zero maintenance, auto-scaling
+- **GitHub as database**: Leverage existing infrastructure
+- **Progressive enhancement**: Works in browser, better as PWA
 
 ### What to Avoid
-- ❌ **Over-engineering V1.0**: Resist adding "nice to have" features
-- ❌ **Scope creep**: Mobile/web can wait for V2.0
-- ❌ **Perfectionism**: Ship functional MVP, iterate
-- ❌ **Analysis paralysis**: Don't spend 3 weeks on architecture docs
+- ❌ **Over-engineering V1.0**: Ship functional MVP first
+- ❌ **Ignoring mobile**: 40%+ usage will be iPhone
+- ❌ **Complex auth early**: Single user V1.0, multi-user V1.5
+- ❌ **Perfect code editor**: Download files, edit in VSCode (V1.0)
 
 ### Best Practices Established
-- **Definition of Done**: Every phase has concrete completion criteria
-- **Fallback plans**: Tauri → Electron, LangChain → simple parsing
-- **Time boxing**: Fixed sprint durations, cut scope if needed
-- **Cost consciousness**: Track Claude API usage, optimize early
+- **Mobile testing mandatory**: Every feature tested on iPhone
+- **Offline-first**: Design for spotty connections
+- **Performance budget**: <3s load time on 3G
+- **Accessibility**: WCAG 2.1 AA minimum (keyboard nav, screen readers)
 
 ---
 
 ## 📚 RESOURCES
 
 ### Technical Documentation
-- **Tauri**: https://tauri.app/v1/guides/
-- **FastAPI**: https://fastapi.tiangolo.com/
-- **Claude API**: https://docs.anthropic.com/claude/reference/
-- **SQLAlchemy**: https://docs.sqlalchemy.org/
 - **React**: https://react.dev/
-- **n8n**: https://docs.n8n.io/
+- **Vite**: https://vitejs.dev/
+- **Vercel**: https://vercel.com/docs
+- **Claude API**: https://docs.anthropic.com/
+- **GitHub API**: https://docs.github.com/en/rest
+- **PWA**: https://web.dev/progressive-web-apps/
 
-### Research & Inspiration
-- **VSCode Architecture**: https://github.com/microsoft/vscode (plugin system reference)
-- **Cursor IDE**: https://cursor.sh/ (Claude integration inspiration)
-- **Obsidian**: https://obsidian.md/ (local-first philosophy)
+### Web App Examples
+- **Cursor IDE**: https://cursor.sh/ (Claude integration reference)
+- **GitHub Codespaces**: https://github.com/features/codespaces (web IDE)
+- **Vercel AI SDK**: https://sdk.vercel.ai/ (streaming chat patterns)
 
-### Community
-- **Tauri Discord**: For Rust/Tauri questions
-- **FastAPI Discord**: Backend troubleshooting
-- **Claude API Forum**: Best practices, rate limits
+### Mobile Web Best Practices
+- **iPhone Safari**: https://webkit.org/blog/ (Safari-specific features)
+- **PWA iOS**: https://web.dev/install-criteria/ (Add to Home Screen)
+- **Touch Targets**: https://web.dev/accessible-tap-targets/
 
 ---
 
@@ -550,13 +517,14 @@ Hub is not just a "chat wrapper" - it's a **development orchestration platform**
 
 ### Starting Work on Hub
 ```
-Project: Claude Project Hub (Hub Development)
-File: hub/PROJECT.md
-Phase: [Current phase from SESSION_HANDOFF]
-Today's focus: [Specific task from current phase]
+Project: Claude Project Hub (Web App Development)
+File: projects/claude-project-hub/PROJECT.md
+Phase: Phase 0 - Repository Optimization
+Focus: Building Progressive Web App for iPhone + desktop
 
-Context: Hub = local development environment replacing claude.ai web interface.
-Goal: Eliminate manual context management, auto-save artifacts, integrate Claude API.
+Context: Hub = web-based development platform (not desktop app)
+Goal: Eliminate manual context management, auto-update PROJECT.md via GitHub API
+Platform: React PWA, Vercel serverless, accessible from iPhone Safari
 
 [Paste SESSION_HANDOFF section here]
 
@@ -565,29 +533,34 @@ What should we build today?
 
 ### Definition of "Done" for V1.0
 ```
-✅ Can launch Hub desktop app
-✅ Can select any project → context auto-loads
-✅ Can chat with Claude → code auto-saves to deliverables/
-✅ PROJECT.md updates automatically
-✅ Session persists (close/reopen = continue)
-✅ Git commits automatically on milestones
-✅ Used for 1 complete project without touching claude.ai web
+✅ Open hub.yourname.vercel.app on iPhone
+✅ Install as PWA (Add to Home Screen)
+✅ Select "MTG Web App" project
+✅ Context auto-loads from GitHub
+✅ Chat with Claude → code generated
+✅ Download code with one tap
+✅ PROJECT.md auto-updates on GitHub
+✅ Refresh browser → session persists
+✅ Works offline (cached contexts)
+✅ Lighthouse score >90
 ```
 
 ---
 
 <div align="center">
 
-**🎯 CLAUDE PROJECT HUB - THE META-PROJECT**
+**🎯 CLAUDE PROJECT HUB - WEB PLATFORM**
 
-*Building the platform to build all other platforms*
+*Progressive Web App for AI-assisted development*
 
-**Status**: Phase 0 - Repository Optimization (20%)  
-**Target V1.0**: December 1, 2025  
-**Vision**: Eliminate manual context overhead, 10x development velocity
+**Status**: Phase 0 - Repository Optimization (30%)  
+**Target V1.0**: November 15, 2025  
+**Platform**: React PWA + Vercel + GitHub API
+
+**Vision**: Work from anywhere - iPhone, iPad, Mac - with full Claude context
 
 ---
 
-*"The system that manages itself, to manage everything else"*
+*"The web app that manages all your projects, accessible from your pocket"*
 
 </div>
