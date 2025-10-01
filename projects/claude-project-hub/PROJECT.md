@@ -16,47 +16,63 @@
 
 ---
 
-## 🎯 CONTEXT
+🎯 CONTEXT
+Problem Statement
+Current State: Developing projects using claude.ai web interface is inefficient:
 
-### Problem Statement
-**Current State**: Developing projects using claude.ai web interface is inefficient:
-- Manual context copy/paste every session (2-5 min overhead)
-- No automatic PROJECT.md updates (manual editing)
-- Code artifacts require manual file creation
-- No memory between sessions (context reset)
-- Can't work from iPhone (claude.ai mobile UX limited)
-- **No cloud-native workflow** (code stuck in browser, not in GitHub)
+Manual context copy/paste every session (2-5 min overhead)
+No automatic PROJECT.md updates (manual editing)
+Code artifacts require manual file creation
+No memory between sessions (context reset)
+Can't work from iPhone (claude.ai mobile UX limited)
+No cloud-native workflow (code stuck in browser, not in GitHub)
 
-**Impact**: ~30% time wasted on "context management overhead" instead of actual development.
+Impact: ~30% time wasted on "context management overhead" instead of actual development.
+Opportunity
+Target State: Hub = cloud-native development platform where:
 
-### Opportunity
-**Target State**: Hub = cloud-native development platform where:
-- Claude API access with **automatic context injection**
-- In-browser chat with **persistent session memory**
-- Code generation → **automatic GitHub commit** (no downloads!)
-- PROJECT.md **auto-updates** via GitHub API
-- **Mobile-optimized** (iPhone Safari PWA)
-- **5G-first design** (always online, cloud storage)
-- **Zero local filesystem** (everything on GitHub)
+Claude API access with automatic context injection
+In-browser chat with persistent session memory
+Code generation → automatic GitHub commit (no downloads!)
+PROJECT.md auto-updates via GitHub API
+Mobile-optimized (iPhone Safari PWA)
+5G-first design (always online, graceful degradation when offline)
+Zero local filesystem (everything on GitHub)
 
-**Expected Impact**: 
-- Context switching: 5 min → 10 seconds (97% reduction)
-- Time to productivity: 10 min → instant
-- Work from anywhere: iPhone, iPad, Mac
-- Code delivery: Browser → GitHub (no manual steps)
-- Development velocity: 2-3x improvement
+Expected Impact:
 
-### Success Criteria
-**V1.0 Complete When**:
-- ✅ Web app loads on desktop + iPhone Safari
-- ✅ Installable as PWA (Add to Home Screen)
-- ✅ Connects to Claude API successfully
-- ✅ Selecting project auto-loads complete context
-- ✅ Chat generates code → **auto-commits to GitHub**
-- ✅ PROJECT.md updates via GitHub API commits
-- ✅ Session memory persists (refresh = continue conversation)
-- ✅ **No downloads required** (cloud-to-cloud workflow)
-- ✅ Used exclusively for 1 complete project cycle
+Context switching: 5 min → 10 seconds (97% reduction)
+Time to productivity: 10 min → instant
+Work from anywhere: iPhone, iPad, Mac
+Code delivery: Browser → GitHub (no manual steps)
+Development velocity: 2-3x improvement
+
+Success Criteria
+V1.0 Complete When:
+
+✅ Web app loads on desktop + iPhone Safari
+✅ Installable as PWA (Add to Home Screen)
+✅ Connects to Claude API successfully
+✅ Selecting project auto-loads complete context
+✅ Chat generates code → user commits to GitHub with one click
+✅ PROJECT.md updates via GitHub API commits
+✅ Session memory persists (refresh = continue conversation)
+✅ Graceful offline handling (shows reconnection status)
+✅ Used exclusively for 1 complete project cycle
+
+Code Workflow (Detailed)
+1. User: "Generate FastAPI endpoint"
+2. Claude: Generates code in artifact UI
+3. User: Clicks [💾 Commit to GitHub] button
+4. Modal appears:
+   - Path selector: projects/X/deliverables/code/
+   - Filename input: auth.py
+   - Auto-generated commit message (editable)
+5. User confirms
+6. Hub: GitHub API PUT request (handles file create/update)
+7. Toast notification: "✅ Code committed to GitHub"
+8. Link: "View on GitHub →"
+No downloads. Pure cloud workflow.
 ---
 
 ## 🛠️ TECH STACK (Web-First)

@@ -181,28 +181,73 @@ Complete all 5 tasks, see app running on iPhone
 
 ---
 
+#### Checkpoint 0.1: Project Setup ⚡
+**Goal**: React app skeleton deployed  
+**Tasks**: 
+- [ ] Setup Vite + React + TypeScript
+- [ ] Configure Tailwind CSS
+- [ ] Deploy to Vercel (empty app)
+- [ ] Test on iPhone Safari
+
+**Deliverable**: Empty app accessible from iPhone  
+**Est**: 1-3h
+
+---
+
+#### Checkpoint 0.1b: Mobile Wireframes 📱
+**Goal**: iPhone UI design validated  
+**Tasks**:
+- [ ] Figma mockup: 3 core screens (Project List, Chat, Code View)
+- [ ] Touch targets ≥44px validation
+- [ ] Bottom navigation layout
+- [ ] Dark mode considerations
+
+**Deliverable**: Mobile-first design system  
+**Est**: 2h  
+**Prerequisites**: 0.1 complete
+
+---
+
+#### Checkpoint 0.3: GitHub Integration 📂
+**Goal**: Bidirectional GitHub sync with rate limit monitoring  
+**Tasks**: 
+- [ ] Octokit setup (authenticated API)
+- [ ] Fetch projects list
+- [ ] Read PROJECT.md files
+- [ ] **Write test: Create/update file via API**
+- [ ] **Rate limit tracker middleware**
+- [ ] Warning UI at 80% quota
+
+**Deliverable**: Can read projects + commit test file + rate monitoring  
+**Est**: 4-5h
+
+---
+
 ### **PHASE 5: PWA Polish** 📱
 
-#### Checkpoint 5.1: Connection Management ⚡
-**Goal**: Graceful handling of connectivity loss  
-**Tasks**: Network detection, reconnect logic, user notifications  
-**Deliverable**: Shows "Reconnecting..." when offline, resumes when back  
+#### Checkpoint 5.1: Network Error Handling ⚡
+**Goal**: Graceful connection loss handling  
+**Tasks**: 
+- [ ] Detect offline state (navigator.onLine)
+- [ ] Show reconnection banner
+- [ ] Queue writes during offline
+- [ ] Auto-retry when back online
+- [ ] User notification of queued operations
+
+**Deliverable**: Shows "⚠️ Reconnecting..." when offline, resumes gracefully  
 **Est**: 2-3h  
 **Prerequisites**: 4.3 complete
 
-#### Checkpoint 5.2: Mobile UX Optimization 📲
-**Goal**: Perfect iPhone experience  
-**Tasks**: Touch gestures, bottom nav, responsive optimization  
-**Deliverable**: Native-like feel on iPhone  
-**Est**: 5-6h  
-**Prerequisites**: 5.1 complete
+---
 
-#### Checkpoint 5.3: Install & Launch 🚀
-**Goal**: PWA installable and polished  
-**Tasks**: Manifest, icons, splash screen, install prompt  
-**Deliverable**: Add to Home Screen → perfect experience  
-**Est**: 3-4h  
-**Prerequisites**: 5.2 complete
+## 🚨 EMERGENCY PIVOTS
+
+### Red Flags
+- **Checkpoint taking >10h**: Scope too large, split it
+- **Not using Hub after 2 weeks**: Design problem
+- **Claude API costs >€150/month**: Hard cap triggered, optimize
+- **GitHub rate limit hit**: Implement request batching
+- **n8n cold starts >1min**: Upgrade Render or simplify workflows
 
 ---
 
