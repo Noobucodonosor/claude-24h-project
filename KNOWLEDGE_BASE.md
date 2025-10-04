@@ -7,16 +7,16 @@
 ## ⚡ CLAUDE QUICK START
 
 ### What You Need to Know Immediately
-- **🎯 PURPOSE**: I manage multiple projects (MTG, Cucina, Università, Hub) using standardized PROJECT.md files
+- **🎯 PURPOSE**: Manage multiple projects (MTG, Cucina, Università, Hub) using standardized PROJECT.md files
 - **📂 STRUCTURE**: Each project in `projects/[name]/PROJECT.md` with complete context
 - **🤖 YOUR ROLE**: Read PROJECT.md, understand current phase, generate production code
 - **🚀 WORKFLOW**: Context → Code → Iterate → Deliverables
 
 ### Current Active Projects (4)
 1. **🌐 Claude Project Hub** (Active, 30%) - PWA web app for project management
-2. **🎮 MTG Web App** (Planning, 40%) - AI deck generator + live referee
-3. **🥗 Cucina Vegana** (Active, 65%) - Meal planning system  
-4. **📚 Università** (Active, 30%) - Study optimization tools
+2. **🎮 MTG Web App** (Paused, 40%) - AI deck generator + live referee
+3. **🥗 Cucina Vegana** (Paused, 65%) - Meal planning system  
+4. **📚 Università** (Paused, 60%) - Study optimization tools
 
 ---
 
@@ -25,7 +25,7 @@
 Every project follows this structure:
 ```
 projects/[name]/
-├── PROJECT.md          ← Complete specification (follows template)
+├── PROJECT.md          ← Complete specification
 ├── context/            ← Supporting files
 └── deliverables/       ← Generated outputs/code
 ```
@@ -77,12 +77,13 @@ What should we build/fix/optimize?"
 1. **Storage Layer**: Structured file system (`projects/`, `hub/`, `docs/`)
 2. **Integration Layer**: Claude context loading + code generation
 3. **Interface Layer**: 
-   - **Legacy**: Static HTML dashboard (`app/frontend/index.html`) - still functional
-   - **V1.0 (in development)**: Hub PWA - Progressive Web App (React + Vercel)
+   - **Legacy**: Static HTML dashboard (`app/frontend/index.html`)
+   - **V1.0 (in development)**: Hub PWA (React + Vercel)
 
 ### Workflow Loop
 ```
-Select Project → Load Context → Work with Claude → Save Deliverables → Update Progress → Commit
+Select Project → Load Context → Work with Claude → 
+Save Deliverables → Update Progress → Commit
 ```
 
 ### Hub Evolution
@@ -99,7 +100,7 @@ Select Project → Load Context → Work with Claude → Save Deliverables → U
 ## 📊 PROJECT TYPES & TEMPLATES
 
 ### Available Templates
-- **WebApp**: Full-stack applications (FastAPI, React, PWA, etc.)
+- **WebApp**: Full-stack applications (FastAPI, React, PWA)
 - **Study**: Academic/learning projects (Obsidian, methodologies)
 - **Creative**: Lifestyle/design projects (recipes, planning)
 - **Tool**: Utilities and automation scripts
@@ -115,27 +116,27 @@ Select Project → Load Context → Work with Claude → Save Deliverables → U
 ## 🎯 PROJECT EXAMPLES
 
 ### 🌐 Claude Project Hub (Meta-Project)
-- **Goal**: PWA web app for managing all projects with Claude API integration
-- **Stack**: React + TypeScript + Vercel Serverless + GitHub API
+- **Goal**: PWA for managing all projects with Claude API
+- **Stack**: React + TypeScript + Vercel + GitHub API
 - **Phase**: Phase 0 - Repository optimization (30%)
 - **Complexity**: High (meta-system, PWA, API integrations)
 
 ### 🎮 MTG Web App (Complex)
 - **Goal**: AI deck generator + live audio referee
 - **Stack**: FastAPI + React + MLX (Apple Silicon)
-- **Phase**: Environment setup (dependencies, MLX config)
+- **Phase**: Environment setup (paused at 40%)
 - **Complexity**: High (ML, real-time audio, monetization)
 
 ### 🥗 Cucina Vegana (Medium)  
 - **Goal**: Complete vegan kitchen management
 - **Stack**: HTML/JS + JSON database
-- **Phase**: Recipe database completion
+- **Phase**: Recipe database (paused at 65%)
 - **Complexity**: Medium (data processing, UI)
 
 ### 📚 Università (Medium)
 - **Goal**: Evidence-based study system
 - **Stack**: Obsidian + Claude + Anki
-- **Phase**: Note system templates
+- **Phase**: Note system templates (paused at 60%)
 - **Complexity**: Medium (methodology, workflow)
 
 ---
@@ -197,7 +198,7 @@ git push
 ### General Principles
 - **Local-first**: Offline capability preferred
 - **Privacy**: Sensitive data stays local when possible
-- **Open source**: Favor FOSS tools when possible
+- **Open source**: Favor FOSS tools
 - **Simplicity**: Working solution > perfect architecture
 - **Mobile-friendly**: Design for iPhone usage
 
@@ -233,7 +234,7 @@ git push
 - `KNOWLEDGE_BASE.md` ← This file (system overview)
 - `PROJECT_TEMPLATE.md` ← Standard template for new projects  
 - `README.md` ← Repository overview and setup
-- `app/frontend/index.html` ← Legacy dashboard (still works)
+- `app/frontend/index.html` ← Legacy dashboard (functional)
 - `hub/` ← Hub PWA development (V1.0 in progress)
 
 ### Current Interfaces
@@ -289,52 +290,22 @@ git push
 ## 📋 CURRENT SYSTEM STATUS
 
 **Repository**: claude-24h-project (structured, documented)  
-**Projects**: 4 active (Hub, MTG, Cucina, Università), all with complete PROJECT.md files  
+**Projects**: 4 active (Hub, MTG, Cucina, Università), all with complete PROJECT.md  
 **Templates**: WebApp, Study, Creative available  
 **Dashboard**: 
-- Legacy HTML dashboard ✅ Functional
-- Hub PWA 🚧 In development (Phase 0 - 30%)
+- Legacy HTML ✅ Functional
+- Hub PWA 🚧 Phase 0 (30%)
 
 **Documentation**: Complete (setup, workflow, guides)
 
 **Ready for**: 
-- Development work on any active project using established templates and workflows
-- Hub development using new web-first architecture
+- Development work on any active project
+- Hub development using web-first architecture
 - Creation of new projects with standardized format
 
 ---
 
-## 🌐 HUB PWA SPECIFICS
-
-### What Hub Will Be (V1.0)
-- **Progressive Web App**: Installable on iPhone + desktop
-- **Claude API Integration**: Direct chat with auto-context loading
-- **GitHub Integration**: Auto-read/write PROJECT.md files
-- **Mobile-Optimized**: Touch-friendly, responsive, offline-capable
-- **Session Persistence**: Conversations saved locally (IndexedDB)
-
-### Current Hub Status
-- **Phase**: Phase 0 - Repository Optimization (30%)
-- **Location**: `hub/` folder (structure created)
-- **Next Steps**: 
-  1. Setup React + Vite project
-  2. Implement Claude API integration
-  3. Build context engine (PROJECT.md parser)
-  4. Deploy to Vercel
-
-### Hub vs Legacy Dashboard
-| Feature | Legacy Dashboard | Hub V1.0 |
-|---------|------------------|----------|
-| Tech | Static HTML | React PWA |
-| Context | Manual copy/paste | Auto-loaded |
-| Claude | External (claude.ai) | Integrated API |
-| Mobile | Responsive | Native PWA |
-| Offline | Static only | Full offline support |
-| Updates | Manual | Auto via GitHub API |
-
----
-
-## 🔄 WORKFLOW UPDATES
+## 🔄 WORKFLOW EXAMPLES
 
 ### Using Hub (When V1.0 Ready)
 1. Open Hub PWA (hub.yourname.vercel.app)
@@ -353,6 +324,47 @@ git push
 
 ---
 
+## 💡 CRITICAL EXAMPLES
+
+### Example 1: Explicit Reference
+```
+User: "What was that book recommendation by the UK author?"
+Action: Search past conversations for "book recommendation uk british"
+```
+
+### Example 2: Implicit Continuation
+```
+User: "I've been thinking more about that career change."
+Action: Search conversations for "career change"
+```
+
+### Example 3: Finding Specific Chat
+```
+User: "Find the link to the chat about butterflies"
+Action: Search and provide link as https://claude.ai/chat/{uri}
+```
+
+### Example 4: Continue Last Conversation
+```
+User: "Continue on our last/recent chat"
+Action: Load most recent conversation
+```
+
+---
+
+## 🎯 CRITICAL NOTES
+
+- **ALWAYS use past chats tools** for references to past conversations
+- **Keep an eye out** for trigger phrases indicating historical context
+- **Past chats tools don't replace** other tools (web search, analysis)
+- **Users are aware** of past chats tools and expect Claude to use them
+- **Even if Claude has memory**, if info not in memory, use these tools
+- **Just call the tools** when needed, don't ask permission first
+- **Focus on original user message**, don't discuss irrelevant tool responses
+- **Never say "I don't see previous messages"** without first using tools
+
+---
+
 <div align="center">
 
 **🎯 KNOWLEDGE BASE v3.0**
@@ -361,6 +373,6 @@ git push
 
 *Quick start → Full context in <30 seconds*
 
-**Updated for Hub PWA architecture**
+**Hub PWA architecture enabled**
 
 </div>
