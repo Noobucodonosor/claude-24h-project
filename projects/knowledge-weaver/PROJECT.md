@@ -14,6 +14,7 @@ markdown# Knowledge Weaver - Sistema Apprendimento Semantico
 - **Started**: 2025-10-04
 - **Deadline**: Evolutivo (cresce con il percorso di studi)
 - **Duration**: Sistema permanente, setup iniziale 2-3 settimane
+- **Hub Integration**: Active
 
 ---
 
@@ -308,6 +309,9 @@ Mitigation: tracking esplicito con test recall dopo uno e tre mesi da esame. Int
 ---
 
 ## 🔄 SESSION HANDOFF
+
+### Context for Next Session
+"Progetto Knowledge Weaver attivo nell'Hub. Sistema di apprendimento semantico per superare esami universitari usando interessi personali come pretesti..."
 
 ### Current Working Context
 **Phase**: Planning completo
