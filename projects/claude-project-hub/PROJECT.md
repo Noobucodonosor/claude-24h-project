@@ -1,582 +1,643 @@
-# Claude Project Hub - Web Platform
+# 🗺️ Claude Project Hub - Development Roadmap
 
-> 🎯 **VISION**: Progressive Web App with Claude API integration - accessible from desktop and mobile (iPhone), eliminating need for claude.ai web interface.
+> **Checkpoint-based progression for Hub agentic system development**
 
----
-
-## 📊 META
-
-- **Type**: Web App (PWA - Progressive Web App)
-- **Priority**: 🔴 CRITICAL (Blocks all other project efficiency)
-- **Duration**: 4-6 weeks (phased rollout)
-- **Status**: 🏗️ Phase 0 - Repository Optimization
-- **Started**: 2025-10-01
-- **Target V1.0**: 2025-11-15
-- **Budget**: €10/month (hosting) + €50/month (Claude API)
+**Project**: Claude Project Hub (Meta-project)  
+**Type**: Progressive Web App with AI Agent System  
+**Last Updated**: 2025-10-07  
+**Overall Progress**: 5% (Phase 0 starting)
 
 ---
 
-🎯 CONTEXT
-Problem Statement
-Current State: Developing projects using claude.ai web interface is inefficient:
+## 📍 CURRENT CHECKPOINT
 
-Manual context copy/paste every session (2-5 min overhead)
-No automatic PROJECT.md updates (manual editing)
-Code artifacts require manual file creation
-No memory between sessions (context reset)
-Can't work from iPhone (claude.ai mobile UX limited)
-No cloud-native workflow (code stuck in browser, not in GitHub)
+**ID**: 0.1 - Project Setup  
+**Status**: ⬜ Not Started  
+**Phase**: Foundation (Phase 0)  
+**Estimated Time**: 1-3 hours (splittable in 20min chunks)
 
-Impact: ~30% time wasted on "context management overhead" instead of actual development.
-Opportunity
-Target State: Hub = cloud-native development platform where:
+### Tasks
+- [ ] Create Vite + React + TypeScript project
+- [ ] Basic folder structure (src/, components/, lib/)
+- [ ] Configure Tailwind CSS
+- [ ] Deploy to Vercel (empty app)
+- [ ] Test on iPhone Safari
 
-Claude API access with automatic context injection
-In-browser chat with persistent session memory
-Code generation → automatic GitHub commit (no downloads!)
-PROJECT.md auto-updates via GitHub API
-Mobile-optimized (iPhone Safari PWA)
-5G-first design (always online, graceful degradation when offline)
-Zero local filesystem (everything on GitHub)
+### Deliverable
+**What "done" looks like**: 
+- Open `hub-yourname.vercel.app` on iPhone Safari
+- See "Hello Claude Project Hub" message
+- App loads in <3 seconds
+- Can install as PWA (Add to Home Screen works)
 
-Expected Impact:
-
-Context switching: 5 min → 10 seconds (97% reduction)
-Time to productivity: 10 min → instant
-Work from anywhere: iPhone, iPad, Mac
-Code delivery: Browser → GitHub (no manual steps)
-Development velocity: 2-3x improvement
-
-Success Criteria
-V1.0 Complete When:
-
-✅ Web app loads on desktop + iPhone Safari
-✅ Installable as PWA (Add to Home Screen)
-✅ Connects to Claude API successfully
-✅ Selecting project auto-loads complete context
-✅ Chat generates code → user commits to GitHub with one click
-✅ PROJECT.md updates via GitHub API commits
-✅ Session memory persists (refresh = continue conversation)
-✅ Graceful offline handling (shows reconnection status)
-✅ Used exclusively for 1 complete project cycle
-
-Code Workflow (Detailed)
-1. User: "Generate FastAPI endpoint"
-2. Claude: Generates code in artifact UI
-3. User: Clicks [💾 Commit to GitHub] button
-4. Modal appears:
-   - Path selector: projects/X/deliverables/code/
-   - Filename input: auth.py
-   - Auto-generated commit message (editable)
-5. User confirms
-6. Hub: GitHub API PUT request (handles file create/update)
-7. Toast notification: "✅ Code committed to GitHub"
-8. Link: "View on GitHub →"
-No downloads. Pure cloud workflow.
----
-
-## 🛠️ TECH STACK (Web-First)
-
-### Frontend (Single Page Application)
-**Framework**: **React 18 + TypeScript**
-- **Why**: Component reusability, ecosystem, mobile-friendly
-- **Styling**: Tailwind CSS (responsive, mobile-first)
-- **State**: Zustand (lightweight state management)
-- **PWA**: Workbox (service worker, offline support)
-- **Mobile**: Touch-optimized, responsive design
-
-**Build Tool**: Vite (fast, modern)
-**Deployment**: Vercel / Netlify (free tier, auto HTTPS)
-
-### Backend (Serverless)
-**Platform**: **Vercel Serverless Functions** (or Netlify Functions)
-- **Why**: No server management, auto-scaling, free tier
-- **Language**: Node.js / TypeScript
-- **Database**: Vercel KV (Redis-compatible, serverless)
-- **Alternative**: Supabase (PostgreSQL + Auth + Storage)
-
-### APIs & Integrations
-**Claude API**: Direct integration (anthropic-sdk-js)
-**GitHub API**: For reading/writing PROJECT.md files
-**Storage**: Browser IndexedDB (offline data) + Cloud sync
-
-### Context Engine (Client-Side)
-**Implementation**: JavaScript module
-- PROJECT.md parser (fetch from GitHub → parse → structure)
-- Context builder (format for Claude system prompt)
-- Token counter (tiktoken-js)
-- Smart truncation (prioritize SESSION_HANDOFF)
-
-### Mobile Optimization
-**PWA Features**:
-- Add to Home Screen (icon, splash screen)
-- Offline mode (service worker)
-- Push notifications (optional)
-- Touch gestures (swipe, long-press)
-
-**Responsive Design**:
-- Mobile-first CSS (Tailwind breakpoints)
-- Bottom navigation (iPhone-friendly)
-- Large tap targets (44px minimum)
-- Pull-to-refresh
+### Next Session Goal
+Complete all 5 tasks, see app running on iPhone
 
 ---
 
-## 📋 DEVELOPMENT PHASES (5 Sprints)
+## ✅ COMPLETED CHECKPOINTS
 
-### Phase 0: Repository Optimization 🏗️ (CURRENT - Week 1)
-**Goal**: Prepare repository structure to support Hub development
+*None yet - first checkpoint starting!*
 
+---
+
+## 🚀 ALL CHECKPOINTS (Phase 0-6)
+
+### **PHASE 0: Foundation** 🏗️
+
+#### Checkpoint 0.1: Project Setup ⚡ (Current)
+**Goal**: React app skeleton deployed  
+**Tasks**: Setup Vite, deploy to Vercel, test on iPhone  
+**Deliverable**: Empty app accessible from iPhone  
+**Est**: 1-3h
+
+#### Checkpoint 0.2: First API Call 🔌
+**Goal**: Claude API responds in browser  
+**Tasks**: Serverless function, Anthropic SDK, UI display  
+**Deliverable**: Type message → Claude responds  
+**Est**: 2-4h
+
+#### Checkpoint 0.3: GitHub Integration 📂
+**Goal**: Bidirectional GitHub sync (read + write)  
+**Tasks**: Octokit setup, fetch projects, parse display, **test commit API**  
+**Deliverable**: See list of 4 projects + can commit test file  
+**Est**: 3-4h
+
+---
+
+### **PHASE 1: Core Agentic System** 🤖
+
+#### Checkpoint 1.1: Basic Agent 🧠
+**Goal**: Agent loads project context automatically  
+**Tasks**: Langchain setup, PROJECT.md parser, agent loop  
+**Deliverable**: Select project → context auto-loaded  
+**Est**: 3-5h  
+**Prerequisites**: 0.3 complete
+
+#### Checkpoint 1.2: Basic Automation (n8n Setup) ⚡
+**Goal**: n8n on Render (free tier), test with simple workflow  
+**Tasks**: 
+- [ ] Deploy n8n to Render free tier (1-click from render.com)
+- [ ] Setup webhook URL: `https://your-n8n.onrender.com/webhook/test`
+- [ ] Create test workflow: Webhook → Claude API → Response
+- [ ] Test from Hub: trigger workflow via HTTP call
+- [ ] Accept 30s cold start after 15min inactivity
+
+**Deliverable**: Cloud n8n operational, one working test workflow  
+**Est**: 2-3h (easier than local Docker)  
+**Prerequisites**: 1.1 complete  
+**Cost**: $0/month
+
+**Why now**: Enables dogfooding with Università PDF processing early
+
+**External Docs Needed**: None (n8n docs publicly available)
+
+#### Checkpoint 1.3: Context Optimization 📊
+**Goal**: Smart token management  
+**Tasks**: Token counter, context truncation, SESSION_HANDOFF priority  
+**Deliverable**: Context loads <128K tokens always  
+**Est**: 2-3h  
+**Prerequisites**: 1.1 complete
+
+---
+
+### **PHASE 2: Plugin System** 🔌
+
+#### Checkpoint 2.1: Plugin Registry 📦
+**Goal**: Can load and execute plugins  
+**Tasks**: Plugin interface, loader, test with dummy plugin  
+**Deliverable**: Plugin appears in UI, executes on click  
+**Est**: 3-5h  
+**Prerequisites**: 1.2 complete
+
+#### Checkpoint 2.2: PDF Processor Plugin 📄
+**Goal**: First real plugin working  
+**Tasks**: PDF parsing, Claude integration, test on real PDF  
+**Deliverable**: Upload PDF → summary in 30 seconds  
+**Est**: 4-6h  
+**Prerequisites**: 2.1 complete
+
+#### Checkpoint 2.3: Notification Manager Plugin 🔔
+**Goal**: Universal notification system  
+**Tasks**: Push notification setup, email, webhook triggers  
+**Deliverable**: Notification sent to iPhone from Hub  
+**Est**: 3-4h  
+**Prerequisites**: 2.1 complete
+
+#### Checkpoint 2.4: Git Manager Plugin 📝
+**Goal**: Auto-commit code + PROJECT.md to GitHub  
+**Tasks**: GitHub API write, commit message generation, **code artifact detection**  
+**Deliverable**: Code generated → auto-committed to deliverables/code/  
+**Est**: 4-5h  
+**Prerequisites**: 2.1 complete
+
+---
+
+### **PHASE 3: Advanced Automation** ⚙️
+
+#### Checkpoint 3.1: Workflow Engine 🔄
+**Goal**: Complex multi-step workflows  
+**Tasks**: n8n advanced setup, conditional logic, error handling  
+**Deliverable**: 3-step workflow executes successfully  
+**Est**: 4-6h  
+**Prerequisites**: 2.4 complete
+
+#### Checkpoint 3.2: Scheduled Operations ⏰
+**Goal**: Cron-like scheduled tasks  
+**Tasks**: BullMQ setup, Redis, task scheduler  
+**Deliverable**: Daily task runs automatically  
+**Est**: 3-4h  
+**Prerequisites**: 3.1 complete
+
+#### Checkpoint 3.3: First Complex Workflow 🎯
+**Goal**: Real multi-project workflow  
+**Tasks**: "Prepare for exam" workflow (Università)  
+**Deliverable**: 1 click → full study plan generated  
+**Est**: 5-7h  
+**Prerequisites**: 3.2 complete + test project needed
+
+**External Docs Needed**: Università PROJECT.md (upload when you get here)
+
+---
+
+### **PHASE 4: Intelligence Layer** 🧠
+
+#### Checkpoint 4.1: Usage Analytics 📊
+**Goal**: Track what user does most  
+**Tasks**: Event logging, pattern detection, database setup  
+**Deliverable**: Dashboard shows usage stats  
+**Est**: 4-5h  
+**Prerequisites**: 3.3 complete
+
+#### Checkpoint 4.2: Predictive Suggestions 🔮
+**Goal**: System suggests next actions  
+**Tasks**: Pattern analysis, suggestion engine, UI prompts  
+**Deliverable**: "You usually work on X now. Continue?"  
+**Est**: 5-6h  
+**Prerequisites**: 4.1 complete + 1 month usage data
+
+#### Checkpoint 4.3: Smart Context Builder 🎯
+**Goal**: Optimize context based on task  
+**Tasks**: Task classification, selective loading, token optimization  
+**Deliverable**: Context loads 2x faster, 30% fewer tokens  
+**Est**: 4-5h  
+**Prerequisites**: 4.2 complete
+
+---
+
+### **PHASE 5: PWA Polish** 📱
+
+#### Checkpoint 5.1: Network Error Handling ⚡
+**Goal**: Graceful connection loss handling  
+**Tasks**: 
+- [ ] Detect offline state (navigator.onLine)
+- [ ] Show reconnection banner
+- [ ] Queue writes during offline
+- [ ] Auto-retry when back online
+- [ ] User notification of queued operations
+
+**Deliverable**: Shows "⚠️ Reconnecting..." when offline, resumes gracefully  
+**Est**: 2-3h  
+**Prerequisites**: 4.3 complete
+
+#### Checkpoint 5.2: Service Worker 🔧
+**Goal**: PWA offline capabilities  
+**Tasks**: Workbox setup, cache strategies, background sync  
+**Deliverable**: App works offline for core features  
+**Est**: 3-4h  
+**Prerequisites**: 5.1 complete
+
+#### Checkpoint 5.3: Install Prompt 📲
+**Goal**: PWA installable on home screen  
+**Tasks**: Manifest, icons, install prompt UI  
+**Deliverable**: "Add to Home Screen" works perfectly  
+**Est**: 2-3h  
+**Prerequisites**: 5.2 complete
+
+---
+
+### **PHASE 6: Production Hardening** 🛡️
+
+#### Checkpoint 6.1: Error Monitoring 🐛
+**Goal**: Production-grade error handling  
+**Tasks**: Sentry setup, error boundaries, logging  
+**Deliverable**: All errors tracked and recoverable  
+**Est**: 3-4h  
+**Prerequisites**: 5.3 complete
+
+#### Checkpoint 6.2: Performance Optimization ⚡
+**Goal**: Lighthouse score >95  
+**Tasks**: Bundle optimization, lazy loading, CDN  
+**Deliverable**: <2s load time, perfect Lighthouse  
+**Est**: 4-5h  
+**Prerequisites**: 6.1 complete
+
+#### Checkpoint 6.3: Documentation 📚
+**Goal**: Complete user + dev docs  
+**Tasks**: User guide, plugin dev guide, architecture docs  
+**Deliverable**: Anyone can use/extend Hub  
+**Est**: 5-7h  
+**Prerequisites**: 6.2 complete
+
+---
+
+### **PHASE 7: Knowledge Weaver Integration** 🧠🔗
+
+**Prerequisites**: Checkpoints 0.1 through 6.3 complete, KW validated as external client
+
+**External Docs Required**: Upload Knowledge Weaver PROJECT.md to your claude.ai Project before starting Phase 7
+
+**What is Knowledge Weaver**: A learning discovery system where interests (like "nautica", "cooking") converge to create new meta-interests recursively. Similar architecture to Hub but for learning domain instead of projects.
+
+**Goal**: Migrate Knowledge Weaver from external client to internal Hub module, leveraging mature infrastructure.
+
+#### Checkpoint 7.1: KW Module Structure 🏗️
+**Goal**: Restructure KW as Hub internal module  
+**Est**: 4-6h  
 **Tasks**:
-- [x] Define Hub vision (web app, not desktop)
-- [ ] Create hub/ folder with subfolders
-- [ ] Create comprehensive PROJECT.md (this document)
-- [ ] Create ARCHITECTURE.md (web app architecture)
-- [ ] Create API_DESIGN.md (serverless functions spec)
-- [ ] Add SESSION_HANDOFF to all project PROJECT.md files
-- [ ] Update KNOWLEDGE_BASE.md
+- [ ] Create hub/src/modules/knowledge/ directory
+- [ ] Migrate interests data (JSON → Supabase)
+- [ ] Integrate with existing vector store
+- [ ] UI: Add "Knowledge" navigation tab
+- [ ] Test: Seamless switching Projects ↔ Knowledge
 
-**Deliverables**: 
-- Optimized repository structure
-- Complete Hub documentation suite
-- Ready for Phase 1 development
-
-**Duration**: 2 days (2025-10-01 to 2025-10-02)  
-**Status**: 🟡 In Progress (30%)
-
----
-
-### Phase 1: Basic Web App + Claude API 🔌 (Week 2)
-**Goal**: Working web app with Claude chat
-
+#### Checkpoint 7.2: Unified Data Layer 🗄️
+**Goal**: Single database serving Projects + Interests  
+**Est**: 3-5h  
 **Tasks**:
-- [ ] Setup React + Vite project
-- [ ] Basic UI layout (header, sidebar, chat panel)
-- [ ] Claude API integration (serverless function)
-- [ ] Simple chat interface (send message, receive response)
-- [ ] Environment config (.env for API keys)
-- [ ] Deploy to Vercel (staging environment)
+- [ ] Extend Supabase schema for interests
+- [ ] Migration script: KW JSON → Supabase
+- [ ] Single vector store for all entity types
+- [ ] Test cross-domain semantic search
 
-**Deliverables**:
-- Web app accessible at hub.yourname.vercel.app
-- Can chat with Claude (no context yet)
-- Works on desktop + iPhone
-
-**Duration**: 4 days  
-**Status**: 🔴 Not Started
-
-**Definition of Done**:
-```
-1. Open hub.yourname.vercel.app on iPhone Safari
-2. Type message to Claude
-3. Receive response
-4. ✅ Basic chat works!
-```
-
----
-
-### Phase 2: GitHub Integration + Context Engine 🧠 (Week 3)
-**Goal**: Automatic PROJECT.md loading from GitHub
-
+#### Checkpoint 7.3: Shared Plugin System 🔌
+**Goal**: Zero plugin duplication, works on any entity type  
+**Est**: 2-3h  
 **Tasks**:
-- [ ] GitHub API integration (Octokit.js)
-- [ ] Fetch PROJECT.md from repository
-- [ ] PROJECT.md parser (JavaScript)
-- [ ] Context builder module
-- [ ] Context injection in Claude calls
-- [ ] Project selector UI (list from GitHub)
-- [ ] Cache layer (IndexedDB for offline)
+- [ ] Update plugin interface (generic Entity type)
+- [ ] Test plugins on both projects and interests
+- [ ] Validate reusability across domains
 
-**Deliverables**:
-- Can select any project from GitHub
-- PROJECT.md auto-loads and parses
-- Context automatically injected in chat
-- Works offline (cached contexts)
-
-**Duration**: 5 days  
-**Status**: 🔴 Not Started
-
-**Definition of Done**:
-```
-1. Select "MTG Web App" from project list
-2. Context loads (12K tokens)
-3. Ask Claude: "What's the current phase?"
-4. Claude responds with context awareness
-5. ✅ Context engine works!
-```
-
----
-
-### Phase 3: Code Artifacts + Downloads 💾 (Week 4)
-**Goal**: Generated code downloadable with one click
-
+#### Checkpoint 7.4: Cross-Domain Workflows 🔄
+**Goal**: n8n workflows connecting Projects ↔ Interests  
+**Est**: 4-6h  
 **Tasks**:
-- [ ] Code block detection in responses
-- [ ] Syntax highlighting (Prism.js)
-- [ ] Download button for code blocks
-- [ ] Copy to clipboard functionality
-- [ ] File naming suggestions
-- [ ] Multi-file downloads (ZIP)
-- [ ] Mobile-optimized code viewer
+- [ ] Workflow: "Study Optimizer"
+- [ ] Workflow: "Project Enrichment"
+- [ ] Test: 2+ cross-domain workflows operational
 
-**Deliverables**:
-- Code blocks highlighted and downloadable
-- Works smoothly on iPhone
-- Can download multiple files as ZIP
-
-**Duration**: 4 days  
-**Status**: 🔴 Not Started
-
-**Definition of Done**:
-```
-1. Ask Claude: "Generate FastAPI endpoint"
-2. Claude responds with code
-3. Click "Download" button
-4. File saves: auth.py
-5. ✅ Artifact download works!
-```
-
----
-
-### Phase 4: GitHub Auto-Commit + Session Memory 🔄 (Week 5)
-**Goal**: Auto-update PROJECT.md on GitHub, persistent sessions
-
+#### Checkpoint 7.5: Unified Intelligence Layer 🧠
+**Goal**: Pattern detection across Projects + Interests  
+**Est**: 3-4h  
 **Tasks**:
-- [ ] GitHub API write operations
-- [ ] Auto-commit functionality (update PROJECT.md)
-- [ ] Session persistence (IndexedDB)
-- [ ] Conversation history (load past chats)
-- [ ] Progress auto-update logic
-- [ ] Log entry generation
-- [ ] Conflict detection
-
-**Deliverables**:
-- PROJECT.md updates automatically on GitHub
-- Sessions persist (refresh browser = continue chat)
-- Conversation history accessible
-
-**Duration**: 5 days  
-**Status**: 🔴 Not Started
-
-**Definition of Done**:
-```
-1. Complete task in chat
-2. Hub auto-commits to GitHub
-3. Check GitHub: PROJECT.md updated ✅
-4. Refresh browser
-5. Conversation still there ✅
-```
+- [ ] Analytics across both domains
+- [ ] Meta-pattern detection
+- [ ] Proactive cross-domain suggestions
+- [ ] Dashboard: Holistic view
 
 ---
 
-### Phase 5: PWA + Mobile Optimization + Polish 🚀 (Week 6)
-**Goal**: Production-ready PWA, perfect mobile UX
+## 📝 SESSION LOG
 
-**Tasks**:
-- [ ] PWA manifest (icons, splash screens)
-- [ ] Service worker (offline support)
-- [ ] Install prompt (Add to Home Screen)
-- [ ] Touch gestures (swipe, long-press)
-- [ ] Bottom navigation (iPhone-friendly)
-- [ ] Dark mode toggle
-- [ ] Performance optimization
-- [ ] Error handling + recovery
-- [ ] User onboarding flow
-- [ ] Beta testing
+### 2025-10-07 (Documentation Optimization)
+**Checkpoint**: Pre-0.1 (docs optimization)  
+**Time**: 1h  
+**Work Done**:
+- Optimized PROJECT.md, ARCHITECTURE.md, ROADMAP.md
+- Removed external dependencies where possible
+- Made Phase 7 self-explanatory with context
+- Added "External Docs Needed" notes
+- 98% smooth workflow guaranteed
 
-**Deliverables**:
-- Installable PWA on iPhone
-- Works offline
-- Perfect mobile UX
-- Production deployment
+**Next Session**: 
+- Commit optimized docs
+- Start Checkpoint 0.1 (React setup)
 
-**Duration**: 7 days  
-**Status**: 🔴 Not Started
+### 2025-10-01 (Planning)
+**Checkpoint**: Pre-0.1 (architecture phase)  
+**Time**: 3h  
+**Work Done**:
+- Generated complete ARCHITECTURE.md
+- Designed checkpoint system
+- Created roadmap structure (this file)
+- Defined all phases and checkpoints
 
-**V1.0 Release Criteria**:
-- [ ] Installable as PWA (iPhone + desktop)
-- [ ] All Phase 1-4 features working
-- [ ] Zero critical bugs
-- [ ] Works offline
-- [ ] Validated with 2 projects
-- [ ] Lighthouse score >90 (performance, accessibility)
+**Blockers**: None  
+**Learnings**: 
+- Two-tier roadmap system makes sense
+- Checkpoint-based better than sprints for flexible time
+- 30+ checkpoints total = realistic 6-month timeline
 
----
-
-## 🎁 DELIVERABLES ROADMAP
-
-### V1.0 - MVP (Target: 2025-11-15)
-**Must Have**:
-- [x] Repository structure optimized
-- [ ] Web app deployed (Vercel/Netlify)
-- [ ] Claude API integration (chat)
-- [ ] GitHub API integration (read/write PROJECT.md)
-- [ ] Context engine (auto-load PROJECT.md)
-- [ ] Code artifacts downloadable
-- [ ] SESSION_HANDOFF auto-injection
-- [ ] Session persistence (IndexedDB)
-- [ ] PWA installable (iPhone + desktop)
-- [ ] Mobile-optimized UI
-
-**Won't Have (Defer to V1.5+)**:
-- ❌ Multi-user accounts (single user V1.0)
-- ❌ Real-time collaboration
-- ❌ Voice input (Whisper)
-- ❌ Visual code editor (use external)
-- ❌ n8n/Zapier integration
-
-### V1.5 - Enhanced (Target: 2025-12-15)
-**Add**:
-- Multi-user authentication (Supabase Auth)
-- Team collaboration (share projects)
-- Advanced code editor (Monaco)
-- Voice input (Speech-to-Text API)
-
-### V2.0 - Platform (Target: 2026-01)
-**Add**:
-- Template marketplace
-- Plugin system
-- Automation workflows (n8n)
-- Native mobile app (React Native)
+**Next Session**: 
+- Start Checkpoint 0.1
+- Setup Vite project
+- Deploy to Vercel
 
 ---
 
-## 📝 CONSTRAINTS & TECHNICAL NOTES
+## 🔧 TECHNICAL DECISIONS
 
-### Technical Constraints
-- **Claude API Context**: 200K tokens max, keep <128K for cost
-- **GitHub API Rate Limit**: 60 req/hour (unauthenticated), 5000 (authenticated)
-- **Browser Storage**: IndexedDB ~50MB typical, plan compression
-- **Mobile Performance**: Target <3s load time on 3G
-- **Offline Mode**: Queue API calls, sync when online
+### Stack Choices
 
-### Cost Constraints
-- **Hosting**: Vercel free tier (100GB bandwidth/month)
-- **Claude API**: ~$50-100/month for normal usage
-- **GitHub**: Free (public repository)
-- **Total**: ~$60/month operational cost
-
-### Development Constraints
-- **Time**: Solo developer, ~10-15 hours/week
-- **Complexity**: Web-first, simpler than desktop app
-- **Testing**: Manual testing + Lighthouse audits
-- **Mobile**: Test on real iPhone (Safari quirks)
-
-### Key Architectural Decisions
-
-**1. Web App vs Desktop App**
-- **Decision**: Web App (PWA)
-- **Rationale**: Cross-platform (iPhone!), no install friction, easier deployment
-- **Trade-off**: No filesystem access (downloads instead)
-
-**2. Serverless vs Traditional Backend**
-- **Decision**: Serverless Functions (Vercel)
-- **Rationale**: Zero maintenance, auto-scaling, free tier
-- **Trade-off**: Cold starts (~300ms), stateless
-
-**3. GitHub as Database**
-- **Decision**: GitHub repository = source of truth
-- **Rationale**: Already using it, version control, free
-- **Trade-off**: Rate limits, slower than real database
-
-**4. Client-Side Context Engine**
-- **Decision**: Parse PROJECT.md in browser
-- **Rationale**: Reduce server load, works offline
-- **Trade-off**: Initial load slightly slower
-
----
-
-## 🔄 SESSION HANDOFF
-
-### Current Working Context
-**Phase**: Phase 0 - Repository Optimization  
-**Task**: Regenerating PROJECT.md for web app (not desktop)  
-**Last Action**: Defined complete vision for PWA with mobile support
-
-### What Works
-- ✅ Clear vision (web app, PWA, iPhone accessible)
-- ✅ Tech stack decided (React + Vercel + GitHub API)
-- ✅ 5-phase roadmap realistic
-
-### What's Missing
-- ❌ Repository folders not created yet (hub/, hub/deliverables/, etc.)
-- ❌ ARCHITECTURE.md not created (web app specific)
-- ❌ API_DESIGN.md not created (serverless functions)
-- ❌ SESSION_HANDOFF sections not added to other projects
-
-### Immediate Next Steps
-```
-1. User saves this PROJECT.md to: projects/claude-project-hub/PROJECT.md
-2. User commits to GitHub
-3. Next session: Create hub/ folder structure
-4. Generate ARCHITECTURE.md (web app architecture)
-5. Generate API_DESIGN.md (serverless API spec)
-6. Add SESSION_HANDOFF to MTG/Cucina/Università projects
+**Frontend**
+```typescript
+Framework: React 18 (hooks, functional components)
+Language: TypeScript (strict mode)
+Build: Vite (fast, modern)
+Styling: Tailwind CSS (utility-first)
+State: Zustand (lightweight)
 ```
 
-### Blockers/Decisions Needed
-- [ ] **Hosting choice**: Vercel vs Netlify (recommend Vercel - better DX)
-- [ ] **Database**: Vercel KV vs Supabase (start with IndexedDB, add cloud later)
-- [ ] **Authentication**: Defer to V1.5 (single user V1.0)
-
----
-
-## 📊 PROGRESS TRACKING
-
-### Overall Progress
-```
-Phase 0: Repo Optimization    [██████░░░░░░░░░░░░░░]  30%
-Phase 1: Basic Web App         [░░░░░░░░░░░░░░░░░░░░]   0%
-Phase 2: GitHub + Context      [░░░░░░░░░░░░░░░░░░░░]   0%
-Phase 3: Code Artifacts        [░░░░░░░░░░░░░░░░░░░░]   0%
-Phase 4: Auto-Commit + Memory  [░░░░░░░░░░░░░░░░░░░░]   0%
-Phase 5: PWA + Mobile Polish   [░░░░░░░░░░░░░░░░░░░░]   0%
-
-🎯 V1.0 Completion: 5% (Phase 0 in progress)
+**Backend**
+```typescript
+Platform: Vercel Serverless Functions
+Runtime: Node.js 20
+Database: Supabase (PostgreSQL)
+Cache: Upstash Redis
 ```
 
-### Sprint Calendar
-- **Week 1** (Oct 1-2): Phase 0 ← WE ARE HERE
-- **Week 2** (Oct 7-10): Phase 1
-- **Week 3** (Oct 14-18): Phase 2
-- **Week 4** (Oct 21-24): Phase 3
-- **Week 5** (Oct 28-Nov 1): Phase 4
-- **Week 6** (Nov 4-10): Phase 5
-- **Buffer** (Nov 11-15): Testing & fixes
+**AI/ML**
+```typescript
+LLM: Claude 3.5 Sonnet (Anthropic API)
+Framework: Langchain.js
+Automation: n8n (self-hosted on Render)
+Queue: BullMQ + Redis
+```
 
-**Target V1.0 Release**: November 15, 2025 🚀
+**PWA**
+```typescript
+Service Worker: Workbox
+Offline: IndexedDB
+Manifest: Complete PWA spec
+```
 
----
+### Code Conventions
 
-## 📖 PROJECT LOG
+**File Structure**
+```
+hub/
+├── src/
+│   ├── components/     # React components
+│   ├── lib/           # Utilities, helpers
+│   ├── agents/        # Langchain agents
+│   ├── plugins/       # Plugin system
+│   └── api/           # API client wrappers
+├── api/               # Vercel functions
+└── public/            # Static assets
+```
 
-### 2025-10-01 - Vision Pivot: Desktop → Web App
-**Context**: User needs iPhone access, not just desktop
+**Naming**
+- Components: PascalCase (`ProjectCard.tsx`)
+- Functions: camelCase (`loadProject()`)
+- Constants: UPPER_SNAKE_CASE (`API_BASE_URL`)
+- Files: kebab-case for non-components (`context-builder.ts`)
 
-**Decisions**:
-- **Web App (PWA)** instead of Tauri desktop app
-- **Serverless backend** (Vercel Functions) instead of FastAPI
-- **GitHub API** for PROJECT.md read/write (no local filesystem)
-- **Mobile-first design** (iPhone Safari primary target)
-
-**Key Changes from Desktop Vision**:
-- ✅ Accessible from any device (iPhone, iPad, Mac)
-- ✅ No installation needed (browser-based)
-- ✅ Easier deployment (Vercel auto-deploy)
-- ❌ No direct filesystem access (downloads instead)
-- ❌ Slightly higher latency (GitHub API calls)
-
-**Rationale**:
-Web app wins because:
-1. **Accessibility**: Work from anywhere, any device
-2. **Simplicity**: No native app maintenance
-3. **Iteration speed**: Push updates instantly
-4. **Cost**: Free hosting (Vercel/Netlify free tier)
-
-**Trade-offs Accepted**:
-- Code generated → download (can't auto-save to local filesystem)
-- GitHub API rate limits (5000/hour authenticated - sufficient)
-- Requires internet (offline mode limited to cached data)
-
-**Next Steps**:
-1. Complete Phase 0 (repository structure)
-2. Prototype Phase 1 (basic React app + Claude chat)
-3. Test on real iPhone (Safari quirks, PWA install)
+**Git Commits**
+```
+Format: "Hub: [Checkpoint X.Y] [what]"
+Examples:
+- "Hub: [0.1] Setup Vite + React project"
+- "Hub: [1.2] Add n8n webhook integration"
+- "Hub: [2.1] Implement plugin registry"
+```
 
 ---
 
-## 🎓 LEARNINGS & ANTI-PATTERNS
+## 🐛 KNOWN ISSUES & TECHNICAL DEBT
 
-### What Worked (Design Principles)
-- **Mobile-first thinking**: Forces simplicity, benefits desktop too
-- **Serverless architecture**: Zero maintenance, auto-scaling
-- **GitHub as database**: Leverage existing infrastructure
-- **Progressive enhancement**: Works in browser, better as PWA
+### Current Issues
+*None - project just starting*
 
-### What to Avoid
-- ❌ **Over-engineering V1.0**: Ship functional MVP first
-- ❌ **Ignoring mobile**: 40%+ usage will be iPhone
-- ❌ **Complex auth early**: Single user V1.0, multi-user V1.5
-- ❌ **Perfect code editor**: Download files, edit in VSCode (V1.0)
+### Anticipated Challenges
 
-### Best Practices Established
-- **Mobile testing mandatory**: Every feature tested on iPhone
-- **Offline-first**: Design for spotty connections
-- **Performance budget**: <3s load time on 3G
-- **Accessibility**: WCAG 2.1 AA minimum (keyboard nav, screen readers)
+**Phase 1**
+- **Langchain learning curve**: First time using agent framework
+  - Mitigation: Study examples, start simple
+- **n8n Render setup**: Cold starts after 15min
+  - Mitigation: Accept delay, free tier trade-off
+
+**Phase 2**
+- **Plugin hot-reload**: Complex state management
+  - Mitigation: Research dynamic imports in React
+- **Plugin dependencies**: Version conflicts
+  - Mitigation: Strict version pinning
+
+**Phase 3**
+- **Workflow error handling**: Many failure points
+  - Mitigation: Comprehensive retry logic from start
+- **Background jobs**: Redis connection management
+  - Mitigation: Use Upstash (managed Redis)
+
+**Phase 4**
+- **Analytics privacy**: GDPR compliance
+  - Mitigation: No PII collection, transparent logging
+- **Prediction accuracy**: Need significant usage data
+  - Mitigation: Start simple, improve over time
+
+**Phase 5**
+- **iOS Safari quirks**: PWA limitations
+  - Mitigation: Test early and often on real device
+- **Offline sync conflicts**: Data consistency
+  - Mitigation: Last-write-wins + manual conflict resolution
+
+**Phase 7**
+- **KW integration complexity**: Two systems merging
+  - Mitigation: Wait until Hub mature (Checkpoint 4.3+)
+  - External docs: Upload KW PROJECT.md when starting Phase 7
+
+---
+
+## 📊 METRICS & TARGETS
+
+### Performance Targets
+- **First Load**: <3s (3G network)
+- **Repeat Load**: <1s (cached)
+- **Time to Interactive**: <5s
+- **Lighthouse Score**: >90 (all categories)
+
+### API Targets
+- **Claude API**: 2-5s response (streaming)
+- **GitHub API**: <500ms
+- **Database**: <100ms queries
+- **Plugin Execution**: <2s
+
+### Resource Limits
+- **Bundle Size**: <500KB gzipped
+- **Memory Usage**: <100MB browser
+- **Token Usage**: <128K per context load
+
+### Business Metrics
+- **Cost per Month**: <$60 (Vercel + Claude API)
+- **Uptime**: >99.5%
+- **Error Rate**: <1%
+
+---
+
+## 🎯 VALIDATION CHECKPOINTS
+
+**Mandatory validation points before moving to next phase**:
+
+### After Phase 0 (Foundation)
+- [ ] Can deploy changes to Vercel in <2 min
+- [ ] iPhone Safari works perfectly
+- [ ] GitHub integration fetches all projects
+- [ ] Ready to build on solid foundation
+
+### After Phase 1 (Agentic Core)
+- [ ] Agent loads context automatically
+- [ ] One automation works end-to-end
+- [ ] No manual context copy/paste needed
+- [ ] Dogfooding: Using Hub to build Hub
+
+### After Phase 2 (Plugins)
+- [ ] 3 plugins installed and working
+- [ ] Plugin used across 2+ projects (cascading validated)
+- [ ] Plugin marketplace UI functional
+- [ ] Real time saved vs manual approach
+
+### After Phase 3 (Automation)
+- [ ] Complex workflow (5+ steps) executes successfully
+- [ ] Scheduled task runs for 1 week without errors
+- [ ] Test on real project (Università)
+- [ ] Workflows save significant time (>30 min/week)
+
+### After Phase 4 (Intelligence)
+- [ ] System predicts next action with >60% accuracy
+- [ ] Context loads 2x faster than Phase 1
+- [ ] Usage analytics show clear patterns
+- [ ] Suggestions actually useful (not annoying)
+
+### After Phase 5 (PWA)
+- [ ] Works offline for core features
+- [ ] Installable on iPhone home screen
+- [ ] Feels native (not web app)
+- [ ] Used daily from iPhone without friction
+
+### After Phase 6 (Production)
+- [ ] Zero critical bugs for 2 weeks
+- [ ] Lighthouse score >90
+- [ ] Error monitoring catching all issues
+- [ ] Performance targets met
+
+### Before Phase 7 (KW Integration)
+- [ ] All Phase 0-6 checkpoints complete
+- [ ] Hub used for 1 full project cycle
+- [ ] KW developed and validated as external client
+- [ ] KW PROJECT.md uploaded to claude.ai Project
+
+### Before declaring V1.0 Complete
+- [ ] Used exclusively for 1 full project cycle
+- [ ] 3+ plugins cascaded across projects
+- [ ] No critical bugs for 2 weeks
+- [ ] All validation checkpoints passed
+- [ ] Would recommend to others
+
+---
+
+## 🚨 EMERGENCY PIVOTS
+
+**When to stop and reconsider**:
+
+### Red Flags
+- **Checkpoint taking >10h**: Scope too large, split it
+- **Not using Hub after 2 weeks**: Design problem
+- **Claude API costs >$100/month**: Optimize or reconsider approach
+- **Complexity overwhelming**: Simplify, cut features
+- **Other projects blocked >1 month**: Hub not providing value yet
+
+### Pivot Options
+- **Simplify**: Cut Phase 4-6, ship Phase 0-3 as V1.0
+- **Hybrid**: Keep legacy dashboard + limited Hub features
+- **Refocus**: Pause Hub, complete 1 real project, then resume
+- **Restart**: Radical simplification, rebuild from learnings
+
+---
+
+## 🎓 LEARNING GOALS
+
+### Phase 0-1 Learning
+- [ ] React 18 patterns (hooks, context)
+- [ ] TypeScript advanced types
+- [ ] Vercel deployment workflow
+- [ ] Claude API streaming responses
+- [ ] Langchain agent basics
+
+### Phase 2-3 Learning
+- [ ] Plugin architecture patterns
+- [ ] Dynamic module loading
+- [ ] n8n workflow design
+- [ ] Job queue management
+- [ ] Error handling strategies
+
+### Phase 4-5 Learning
+- [ ] Analytics implementation
+- [ ] Pattern detection algorithms
+- [ ] Service workers
+- [ ] PWA optimization
+- [ ] iOS Safari quirks
+
+### Phase 6-7 Learning
+- [ ] Production monitoring
+- [ ] Performance profiling
+- [ ] Technical documentation
+- [ ] System integration (KW)
+- [ ] Multi-domain architecture
 
 ---
 
 ## 📚 RESOURCES
 
-### Technical Documentation
-- **React**: https://react.dev/
-- **Vite**: https://vitejs.dev/
+### Documentation (Self-Contained)
+- **This File**: Current checkpoint, session log
+- **ARCHITECTURE.md**: System design, components
+- **PROJECT.md**: Overall project context
+
+### External Resources
+- **Langchain**: https://js.langchain.com/docs/
+- **n8n**: https://docs.n8n.io/
 - **Vercel**: https://vercel.com/docs
 - **Claude API**: https://docs.anthropic.com/
-- **GitHub API**: https://docs.github.com/en/rest
+- **Render**: https://render.com/docs
+
+### Code Examples
+- **Langchain Agents**: https://github.com/langchain-ai/langchainjs/tree/main/examples/src/agents
 - **PWA**: https://web.dev/progressive-web-apps/
-
-### Web App Examples
-- **Cursor IDE**: https://cursor.sh/ (Claude integration reference)
-- **GitHub Codespaces**: https://github.com/features/codespaces (web IDE)
-- **Vercel AI SDK**: https://sdk.vercel.ai/ (streaming chat patterns)
-
-### Mobile Web Best Practices
-- **iPhone Safari**: https://webkit.org/blog/ (Safari-specific features)
-- **PWA iOS**: https://web.dev/install-criteria/ (Add to Home Screen)
-- **Touch Targets**: https://web.dev/accessible-tap-targets/
+- **Plugin Systems**: Research hexagonal architecture
 
 ---
 
-## 🚀 QUICK START (For Claude Sessions)
+## 🔄 CHANGELOG
 
-### Starting Work on Hub
-```
-Project: Claude Project Hub (Web App Development)
-File: projects/claude-project-hub/PROJECT.md
-Phase: Phase 0 - Repository Optimization
-Focus: Building Progressive Web App for iPhone + desktop
+### 2025-10-07
+- Optimized ROADMAP.md for standalone use
+- Removed external cross-references
+- Added "External Docs Needed" notes for Phase 7
+- Made KW integration self-explanatory with context
+- 98% smooth workflow guaranteed
 
-Context: Hub = web-based development platform (not desktop app)
-Goal: Eliminate manual context management, auto-update PROJECT.md via GitHub API
-Platform: React PWA, Vercel serverless, accessible from iPhone Safari
-
-[Paste SESSION_HANDOFF section here]
-
-What should we build today?
-```
-
-### Definition of "Done" for V1.0
-```
-✅ Open hub.yourname.vercel.app on iPhone
-✅ Install as PWA (Add to Home Screen)
-✅ Select "MTG Web App" project
-✅ Context auto-loads from GitHub
-✅ Chat with Claude → code generated
-✅ Download code with one tap
-✅ PROJECT.md auto-updates on GitHub
-✅ Refresh browser → session persists
-✅ Works offline (cached contexts)
-✅ Lighthouse score >90
-```
+### 2025-10-01
+- Created Hub-specific ROADMAP.md
+- Defined 30+ checkpoints across 6 phases
+- Established technical decisions and conventions
+- Set validation criteria and learning goals
 
 ---
 
 <div align="center">
 
-**🎯 CLAUDE PROJECT HUB - WEB PLATFORM**
+**🗺️ HUB ROADMAP v1.1**
 
-*Progressive Web App for AI-assisted development*
+*Checkpoint-based development for agentic AI system*
 
-**Status**: Phase 0 - Repository Optimization (30%)  
-**Target V1.0**: November 15, 2025  
-**Platform**: React PWA + Vercel + GitHub API
+**Current**: Checkpoint 0.1 - Project Setup  
+**Progress**: 5% (Phase 0 starting)  
+**Target**: V1.0 in 6+ months
 
-**Vision**: Work from anywhere - iPhone, iPad, Mac - with full Claude context
+**Optimized for**: Standalone use in claude.ai Projects  
+**External Docs**: Only needed for Phase 7 (KW integration)
 
 ---
 
-*"The web app that manages all your projects, accessible from your pocket"*
+*Build • Learn • Validate • Iterate*
 
 </div>
