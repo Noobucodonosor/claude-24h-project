@@ -1,8 +1,9 @@
-# 🏗️ Claude Project Hub - System Architecture
+ARCHITECTURE.md Completo - Generato
+markdown# 🏗️ Claude Project Hub - System Architecture
 
 > **Complete architectural design for Discovery Engine that facilitates recursive exploration of project spaces**
 
-**Version**: 2.1 (Discovery-Focused Architecture)  
+**Version**: 2.2 (Two-Phase Strategy + KW Integration)  
 **Last Updated**: 2025-10-07  
 **Status**: Design Phase → Implementation Starting
 
@@ -21,6 +22,25 @@
 5. **Emergent Structure**: Connessioni tra progetti emergono da analisi semantica, non da categorizzazione manuale
 6. **Mobile Native**: iPhone-first design, 5G-optimized PWA
 7. **Cloud Native**: Zero local filesystem, GitHub as single source of truth
+
+### Two-Phase Integration Strategy
+
+**Phase 1 (Current → Checkpoint 4.3): Foundation Building**
+- Knowledge Weaver operates as external client
+- Uses Hub APIs when available
+- Separate repositories, clear boundaries
+- Focus: Build solid Hub infrastructure
+
+**Phase 2 (After Checkpoint 4.3): Deep Integration**
+- KW becomes internal Hub module
+- Shared vector store, unified database
+- Single UI with "Projects" and "Knowledge" tabs
+- Implementation: Phase 7 (5 new checkpoints)
+
+**Rationale**: 
+Attempting deep integration immediately would create scope creep. With mature Hub infrastructure (RAG working, plugins stable, workflows tested), integrating KW becomes straightforward reuse of validated patterns rather than simultaneous complex system development.
+
+**Trigger for Phase 2**: Checkpoint 4.3 complete + KW validated as external client
 
 ---
 
@@ -102,12 +122,8 @@
 // Context Management
 - tiktoken (token counting)
 - Smart loading: 5-10K tokens vs 150K (90% reduction)
-```
-
-**Discovery Patterns**:
-
-```typescript
-// Pattern 1: Direct Query with Cross-Project Discovery
+Discovery Patterns:
+typescript// Pattern 1: Direct Query with Cross-Project Discovery
 User: "How to implement audio pipeline for MTG?"
     ↓
 Discovery Engine: 
@@ -137,21 +153,13 @@ Discovery Engine:
   3. Identifies: Applies to Hub (context), Nautica (routes), Università (study)
     ↓
 Suggests: "This is a meta-interest. Want to explore optimization theory?"
-```
+Not Just Retrieval: Sistema non cerca keyword matches ma convergenze strutturali attraverso analisi semantica profonda.
 
-**Not Just Retrieval**: Sistema non cerca keyword matches ma convergenze strutturali attraverso analisi semantica profonda.
-
----
-
-### 2. Plugin System as Materialized Convergences
-
-**Design Philosophy**: Plugin non sono utilities per efficienza ma materializzazioni di convergenze operative scoperte
-
-**Core Insight**: Quando sviluppi soluzione per problema in progetto A, sistema analizza se struttura è applicabile a B, C. Se convergenza esiste, suggerisce astrazione in plugin **perché convergenza stessa è insight interessante**.
-
-**Plugin Structure**:
-```typescript
-interface Plugin {
+2. Plugin System as Materialized Convergences
+Design Philosophy: Plugin non sono utilities per efficienza ma materializzazioni di convergenze operative scoperte
+Core Insight: Quando sviluppi soluzione per problema in progetto A, sistema analizza se struttura è applicabile a B, C. Se convergenza esiste, suggerisce astrazione in plugin perché convergenza stessa è insight interessante.
+Plugin Structure:
+typescriptinterface Plugin {
   id: string;
   name: string;
   version: string;
@@ -180,11 +188,8 @@ interface Plugin {
   dependencies?: string[];
   config: PluginConfig;
 }
-```
-
-**Example - PDF Processor Plugin**:
-```typescript
-{
+Example - PDF Processor Plugin:
+typescript{
   id: "pdf-processor",
   name: "PDF → Structured Summary",
   
@@ -223,42 +228,33 @@ interface Plugin {
     }
   ]
 }
-```
+Cascading Discovery:
 
-**Cascading Discovery**: 
-- Plugin usato frequentemente in contesto non anticipato → genera nuovo operationalDimension
-- Sistema impara dalla struttura dei problemi che risolvi
-- Ogni plugin = testimonianza tangibile di classe problemi ricorrente scoperta
+Plugin usato frequentemente in contesto non anticipato → genera nuovo operationalDimension
+Sistema impara dalla struttura dei problemi che risolvi
+Ogni plugin = testimonianza tangibile di classe problemi ricorrente scoperta
 
-**Plugin Installation Flow**:
-```
+Plugin Installation Flow:
 1. User discovers plugin in marketplace UI
 2. Click "Install" → Plugin downloaded
 3. Dependencies resolved automatically
 4. Plugin initialized with project config
 5. Usage tracked for pattern analysis
 6. If used in unexpected context → new operational dimension emerges
-```
 
----
+3. Workflow Automation Engine (n8n)
+Why n8n:
 
-### 3. Workflow Automation Engine (n8n)
+Self-hosted (data privacy)
+Visual workflow builder (no code for simple flows)
+300+ pre-built integrations
+Webhook support
+Error handling + retry logic built-in
 
-**Why n8n**:
-- Self-hosted (data privacy)
-- Visual workflow builder (no code for simple flows)
-- 300+ pre-built integrations
-- Webhook support
-- Error handling + retry logic built-in
-
-**Deployment**:
-```bash
-docker run -d --name n8n -p 5678:5678 n8nio/n8n
-```
-
-**Integration with Hub**:
-```typescript
-// Hub triggers n8n workflow via webhook
+Deployment:
+bashdocker run -d --name n8n -p 5678:5678 n8nio/n8n
+Integration with Hub:
+typescript// Hub triggers n8n workflow via webhook
 await fetch('http://localhost:5678/webhook/process-pdf', {
   method: 'POST',
   body: JSON.stringify({
@@ -274,12 +270,8 @@ await fetch('http://localhost:5678/webhook/process-pdf', {
 // 3. Save summary to GitHub
 // 4. Trigger notification
 // 5. Update PROJECT.md progress
-```
-
-**Example Workflows**:
-
-**Università: "Prepare for Exam"**
-```
+Example Workflows:
+Università: "Prepare for Exam"
 Trigger: User clicks "Prepare for Exam: Fisica 2"
 1. Gather all lecture notes (GitHub API)
 2. Send to Claude for comprehensive summary
@@ -288,19 +280,12 @@ Trigger: User clicks "Prepare for Exam: Fisica 2"
 5. Send push notification: "Study plan ready!"
 
 Result: 1 click → full exam prep automated
-```
 
----
-
-### 4. Intelligence Layer as Pattern Recognizer
-
-**Purpose**: Non predire azioni future ma scoprire pattern latenti nella struttura del lavoro
-
-**Components**:
-
-**Pattern Detection**:
-```typescript
-interface DiscoveredPattern {
+4. Intelligence Layer as Pattern Recognizer
+Purpose: Non predire azioni future ma scoprire pattern latenti nella struttura del lavoro
+Components:
+Pattern Detection:
+typescriptinterface DiscoveredPattern {
   id: string;
   name: string;
   description: string;
@@ -318,16 +303,14 @@ interface DiscoveredPattern {
   // Convergenze rilevate
   relatedPatterns: string[];
 }
-```
+Example Patterns Discovered:
 
-**Example Patterns Discovered**:
-- "optimization-under-multiple-constraints": Nautica (meteo), Università (tempo), Coworking (budget), Hub (tokens)
-- "scheduling-recurring-events": Università (study), MTG (tournaments), Cucina (meal prep)
-- "real-time-monitoring-with-alerts": MTG (audio), Hub (performance), IoT agricoltura
+"optimization-under-multiple-constraints": Nautica (meteo), Università (tempo), Coworking (budget), Hub (tokens)
+"scheduling-recurring-events": Università (study), MTG (tournaments), Cucina (meal prep)
+"real-time-monitoring-with-alerts": MTG (audio), Hub (performance), IoT agricoltura
 
-**Suggestions Based on Patterns**:
-```typescript
-// Sistema rileva pattern ricorrente
+Suggestions Based on Patterns:
+typescript// Sistema rileva pattern ricorrente
 const pattern = detectPattern("scheduling-under-constraints");
 
 // Suggerisce esplorazione
@@ -340,11 +323,8 @@ suggest({
     "Connect with Knowledge Weaver: formal scheduling theory"
   ]
 });
-```
-
-**Usage Analytics**:
-```typescript
-interface UsageEvent {
+Usage Analytics:
+typescriptinterface UsageEvent {
   userId: string;
   projectId: string;
   action: string;
@@ -357,29 +337,19 @@ interface UsageEvent {
     convergencesDiscovered: string[];
   };
 }
-```
 
----
-
-### 5. Data Layer Architecture
-
-**Cloud-First Storage Strategy**:
-
-**Tier 1: GitHub (Source of Truth)**
-```
+5. Data Layer Architecture
+Cloud-First Storage Strategy:
+Tier 1: GitHub (Source of Truth)
 projects/
   mtg-webapp/
     PROJECT.md          ← Single source of truth
     deliverables/
       code/             ← Generated code auto-committed
-```
-
-**Read/Write Operations**: Via Octokit (GitHub API)  
-**Rate Limit**: 5000 req/hour (authenticated)
-
-**Tier 2: Supabase (Session & Analytics & Graph Cache)**
-```sql
--- User sessions (cloud-synced)
+Read/Write Operations: Via Octokit (GitHub API)
+Rate Limit: 5000 req/hour (authenticated)
+Tier 2: Supabase (Session & Analytics & Graph Cache)
+sql-- User sessions (cloud-synced)
 CREATE TABLE sessions (
   id UUID PRIMARY KEY,
   user_id UUID,
@@ -406,11 +376,8 @@ CREATE TABLE convergences (
   discovered_at TIMESTAMP,
   validated_by_user BOOLEAN
 );
-```
-
-**Tier 3: Vector Store (Supabase pgvector)**
-```sql
--- Enable pgvector extension
+Tier 3: Vector Store (Supabase pgvector)
+sql-- Enable pgvector extension
 CREATE EXTENSION vector;
 
 -- Store embeddings
@@ -427,16 +394,10 @@ SELECT content, 1 - (embedding <=> query_embedding) as similarity
 FROM document_embeddings
 ORDER BY embedding <=> query_embedding
 LIMIT 5;
-```
 
----
-
-## 📱 PWA ARCHITECTURE
-
-### Service Worker Strategy
-
-```typescript
-import { precacheAndRoute } from 'workbox-precaching';
+📱 PWA ARCHITECTURE
+Service Worker Strategy
+typescriptimport { precacheAndRoute } from 'workbox-precaching';
 import { CacheFirst, NetworkFirst } from 'workbox-strategies';
 
 // Precache static assets
@@ -456,126 +417,104 @@ self.addEventListener('sync', (event) => {
     event.waitUntil(syncPendingOperations());
   }
 });
-```
+Offline Capabilities
+Works Offline:
 
-### Offline Capabilities
+✅ View cached projects
+✅ Read conversation history
+✅ Browse plugin marketplace (cached)
+✅ Explore graph (cached)
 
-**Works Offline**:
-- ✅ View cached projects
-- ✅ Read conversation history
-- ✅ Browse plugin marketplace (cached)
-- ✅ Explore graph (cached)
+Requires Online:
 
-**Requires Online**:
-- ❌ Claude API calls
-- ❌ GitHub commits (queued)
-- ❌ Convergence detection (queued)
+❌ Claude API calls
+❌ GitHub commits (queued)
+❌ Convergence detection (queued)
 
----
 
-## 🔐 SECURITY ARCHITECTURE
-
-### Authentication & Authorization
-**Auth Provider**: Supabase Auth (GitHub OAuth)
-
-```typescript
-// User flow
+🔐 SECURITY ARCHITECTURE
+Authentication & Authorization
+Auth Provider: Supabase Auth (GitHub OAuth)
+typescript// User flow
 1. User signs in with GitHub
 2. Supabase creates JWT token
 3. Token stored in httpOnly cookie
 4. Every API call validates token
 5. GitHub permissions inherited
-```
-
-### API Security
-**Rate Limiting** (Vercel Edge Config):
-```typescript
-const limits = {
+API Security
+Rate Limiting (Vercel Edge Config):
+typescriptconst limits = {
   claude_api: "100 req/hour",
   github_api: "5000 req/hour",
   plugin_execution: "50 req/hour"
 };
-```
 
----
+🚀 DEPLOYMENT ARCHITECTURE
+Production Infrastructure
+Vercel Edge Network:
 
-## 🚀 DEPLOYMENT ARCHITECTURE
+Static assets (React build)
+Edge functions (API routes)
+Automatic HTTPS
+Global CDN
 
-### Production Infrastructure
+Vercel Serverless Functions:
 
-**Vercel Edge Network**:
-- Static assets (React build)
-- Edge functions (API routes)
-- Automatic HTTPS
-- Global CDN
+Node.js runtime
+Auto-scaling (0 → 1000+ concurrent)
+Cold start: ~300ms
 
-**Vercel Serverless Functions**:
-- Node.js runtime
-- Auto-scaling (0 → 1000+ concurrent)
-- Cold start: ~300ms
+External Services:
 
-**External Services**:
-- Supabase (Database + Auth + Vector Store)
-- Upstash Redis (Cache)
-- n8n (Self-hosted workflows)
+Supabase (Database + Auth + Vector Store)
+Upstash Redis (Cache)
+n8n (Self-hosted workflows)
 
----
 
-## 📊 METRICS & TARGETS
+📊 METRICS & TARGETS
+Discovery Metrics (Primary)
 
-### Discovery Metrics (Primary)
+Convergences identified per week: Target ≥3 cross-project convergences recognized as valuable
+Recursive exploration depth: Average chain length (query → convergence → new query → ...)
+Pattern emergence rate: New operational dimensions discovered per month
+User validation rate: % of suggested convergences that user explores (target >60%)
 
-- **Convergences identified per week**: Target ≥3 cross-project convergences recognized as valuable
-- **Recursive exploration depth**: Average chain length (query → convergence → new query → ...)
-- **Pattern emergence rate**: New operational dimensions discovered per month
-- **User validation rate**: % of suggested convergences that user explores (target >60%)
+Performance Metrics (Secondary)
+Load Times
 
-### Performance Metrics (Secondary)
+First Load: <3s (3G)
+Repeat Load: <1s (cached)
+Time to Interactive: <5s
+Lighthouse Score: >90
 
-**Load Times**
-- **First Load**: <3s (3G)
-- **Repeat Load**: <1s (cached)
-- **Time to Interactive**: <5s
-- **Lighthouse Score**: >90
+API Response Times
 
-**API Response Times**
-- **Claude API**: 2-5s (streaming)
-- **GitHub API**: 100-500ms
-- **Database**: <100ms
-- **Plugin execution**: <2s
-- **Graph traversal**: <500ms
+Claude API: 2-5s (streaming)
+GitHub API: 100-500ms
+Database: <100ms
+Plugin execution: <2s
+Graph traversal: <500ms
 
-### Success Criteria for Discovery Engine
+Success Criteria for Discovery Engine
 
-- [ ] Proposes at least 1 non-obvious cross-project connection per day of active use
-- [ ] User recognizes suggested convergences as genuinely interesting >70% of time
-- [ ] At least 3 meta-patterns discovered after 3 months of usage
-- [ ] Average recursive exploration depth ≥2 (user follows suggestions that generate further suggestions)
+ Proposes at least 1 non-obvious cross-project connection per day of active use
+ User recognizes suggested convergences as genuinely interesting >70% of time
+ At least 3 meta-patterns discovered after 3 months of usage
+ Average recursive exploration depth ≥2 (user follows suggestions that generate further suggestions)
 
----
 
-## 🎯 INTEGRATION WITH KNOWLEDGE WEAVER
+🎯 INTEGRATION WITH KNOWLEDGE WEAVER
+Hub e Knowledge Weaver sono isomorfi (stessa struttura matematica applicata a domini diversi):
+AspectHubKnowledge WeaverCorpusProgetti + documentazioneInteressi + programmi accademiciQueryTask corrente utenteProblema pratico / esameRetrievalSemantic search cross-projectConvergenze dimensioni operativeOutputContext ottimizzato + suggestionsPercorso apprendimentoGrowthNuovi progetti, nuova docsNuovi interessi, nuovi programmiPatternRetrieval-Augmented Project ManagementRetrieval-Augmented Learning
+Unified Architecture Possible:
 
-Hub e Knowledge Weaver sono **isomorfi** (stessa struttura matematica applicata a domini diversi):
+Stesso retrieval engine
+Stesso vector store con namespace: "projects", "interests", "academic-programs"
+Stesso graph database
+Discovery logic condivisa
 
-| Aspect | Hub | Knowledge Weaver |
-|--------|-----|------------------|
-| **Corpus** | Progetti + documentazione | Interessi + programmi accademici |
-| **Query** | Task corrente utente | Problema pratico / esame |
-| **Retrieval** | Semantic search cross-project | Convergenze dimensioni operative |
-| **Output** | Context ottimizzato + suggestions | Percorso apprendimento |
-| **Growth** | Nuovi progetti, nuova docs | Nuovi interessi, nuovi programmi |
-| **Pattern** | Retrieval-Augmented Project Management | Retrieval-Augmented Learning |
-
-**Unified Architecture Possible**: 
-- Stesso retrieval engine
-- Stesso vector store con namespace: "projects", "interests", "academic-programs"
-- Stesso graph database
-- Discovery logic condivisa
-
-**Example Integration**:
-```typescript
-// User working on Hub feature
+Example Integration:
+typescript// User working on Hub feature
 const task = "Implement notification system";
 
 // Discovery Engine queries both domains
@@ -593,155 +532,308 @@ const kwSuggestions = await discover({
 //          Connects to HCI, psychology of attention, push protocols
 
 // User can explore both or either
-```
 
----
-
-## 🔧 TECHNOLOGY STACK SUMMARY
-
-### Frontend
-```typescript
-- React 18 (UI)
+🔧 TECHNOLOGY STACK SUMMARY
+Frontend
+typescript- React 18 (UI)
 - TypeScript (type safety)
 - Vite (build tool)
 - TailwindCSS (styling)
 - Zustand (state)
 - React Query (server state)
 - Workbox (PWA)
-```
-
-### Backend
-```typescript
-- Vercel Serverless (hosting)
+Backend
+typescript- Vercel Serverless (hosting)
 - Node.js 20 (runtime)
 - Anthropic SDK (Claude)
 - Octokit (GitHub)
 - LangChain.js (discovery engine)
 - Zod (validation)
-```
-
-### Database & Cache
-```typescript
-- Supabase (PostgreSQL + Auth + pgvector)
+Database & Cache
+typescript- Supabase (PostgreSQL + Auth + pgvector)
 - Upstash Redis (KV store)
 - IndexedDB (client storage)
-```
-
-### Graph & Semantic
-```typescript
-- NetworkX or Neo4j (graph database)
+Graph & Semantic
+typescript- NetworkX or Neo4j (graph database)
 - OpenAI/Anthropic Embeddings
 - Supabase pgvector (vector store)
-```
-
-### Automation
-```typescript
-- n8n (workflow engine)
+Automation
+typescript- n8n (workflow engine)
 - BullMQ (job queue)
 - node-cron (scheduling)
-```
 
----
+📈 IMPLEMENTATION PHASES (REVISED)
+Phase 0: Foundation (architecture + skeleton) ← CURRENT
 
-## 📈 IMPLEMENTATION PHASES (REVISED)
+ Architecture defined (this document)
+ React + Vite setup
+ Vercel deployment
+ Test on iPhone
 
-### Phase 0: Foundation (architecture + skeleton) ← **CURRENT**
-- [x] Architecture defined (this document)
-- [ ] React + Vite setup
-- [ ] Vercel deployment
-- [ ] Test on iPhone
+Phase 1: Discovery Engine Core
 
-### Phase 1: Discovery Engine Core
-- [ ] **Checkpoint 1.1**: Graph-based context engine (not just token optimization)
-  - Parse PROJECT.md → graph representation
-  - Basic graph traversal
-  - Test: query "audio" returns MTG + related projects
+ Checkpoint 1.1: Graph-based context engine (not just token optimization)
+
+Parse PROJECT.md → graph representation
+Basic graph traversal
+Test: query "audio" returns MTG + related projects
+
+
+ Checkpoint 1.2: Basic Automation (n8n Setup)
+
+n8n deployed (Render free tier or Docker local)
+Test workflow: Webhook → Claude → Notification
+Maintain n8n (skill transferable, useful for complex workflows)
+
+
+ Checkpoint 1.3: Context Optimization + Convergence Detection
+
+Automatically identify when solution A applies to project B
+UI to display discovered convergences
+User validation feedback loop
+
+
+
+Phase 2: Plugin Architecture (convergences materialized)
+
+ Plugin registry with operational dimensions metadata
+ Plugin executor
+ Test: PDF processor cascades to 3+ projects
+
+Phase 3: Workflow Automation (n8n integration)
+
+ n8n setup and integration
+ First complex workflow (e.g., exam prep automation)
+
+Phase 4: Intelligence Layer (pattern recognizer)
+
+ Usage analytics
+ Pattern detection
+ Proactive suggestions
+
+Phase 5: PWA Polish (mobile optimization)
+
+ Service worker
+ Offline mode
+ Install prompt
+ Touch optimization
+
+Phase 6: Production Hardening
+
+ Error monitoring
+ Performance optimization
+ Documentation
+
+
+PHASE 7: Knowledge Weaver Integration 🧠🔗
+
+Prerequisites: Checkpoints 0.1 through 6.3 complete, KW validated as external client
+
+Goal: Migrate Knowledge Weaver from external client to internal Hub module, leveraging mature infrastructure.
+
+Checkpoint 7.1: KW Module Structure 🏗️
+Goal: Restructure KW as Hub internal module
+Est: 4-6h
+Prerequisites: 6.3 complete, KW externally operational
+Tasks:
+
+ Create hub/src/modules/knowledge/ directory structure
+ Migrate interests data (JSON → Supabase schema extension)
+ Integrate with existing vector store (reuse namespace approach)
+ UI: Add "Knowledge" navigation tab
+ Test: Seamless switching Projects ↔ Knowledge views
+
+Deliverable: KW accessible from Hub UI, data migrated, no functionality loss
+Technical Notes:
+typescript// Unified data access pattern
+const entity = await hub.getEntity({
+  type: 'project' | 'interest',
+  id: string
+});
+
+// Same vector store, different namespace
+vectorStore.search(query, { namespace: 'interests' })
+
+Checkpoint 7.2: Unified Data Layer 🗄️
+Goal: Single database serving Projects + Interests
+Est: 3-5h
+Prerequisites: 7.1 complete
+Tasks:
+
+ Extend Supabase schema:
+
+sql  CREATE TABLE interests (
+    id UUID PRIMARY KEY,
+    name TEXT,
+    description TEXT,
+    operational_dimensions JSONB,
+    embedding vector(1536)
+  );
   
-- [ ] **Checkpoint 1.2**: Claude API integration with context optimization
-  
-- [ ] **Checkpoint 1.3**: Convergence Detection (NEW)
-  - Automatically identify when solution A applies to project B
-  - UI to display discovered convergences
-  - User validation feedback loop
+  CREATE TABLE convergences (
+    id UUID PRIMARY KEY,
+    entity_a_type TEXT, -- 'project' or 'interest'
+    entity_a_id UUID,
+    entity_b_type TEXT,
+    entity_b_id UUID,
+    shared_dimension TEXT,
+    validated BOOLEAN
+  );
 
-### Phase 2: Plugin Architecture (convergences materialized)
-- [ ] Plugin registry with operational dimensions metadata
-- [ ] Plugin executor
-- [ ] Test: PDF processor cascades to 3+ projects
+ Migration script: KW JSON files → Supabase tables
+ Single vector store for all entity types
+ Test cross-domain semantic search
 
-### Phase 3: Workflow Automation (n8n integration)
-- [ ] n8n setup and integration
-- [ ] First complex workflow (e.g., exam prep automation)
+Deliverable: Unified semantic search
+Test: Query "optimization" returns both Projects (Hub, Università) and Interests (Nautica, Coworking)
 
-### Phase 4: Intelligence Layer (pattern recognizer)
-- [ ] Usage analytics
-- [ ] Pattern detection
-- [ ] Proactive suggestions
+Checkpoint 7.3: Shared Plugin System 🔌
+Goal: Zero plugin duplication, works on any entity type
+Est: 2-3h
+Prerequisites: 7.2 complete
+Tasks:
 
-### Phase 5: PWA Polish (mobile optimization)
-- [ ] Service worker
-- [ ] Offline mode
-- [ ] Install prompt
-- [ ] Touch optimization
+ Update plugin interface to accept generic Entity type
+ "intreccia" plugin: detects entity type, runs convergence analysis
+ PDF processor: auto-detects (project doc vs academic syllabus)
+ Notification: unified for all entity types
+ Test plugin reusability across domains
 
-### Phase 6: Production Hardening
-- [ ] Error monitoring
-- [ ] Performance optimization
-- [ ] Documentation
+Deliverable: Existing plugins work unchanged on Interests
+Example:
+typescript// Before (Phase 2):
+await plugins.run('pdf-processor', { 
+  projectId: 'università' 
+});
 
----
+// After (Phase 7):
+await plugins.run('pdf-processor', { 
+  entity: { type: 'interest', id: 'fisica-syllabus' }
+});
+// Same plugin, generic entity handling
 
-## 🎓 ARCHITECTURE VALIDATION CHECKLIST
+Checkpoint 7.4: Cross-Domain Workflows 🔄
+Goal: n8n workflows connecting Projects ↔ Interests
+Est: 4-6h
+Prerequisites: 7.3 complete
+Tasks:
 
+ Workflow: "Study Optimizer"
+
+Trigger: Exam scheduled (Project: Università)
+Steps: Find KW interests → Convergences → Study plan → Flashcards
+
+
+ Workflow: "Project Enrichment"
+
+Trigger: New project created
+Steps: Analyze description → Find related interests → Suggest connections
+
+
+ Test: At least 2 cross-domain workflows operational
+ Documentation: Workflow templates for future expansion
+
+Deliverable: Automated bridges between project work and learning
+Example Output:
+Workflow: "Study Optimizer" triggered for Fisica 2 exam
+
+Found convergences:
+- Interest "Nautica" shares "force dynamics" with exam topic
+- Interest "IoT agricoltura" shares "sensor data analysis"
+
+Generated study plan:
+1. Review force calculations using boat navigation examples
+2. Practice data analysis with agricultural sensor datasets
+3. Flashcards created: 45 cards connecting theory ↔ practice
+
+Study guide ready: projects/università/exams/fisica-2-plan.md
+
+Checkpoint 7.5: Unified Intelligence Layer 🧠
+Goal: Pattern detection across Projects + Interests
+Est: 3-4h
+Prerequisites: 7.4 complete
+Tasks:
+
+ Analytics: Track patterns across both domains
+ Meta-pattern detection: "optimization under constraints" appears in:
+
+Hub (context tokens)
+Nautica (route planning)
+Università (exam scheduling)
+Coworking (space + budget)
+
+
+ Proactive suggestions: "Interest X might improve Project Y"
+ Dashboard: Holistic view of Projects + Knowledge graph
+
+Deliverable: System recognizes and suggests cross-domain opportunities
+Example Intelligence:
+🧠 Pattern Detected: "optimization-under-constraints"
+
+Observed in:
+- 4 Projects: Hub, Università, Coworking, MTG
+- 6 Interests: Nautica, IoT, Cucina, Engineering
+
+Suggestion: This is recurring meta-pattern.
+→ Consider studying Operations Research formally
+→ Solutions applicable across all instances
+→ ROI: High (affects 10+ entities)
+
+Phase 7 Summary:
+
+Duration: 15-20h total
+Trigger: After Hub Checkpoint 4.3 complete
+Result: Unified system, zero duplication, isomorphic architecture validated
+Next: Continuous evolution, new domains easily added
+
+
+🎓 ARCHITECTURE VALIDATION CHECKLIST
 Before implementation:
 
-- [ ] **Scalability**: Can handle 10x users without refactor?
-- [ ] **Discovery-First**: Sistema ottimizza per scoperta, non efficienza?
-- [ ] **Security**: All sensitive data encrypted + validated?
-- [ ] **Reliability**: Graceful degradation when services fail?
-- [ ] **Performance**: Meets all targets on slow connections?
-- [ ] **Maintainability**: Clear separation of concerns?
-- [ ] **Extensibility**: Easy to add plugins/features?
-- [ ] **Cost**: Stays within budget at projected scale?
-- [ ] **UX**: Feels fast and native on iPhone?
-- [ ] **Isomorphic with KW**: Architecture reusable for knowledge domain?
+ Scalability: Can handle 10x users without refactor?
+ Discovery-First: Sistema ottimizza per scoperta, non efficienza?
+ Security: All sensitive data encrypted + validated?
+ Reliability: Graceful degradation when services fail?
+ Performance: Meets all targets on slow connections?
+ Maintainability: Clear separation of concerns?
+ Extensibility: Easy to add plugins/features?
+ Cost: Stays within budget at projected scale?
+ UX: Feels fast and native on iPhone?
+ Isomorphic with KW: Architecture reusable for knowledge domain?
+ Two-Phase Strategy: Clear path from external client to internal module?
 
----
 
-## 📚 REFERENCES
+📚 REFERENCES
+Technical Documentation
 
-### Technical Documentation
-- **LangChain**: https://js.langchain.com/docs/
-- **Anthropic API**: https://docs.anthropic.com/
-- **n8n**: https://docs.n8n.io/
-- **Vercel**: https://vercel.com/docs
-- **Supabase**: https://supabase.com/docs
-- **Neo4j**: https://neo4j.com/docs/
+LangChain: https://js.langchain.com/docs/
+Anthropic API: https://docs.anthropic.com/
+n8n: https://docs.n8n.io/
+Vercel: https://vercel.com/docs
+Supabase: https://supabase.com/docs
+Neo4j: https://neo4j.com/docs/
 
-### Architecture Patterns
-- **Graph-Based Knowledge Management**: Neo4j patterns
-- **Semantic Retrieval**: RAG patterns
-- **Convergence Detection**: Similar to recommendation systems but optimized for discovery
-- **Plugin Architecture**: Hexagonal Architecture (Ports & Adapters)
-- **Event-Driven Architecture**: For workflow automation
+Architecture Patterns
 
-### Philosophical Alignment
-- **Knowledge Weaver PROJECT.md**: Isomorphic architecture for learning domain
-- **Research**: Serendipity in information retrieval, exploratory search systems
+Graph-Based Knowledge Management: Neo4j patterns
+Semantic Retrieval: RAG patterns
+Convergence Detection: Similar to recommendation systems but optimized for discovery
+Plugin Architecture: Hexagonal Architecture (Ports & Adapters)
+Event-Driven Architecture: For workflow automation
 
----
+Philosophical Alignment
+
+Knowledge Weaver PROJECT.md: Isomorphic architecture for learning domain
+Research: Serendipity in information retrieval, exploratory search systems
+
 
 <div align="center">
+🏗️ ARCHITECTURE v2.2
+Discovery Engine for Recursive Project Exploration
+Status: Design Complete → Implementation Starting
+Key Innovation: From Efficiency Optimization to Discovery Facilitation
+New: Two-Phase Strategy for Knowledge Weaver Integration
 
-**🏗️ ARCHITECTURE v2.1**
-
-*Discovery Engine for Recursive Project Exploration*
-
-**Status**: Design Complete → Implementation Starting  
-**Key Innovation**: From Efficiency Optimization to Discovery Facilitation
-
----
-
-*Built with intelligence, designed for exploration*
-
+Built with intelligence, designed for exploration
 </div>
+```
