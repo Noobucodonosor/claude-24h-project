@@ -1,25 +1,26 @@
 # 🏗️ Claude Project Hub - System Architecture
 
-> **Complete architectural design for agentic AI-powered project management system**
+> **Complete architectural design for Discovery Engine that facilitates recursive exploration of project spaces**
 
-**Version**: 2.0 (Agentic Architecture)  
-**Last Updated**: 2025-10-01  
+**Version**: 2.1 (Discovery-Focused Architecture)  
+**Last Updated**: 2025-10-07  
 **Status**: Design Phase → Implementation Starting
 
 ---
 
 ## 🎯 VISION STATEMENT
 
-**Claude Project Hub is not a project manager - it's an autonomous AI ecosystem that learns, automates, and evolves with you.**
+**Claude Project Hub è un Discovery Engine che facilita l'esplorazione ricorsiva di spazi progettuali complessi attraverso l'identificazione di convergenze operative cross-progetto, non un semplice project manager.**
 
 ### Core Principles
 
-1. **Agentic First**: System executes operations autonomously based on context
-2. **Plugin Architecture**: Components reusable across all projects (cascading features)
-3. **Intelligence Layer**: System learns from usage and predicts next actions
-4. **Mobile Native**: iPhone-first design, 5G-optimized PWA
-5. **Cloud Native**: Zero local filesystem, GitHub as single source of truth
-6. **Context Aware**: Deep integration with PROJECT.md for intelligent automation
+1. **Discovery-First**: Sistema ottimizza per scoperta di connessioni non ovvie, non per efficienza operativa
+2. **Graph-Based Context**: Progetti, documenti, interessi rappresentati come grafo semantico dove vicinanza indica applicabilità condivisa
+3. **Convergence Identification**: Capacità di rilevare quando soluzioni sviluppate in un progetto sono strutturalmente applicabili ad altri
+4. **Recursive Exploration**: Ogni scoperta suggerisce ulteriori direzioni di indagine
+5. **Emergent Structure**: Connessioni tra progetti emergono da analisi semantica, non da categorizzazione manuale
+6. **Mobile Native**: iPhone-first design, 5G-optimized PWA
+7. **Cloud Native**: Zero local filesystem, GitHub as single source of truth
 
 ---
 
@@ -37,24 +38,18 @@
 - Authentication & Authorization
 - Rate Limiting & Caching
 
-**3. Core Agentic Layer**
-- **Agent Orchestrator** (Langchain)
-  - Context Builder (PROJECT.md → Agent Context)
-  - Task Planner (Break down user intent)
-  - Execution Engine (Run autonomous operations)
-  - Memory System (Session persistence)
+**3. Discovery Engine Layer** (Core)
+- **Graph Builder** (PROJECT.md → Graph representation)
+- **Convergence Detector** (Identify cross-project applicability)
+- **Context Optimizer** (Load only relevant nodes)
+- **Exploration Suggester** (Propose recursive directions)
 - **Claude API Integration** (Anthropic SDK)
-  - Streaming responses
-  - Context optimization (200K token management)
-  - Artifact extraction
 
 **4. Plugin System Layer**
-- PDF Parser Plugin
-- Notifier Plugin
-- Git Manager Plugin
-- Scheduler Plugin
-- Analytics Plugin
-- Custom Plugins...
+- Plugin Registry (Convergences materialized)
+- Plugin Executor
+- Dependency Manager
+- Hot-reload System
 
 **5. Workflow Automation Layer**
 - n8n Workflow Engine (Self-hosted)
@@ -62,14 +57,15 @@
 - Event-driven workflows
 
 **6. Intelligence Layer**
-- Usage Analytics & Learning
-- Pattern detection
-- Predictive suggestions
-- Context optimization
+- Pattern Recognition
+- Meta-pattern Discovery
+- Usage Analytics
+- Convergence Validation
 
 **7. Data Layer**
 - **GitHub** (Source of truth - PROJECT.md files)
-- **Supabase** (Cloud DB - sessions, analytics)
+- **Supabase** (Cloud DB - sessions, analytics, graph cache)
+- **Vector Store** (Embeddings for semantic search)
 - **IndexedDB** (Local cache - offline PWA)
 
 **8. External Integrations**
@@ -81,57 +77,77 @@
 
 ## 🧩 CORE COMPONENTS
 
-### 1. Agent Orchestrator (Langchain-based)
+### 1. Discovery Engine (Core Innovation)
 
-**Purpose**: Central intelligence that interprets user intent and executes autonomous operations
+**Purpose**: Central intelligence that identifies relevant nodes in project graph and suggests recursive explorations
 
 **Key Responsibilities**:
-- Parse PROJECT.md files and build agent context
-- Understand user commands (natural language → actions)
-- Plan multi-step operations
-- Execute tasks via plugin system
+- Parse PROJECT.md files and build graph representation
+- **Convergence Detection**: Identify when problems in different projects share operational structure
+- **Cross-project Suggestions**: Propose explorations connecting apparently distant problems
+- **Recursive Traversal**: Enable discoveries to generate new queries
 - Maintain conversation memory across sessions
 
 **Technology Stack**:
 ```typescript
 // Core
-- LangChain.js (agent framework)
-- Claude API (Anthropic SDK)
-- Vercel AI SDK (streaming helpers)
+- LangChain.js (graph traversal, semantic search)
+- Claude API (Anthropic SDK - convergence analysis)
+- NetworkX or Neo4j (graph database)
 
-// Memory
-- Upstash Redis (serverless KV store)
-- IndexedDB (client-side persistence)
+// Semantic Analysis  
+- OpenAI/Anthropic Embeddings (semantic similarity)
+- Supabase pgvector (vector store)
 
 // Context Management
 - tiktoken (token counting)
-- Custom PROJECT.md parser
+- Smart loading: 5-10K tokens vs 150K (90% reduction)
 ```
 
-**Agent Types**:
-1. **Context Agent**: Loads and optimizes PROJECT.md context
-2. **Task Agent**: Breaks down complex requests into steps
-3. **Execution Agent**: Runs operations via plugins
-4. **Learning Agent**: Analyzes usage patterns, suggests improvements
+**Discovery Patterns**:
 
-**Example Flow**:
+```typescript
+// Pattern 1: Direct Query with Cross-Project Discovery
+User: "How to implement audio pipeline for MTG?"
+    ↓
+Discovery Engine: 
+  1. Loads MTG PROJECT.md (audio section)
+  2. Semantic search identifies related concepts
+  3. Discovers: Università (time-series processing), Cucina (scheduling patterns)
+    ↓
+Output: MTG docs + Università patterns + Cucina scheduling + convergence insight
+"Real-time audio processing shares structure with time-series data analysis"
+
+// Pattern 2: Convergence Suggestion (Proactive)
+User: Working on Hub notification system
+    ↓
+Discovery Engine:
+  1. Analyzes notification requirements
+  2. Searches graph for similar problems solved
+  3. Identifies: Università spaced-repetition + Cucina meal-prep reminders
+    ↓
+Suggests: "These projects share notification structure. Explore for insights?"
+
+// Pattern 3: Recursive Exploration
+User: Explores suggested convergence
+    ↓
+Discovery Engine:
+  1. Convergence itself becomes new query
+  2. Discovers meta-pattern: "scheduling-under-constraints"
+  3. Identifies: Applies to Hub (context), Nautica (routes), Università (study)
+    ↓
+Suggests: "This is a meta-interest. Want to explore optimization theory?"
 ```
-User: "Start working on MTG project"
-    ↓
-Context Agent: Fetches mtg-webapp/PROJECT.md from GitHub
-    ↓
-Task Agent: Plans session (load context → suggest next steps)
-    ↓
-Execution Agent: Prepares Claude with optimized context
-    ↓
-User sees: Instant project load + intelligent suggestions
-```
+
+**Not Just Retrieval**: Sistema non cerca keyword matches ma convergenze strutturali attraverso analisi semantica profonda.
 
 ---
 
-### 2. Plugin System Architecture
+### 2. Plugin System as Materialized Convergences
 
-**Design Pattern**: Registry + Factory + Dependency Injection
+**Design Philosophy**: Plugin non sono utilities per efficienza ma materializzazioni di convergenze operative scoperte
+
+**Core Insight**: Quando sviluppi soluzione per problema in progetto A, sistema analizza se struttura è applicabile a B, C. Se convergenza esiste, suggerisce astrazione in plugin **perché convergenza stessa è insight interessante**.
 
 **Plugin Structure**:
 ```typescript
@@ -139,6 +155,21 @@ interface Plugin {
   id: string;
   name: string;
   version: string;
+  
+  // Metadata Semantico (Critical)
+  operationalDimensions: string[];  // Dimensioni operative indirizzate
+  
+  discoveredFrom: {
+    originalProject: string;
+    problem: string;
+    date: Date;
+  };
+  
+  appliesTo: {
+    project: string;
+    useCases: string[];
+    validatedBy: 'system' | 'user';
+  }[];
   
   // Lifecycle
   init(): Promise<void>;
@@ -151,26 +182,53 @@ interface Plugin {
 }
 ```
 
-**Core Plugins (Phase 1-2)**:
+**Example - PDF Processor Plugin**:
+```typescript
+{
+  id: "pdf-processor",
+  name: "PDF → Structured Summary",
+  
+  operationalDimensions: [
+    "extraction-structured-info-from-unstructured",
+    "document-understanding",
+    "summarization-under-constraints"
+  ],
+  
+  discoveredFrom: {
+    originalProject: "università",
+    problem: "Process lecture slides efficiently",
+    date: "2025-10-15"
+  },
+  
+  appliesTo: [
+    {
+      project: "università",
+      useCases: ["lecture slides", "textbook chapters", "research papers"],
+      validatedBy: "user"
+    },
+    {
+      project: "mtg-webapp", 
+      useCases: ["rules PDFs", "tournament regulations"],
+      validatedBy: "system" // Suggested by convergence detector
+    },
+    {
+      project: "cucina-vegana",
+      useCases: ["recipe books", "nutrition papers"],
+      validatedBy: "system"
+    },
+    {
+      project: "knowledge-weaver",
+      useCases: ["academic syllabi", "course materials"],
+      validatedBy: "user"
+    }
+  ]
+}
+```
 
-**PDF Processor Plugin**
-- Extract text from PDFs
-- Send to Claude for summarization
-- Generate structured output (markdown/JSON)
-- Used by: università, mtg-webapp, cucina-vegana
-
-**Notification Manager Plugin**
-- Push notifications (web + mobile)
-- Email notifications
-- Slack messages
-- Custom webhook triggers
-- Used by: all projects
-
-**GitHub Auto-Committer Plugin**
-- Auto-commit PROJECT.md updates
-- Create branches for experiments
-- Generate commit messages via Claude
-- Used by: all projects
+**Cascading Discovery**: 
+- Plugin usato frequentemente in contesto non anticipato → genera nuovo operationalDimension
+- Sistema impara dalla struttura dei problemi che risolvi
+- Ogni plugin = testimonianza tangibile di classe problemi ricorrente scoperta
 
 **Plugin Installation Flow**:
 ```
@@ -178,23 +236,8 @@ interface Plugin {
 2. Click "Install" → Plugin downloaded
 3. Dependencies resolved automatically
 4. Plugin initialized with project config
-5. Plugin available in project context menu
-6. Usage tracked for analytics
-```
-
-**Cascading Features Example**:
-```
-Scenario: Develop "Scheduler" plugin for Università
-    ↓
-Test with Università project (study sessions)
-    ↓
-Realize MTG needs same feature (tournament scheduling)
-    ↓
-Install Scheduler in MTG project → Works out-of-box
-    ↓
-Later: Cucina uses it for meal prep scheduling
-    ↓
-Plugin validated across 3 different domains
+5. Usage tracked for pattern analysis
+6. If used in unexpected context → new operational dimension emerges
 ```
 
 ---
@@ -247,26 +290,59 @@ Trigger: User clicks "Prepare for Exam: Fisica 2"
 Result: 1 click → full exam prep automated
 ```
 
-**MTG WebApp: "Generate & Test Deck"**
-```
-Trigger: User provides collection CSV
-1. Parse collection → send to Claude
-2. Generate 3 deck options
-3. Simulate matches (vs meta decks)
-4. Rank decks by win rate
-5. Generate deck PDF + sideboard guide
-6. Notify user with results
-```
-
 ---
 
-### 4. Intelligence Layer
+### 4. Intelligence Layer as Pattern Recognizer
 
-**Purpose**: System that learns from usage and becomes smarter over time
+**Purpose**: Non predire azioni future ma scoprire pattern latenti nella struttura del lavoro
 
 **Components**:
 
-**Usage Analytics**
+**Pattern Detection**:
+```typescript
+interface DiscoveredPattern {
+  id: string;
+  name: string;
+  description: string;
+  
+  // Dove pattern osservato
+  occurrences: {
+    project: string;
+    context: string;
+    timestamp: Date;
+  }[];
+  
+  // Frequenza
+  frequency: number;
+  
+  // Convergenze rilevate
+  relatedPatterns: string[];
+}
+```
+
+**Example Patterns Discovered**:
+- "optimization-under-multiple-constraints": Nautica (meteo), Università (tempo), Coworking (budget), Hub (tokens)
+- "scheduling-recurring-events": Università (study), MTG (tournaments), Cucina (meal prep)
+- "real-time-monitoring-with-alerts": MTG (audio), Hub (performance), IoT agricoltura
+
+**Suggestions Based on Patterns**:
+```typescript
+// Sistema rileva pattern ricorrente
+const pattern = detectPattern("scheduling-under-constraints");
+
+// Suggerisce esplorazione
+suggest({
+  message: "Detected 'scheduling-under-constraints' across 4 projects",
+  exploration: "This might be meta-interest worth exploring",
+  suggestedActions: [
+    "Abstract scheduling logic into reusable component",
+    "Study optimization algorithms (operations research)",
+    "Connect with Knowledge Weaver: formal scheduling theory"
+  ]
+});
+```
+
+**Usage Analytics**:
 ```typescript
 interface UsageEvent {
   userId: string;
@@ -278,46 +354,9 @@ interface UsageEvent {
     dayOfWeek: string;
     sessionDuration: number;
     pluginsUsed: string[];
+    convergencesDiscovered: string[];
   };
 }
-```
-
-**Tracked Metrics**:
-- Most used projects
-- Common action sequences
-- Peak usage times
-- Plugin popularity
-- Context loading times
-- Claude API token usage
-
-**Predictive Suggestions**
-```typescript
-// After 1 month of usage, system detects patterns
-
-Pattern: Every Sunday evening user works on Università
-Suggestion: "Want to auto-open Università project on Sundays?"
-
-Pattern: User always uses PDF Processor → Notifier
-Suggestion: "Create workflow to chain these automatically?"
-
-Pattern: MTG work correlates with weekends
-Suggestion: "Schedule MTG notifications for Saturdays?"
-```
-
-**Context Optimization**
-```typescript
-// Smart context builder learns which sections of PROJECT.md
-// are most relevant for different task types
-
-Task: "Generate code"
-Optimized Context: Load STACK + CURRENT_PHASE + SESSION_HANDOFF
-Skip: LOG, RESOURCES (saves 40% tokens)
-
-Task: "Review progress"
-Optimized Context: Load PROGRESS + LOG + DELIVERABLES
-Skip: STACK details (saves 30% tokens)
-
-Result: Faster responses + lower API costs
 ```
 
 ---
@@ -338,17 +377,7 @@ projects/
 **Read/Write Operations**: Via Octokit (GitHub API)  
 **Rate Limit**: 5000 req/hour (authenticated)
 
-**Code Commit Flow**:
-```typescript
-// When user clicks "Commit to GitHub"
-1. Check if file exists (GET /repos/.../contents/path)
-2. If exists: use existing SHA for update
-3. If new: create file
-4. Commit with auto-generated message
-5. Return commit URL
-```
-
-**Tier 2: Supabase (Session & Analytics)**
+**Tier 2: Supabase (Session & Analytics & Graph Cache)**
 ```sql
 -- User sessions (cloud-synced)
 CREATE TABLE sessions (
@@ -360,103 +389,44 @@ CREATE TABLE sessions (
   conversation_history JSONB[]
 );
 
--- Claude API usage tracking
-CREATE TABLE api_usage (
+-- Graph cache (for performance)
+CREATE TABLE graph_cache (
   id UUID PRIMARY KEY,
-  user_id UUID,
-  month TEXT,
-  tokens_used INTEGER,
-  cost_usd DECIMAL
+  updated_at TIMESTAMP,
+  nodes JSONB,
+  edges JSONB
+);
+
+-- Discovered convergences
+CREATE TABLE convergences (
+  id UUID PRIMARY KEY,
+  project_a TEXT,
+  project_b TEXT,
+  operational_dimension TEXT,
+  discovered_at TIMESTAMP,
+  validated_by_user BOOLEAN
 );
 ```
 
-**Budget Protection**:
-```typescript
-// Check every 6h via Vercel Cron
-if (monthlySpend > 100) showWarning();
-if (monthlySpend > 150) disableAPI();
-```
+**Tier 3: Vector Store (Supabase pgvector)**
+```sql
+-- Enable pgvector extension
+CREATE EXTENSION vector;
 
-**Tier 3: Browser Session Cache (Temporary)**
-```typescript
-// In-memory only, NO IndexedDB persistence
-const sessionCache = {
-  conversationBuffer: [],    // Last 10 messages
-  projectList: null,          // Cached 1 hour
-  apiResponses: new Map()     // Dedupe, 5min TTL
-};
+-- Store embeddings
+CREATE TABLE document_embeddings (
+  id UUID PRIMARY KEY,
+  project_id TEXT,
+  content TEXT,
+  embedding vector(1536),
+  metadata JSONB
+);
 
-// Clears on: page refresh, app close, timeout (30min)
-```
-
-**Connection Handling**:
-```typescript
-if (navigator.onLine === false) {
-  showBanner("⚠️ Offline - Reconnecting...");
-  queueWrites(); // Auto-retry when online
-}
-```
-
----
-
-## 📱 iOS PWA CONSTRAINTS
-
-### Known Limitations
-- **Storage**: 50MB quota (iOS clears if exceeded)
-- **Notifications**: ❌ NO push on iOS Safari → Email fallback
-- **Background Sync**: Only if app opened weekly
-- **Session Persistence**: iOS may kill PWA after inactivity
-
-### Mitigation Strategy
-- Design for email notifications (iOS)
-- Compress PROJECT.md contexts (gzip)
-- Warn user if >45MB cached data
-- Auto-save to Supabase every 30s
-
----
-
-## 🔐 SECURITY ARCHITECTURE
-
-### Authentication & Authorization
-**Auth Provider**: Supabase Auth (GitHub OAuth)
-
-```typescript
-// User flow
-1. User signs in with GitHub
-2. Supabase creates JWT token
-3. Token stored in httpOnly cookie
-4. Every API call validates token
-5. GitHub permissions inherited
-```
-
-### API Security
-**Rate Limiting** (Vercel Edge Config):
-```typescript
-const limits = {
-  claude_api: "100 req/hour",
-  github_api: "5000 req/hour",
-  plugin_execution: "50 req/hour"
-};
-```
-
-**Input Validation**:
-```typescript
-import { z } from 'zod';
-
-const ProjectInputSchema = z.object({
-  name: z.string().min(1).max(100),
-  description: z.string().max(500)
-});
-```
-
-**Secrets Management**:
-```bash
-# Environment variables (Vercel)
-ANTHROPIC_API_KEY=sk-ant-...
-GITHUB_TOKEN=ghp_...
-SUPABASE_URL=https://...
-
-# Never exposed to client
+-- Similarity search
+SELECT content, 1 - (embedding <=> query_embedding) as similarity
+FROM document_embeddings
+ORDER BY embedding <=> query_embedding
+LIMIT 5;
 ```
 
 ---
@@ -493,13 +463,39 @@ self.addEventListener('sync', (event) => {
 **Works Offline**:
 - ✅ View cached projects
 - ✅ Read conversation history
-- ✅ Edit PROJECT.md (queued for sync)
 - ✅ Browse plugin marketplace (cached)
+- ✅ Explore graph (cached)
 
 **Requires Online**:
-- ❌ Claude API calls (no offline LLM in V1.0)
+- ❌ Claude API calls
 - ❌ GitHub commits (queued)
-- ❌ Plugin installations (cached after first)
+- ❌ Convergence detection (queued)
+
+---
+
+## 🔐 SECURITY ARCHITECTURE
+
+### Authentication & Authorization
+**Auth Provider**: Supabase Auth (GitHub OAuth)
+
+```typescript
+// User flow
+1. User signs in with GitHub
+2. Supabase creates JWT token
+3. Token stored in httpOnly cookie
+4. Every API call validates token
+5. GitHub permissions inherited
+```
+
+### API Security
+**Rate Limiting** (Vercel Edge Config):
+```typescript
+const limits = {
+  claude_api: "100 req/hour",
+  github_api: "5000 req/hour",
+  plugin_execution: "50 req/hour"
+};
+```
 
 ---
 
@@ -519,54 +515,85 @@ self.addEventListener('sync', (event) => {
 - Cold start: ~300ms
 
 **External Services**:
-- Supabase (Database + Auth)
+- Supabase (Database + Auth + Vector Store)
 - Upstash Redis (Cache)
-
-### CI/CD Pipeline
-
-```yaml
-# .github/workflows/deploy.yml
-name: Deploy Hub
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
-      - uses: amondnet/vercel-action@v20
-
-# Total time: ~2 minutes
-```
+- n8n (Self-hosted workflows)
 
 ---
 
-## 📊 SCALABILITY CONSIDERATIONS
+## 📊 METRICS & TARGETS
 
-### Current Targets (V1.0)
-- **Users**: 1 → 10 → 100
-- **Projects per user**: 10-20
-- **Concurrent sessions**: 50
-- **API calls/day**: ~10,000
+### Discovery Metrics (Primary)
 
-### Future Scale (V2.0+)
-- **Users**: 1,000 → 10,000
-- **Projects per user**: 50+
-- **Concurrent sessions**: 1,000+
-- **API calls/day**: 1M+
+- **Convergences identified per week**: Target ≥3 cross-project convergences recognized as valuable
+- **Recursive exploration depth**: Average chain length (query → convergence → new query → ...)
+- **Pattern emergence rate**: New operational dimensions discovered per month
+- **User validation rate**: % of suggested convergences that user explores (target >60%)
 
-### Scaling Strategy
+### Performance Metrics (Secondary)
 
-**Database**: Supabase free → Pro ($25/mo) → Self-hosted PostgreSQL  
-**Claude API**: Direct calls → Batching + caching → Local LLM fallback  
-**Redis/Cache**: Upstash free → Pro → Self-hosted cluster
+**Load Times**
+- **First Load**: <3s (3G)
+- **Repeat Load**: <1s (cached)
+- **Time to Interactive**: <5s
+- **Lighthouse Score**: >90
+
+**API Response Times**
+- **Claude API**: 2-5s (streaming)
+- **GitHub API**: 100-500ms
+- **Database**: <100ms
+- **Plugin execution**: <2s
+- **Graph traversal**: <500ms
+
+### Success Criteria for Discovery Engine
+
+- [ ] Proposes at least 1 non-obvious cross-project connection per day of active use
+- [ ] User recognizes suggested convergences as genuinely interesting >70% of time
+- [ ] At least 3 meta-patterns discovered after 3 months of usage
+- [ ] Average recursive exploration depth ≥2 (user follows suggestions that generate further suggestions)
+
+---
+
+## 🎯 INTEGRATION WITH KNOWLEDGE WEAVER
+
+Hub e Knowledge Weaver sono **isomorfi** (stessa struttura matematica applicata a domini diversi):
+
+| Aspect | Hub | Knowledge Weaver |
+|--------|-----|------------------|
+| **Corpus** | Progetti + documentazione | Interessi + programmi accademici |
+| **Query** | Task corrente utente | Problema pratico / esame |
+| **Retrieval** | Semantic search cross-project | Convergenze dimensioni operative |
+| **Output** | Context ottimizzato + suggestions | Percorso apprendimento |
+| **Growth** | Nuovi progetti, nuova docs | Nuovi interessi, nuovi programmi |
+| **Pattern** | Retrieval-Augmented Project Management | Retrieval-Augmented Learning |
+
+**Unified Architecture Possible**: 
+- Stesso retrieval engine
+- Stesso vector store con namespace: "projects", "interests", "academic-programs"
+- Stesso graph database
+- Discovery logic condivisa
+
+**Example Integration**:
+```typescript
+// User working on Hub feature
+const task = "Implement notification system";
+
+// Discovery Engine queries both domains
+const hubSuggestions = await discover({
+  domain: "projects",
+  query: task
+});
+// Returns: Università spaced-rep, Cucina meal-prep reminders
+
+const kwSuggestions = await discover({
+  domain: "interests", 
+  query: task
+});
+// Returns: "notification-systems" might be interest worth exploring
+//          Connects to HCI, psychology of attention, push protocols
+
+// User can explore both or either
+```
 
 ---
 
@@ -589,15 +616,22 @@ jobs:
 - Node.js 20 (runtime)
 - Anthropic SDK (Claude)
 - Octokit (GitHub)
-- LangChain.js (agents)
+- LangChain.js (discovery engine)
 - Zod (validation)
 ```
 
 ### Database & Cache
 ```typescript
-- Supabase (PostgreSQL + Auth)
+- Supabase (PostgreSQL + Auth + pgvector)
 - Upstash Redis (KV store)
 - IndexedDB (client storage)
+```
+
+### Graph & Semantic
+```typescript
+- NetworkX or Neo4j (graph database)
+- OpenAI/Anthropic Embeddings
+- Supabase pgvector (vector store)
 ```
 
 ### Automation
@@ -607,41 +641,62 @@ jobs:
 - node-cron (scheduling)
 ```
 
-### DevOps
-```typescript
-- GitHub Actions (CI/CD)
-- Sentry (error monitoring)
-- Vercel Analytics (performance)
-```
+---
+
+## 📈 IMPLEMENTATION PHASES (REVISED)
+
+### Phase 0: Foundation (architecture + skeleton) ← **CURRENT**
+- [x] Architecture defined (this document)
+- [ ] React + Vite setup
+- [ ] Vercel deployment
+- [ ] Test on iPhone
+
+### Phase 1: Discovery Engine Core
+- [ ] **Checkpoint 1.1**: Graph-based context engine (not just token optimization)
+  - Parse PROJECT.md → graph representation
+  - Basic graph traversal
+  - Test: query "audio" returns MTG + related projects
+  
+- [ ] **Checkpoint 1.2**: Claude API integration with context optimization
+  
+- [ ] **Checkpoint 1.3**: Convergence Detection (NEW)
+  - Automatically identify when solution A applies to project B
+  - UI to display discovered convergences
+  - User validation feedback loop
+
+### Phase 2: Plugin Architecture (convergences materialized)
+- [ ] Plugin registry with operational dimensions metadata
+- [ ] Plugin executor
+- [ ] Test: PDF processor cascades to 3+ projects
+
+### Phase 3: Workflow Automation (n8n integration)
+- [ ] n8n setup and integration
+- [ ] First complex workflow (e.g., exam prep automation)
+
+### Phase 4: Intelligence Layer (pattern recognizer)
+- [ ] Usage analytics
+- [ ] Pattern detection
+- [ ] Proactive suggestions
+
+### Phase 5: PWA Polish (mobile optimization)
+- [ ] Service worker
+- [ ] Offline mode
+- [ ] Install prompt
+- [ ] Touch optimization
+
+### Phase 6: Production Hardening
+- [ ] Error monitoring
+- [ ] Performance optimization
+- [ ] Documentation
 
 ---
 
-## 📈 PERFORMANCE TARGETS
-
-### Load Times
-- **First Load**: <3s (3G)
-- **Repeat Load**: <1s (cached)
-- **Time to Interactive**: <5s
-- **Lighthouse Score**: >90
-
-### API Response Times
-- **Claude API**: 2-5s (streaming)
-- **GitHub API**: 100-500ms
-- **Database**: <100ms
-- **Plugin execution**: <2s
-
-### Resource Usage
-- **Bundle Size**: <500KB (gzipped)
-- **Memory**: <100MB (browser)
-- **Battery**: Minimal impact (PWA optimized)
-
----
-
-## 🎯 ARCHITECTURE VALIDATION CHECKLIST
+## 🎓 ARCHITECTURE VALIDATION CHECKLIST
 
 Before implementation:
 
 - [ ] **Scalability**: Can handle 10x users without refactor?
+- [ ] **Discovery-First**: Sistema ottimizza per scoperta, non efficienza?
 - [ ] **Security**: All sensitive data encrypted + validated?
 - [ ] **Reliability**: Graceful degradation when services fail?
 - [ ] **Performance**: Meets all targets on slow connections?
@@ -649,20 +704,7 @@ Before implementation:
 - [ ] **Extensibility**: Easy to add plugins/features?
 - [ ] **Cost**: Stays within budget at projected scale?
 - [ ] **UX**: Feels fast and native on iPhone?
-
----
-
-## 🚀 IMPLEMENTATION PHASES
-
-This architecture will be built in 6 phases:
-
-**Phase 0**: Foundation (architecture + skeleton) ← **NOW**  
-**Phase 1**: Core Agentic System (Langchain + Claude)  
-**Phase 2**: Plugin Architecture (cascading features)  
-**Phase 3**: Workflow Automation (n8n integration)  
-**Phase 4**: Intelligence Layer (analytics + learning)  
-**Phase 5**: PWA Polish (mobile optimization)  
-**Phase 6**: Production Hardening (monitoring + docs)
+- [ ] **Isomorphic with KW**: Architecture reusable for knowledge domain?
 
 ---
 
@@ -674,25 +716,32 @@ This architecture will be built in 6 phases:
 - **n8n**: https://docs.n8n.io/
 - **Vercel**: https://vercel.com/docs
 - **Supabase**: https://supabase.com/docs
+- **Neo4j**: https://neo4j.com/docs/
 
 ### Architecture Patterns
-- **Hexagonal Architecture**: Ports & Adapters for plugins
+- **Graph-Based Knowledge Management**: Neo4j patterns
+- **Semantic Retrieval**: RAG patterns
+- **Convergence Detection**: Similar to recommendation systems but optimized for discovery
+- **Plugin Architecture**: Hexagonal Architecture (Ports & Adapters)
 - **Event-Driven Architecture**: For workflow automation
-- **CQRS**: Command Query Responsibility Segregation
+
+### Philosophical Alignment
+- **Knowledge Weaver PROJECT.md**: Isomorphic architecture for learning domain
+- **Research**: Serendipity in information retrieval, exploratory search systems
 
 ---
 
 <div align="center">
 
-**🏗️ ARCHITECTURE v2.0**
+**🏗️ ARCHITECTURE v2.1**
 
-*Agentic AI System for Autonomous Project Management*
+*Discovery Engine for Recursive Project Exploration*
 
 **Status**: Design Complete → Implementation Starting  
-**Next**: Phase 0 - Foundation Setup
+**Key Innovation**: From Efficiency Optimization to Discovery Facilitation
 
 ---
 
-*Built with intelligence, designed for evolution*
+*Built with intelligence, designed for exploration*
 
 </div>
