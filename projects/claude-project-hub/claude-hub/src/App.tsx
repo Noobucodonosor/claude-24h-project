@@ -1,66 +1,74 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
-  const [message, setMessage] = useState('')
-  const [response, setResponse] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('');
+  const [response, setResponse] = useState('');
+  const [repos, setRepos] = useState<string[]>([]);
+
+  // Carica repos all'avvio
+  useEffect(() => {
+    fetch('/api/github')
+      .then(r => r.json())
+      .then(data => setRepos(data.repos))
+      .catch(err => console.error('GitHub error:', err));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
+    e.preventDefault();
     
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message })
-      })
-      const data = await res.json()
-      setResponse(data.response)
-    } catch (error) {
-      setResponse('Error: ' + error)
-    }
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message })
+    });
     
-    setLoading(false)
-  }
+    const data = await res.json();
+    setResponse(data.response);
+  };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#111', color: '#fff', padding: '2rem' }}>
-      <h1>🏗️ Claude Hub</h1>
+    <div className="min-h-screen bg-black text-white p-8">
+      <h1 className="text-4xl font-bold mb-8">⚖️ Claude Hub</h1>
       
-      <form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
+      <form onSubmit={handleSubmit} className="mb-8">
         <input
+          type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Ask Claude..."
-          style={{ 
-            width: '100%', 
-            padding: '1rem', 
-            fontSize: '1rem',
-            marginBottom: '1rem'
-          }}
+          className="w-full p-4 bg-gray-900 rounded mb-4"
         />
         <button 
-          type="submit" 
-          disabled={loading}
-          style={{ padding: '1rem 2rem', fontSize: '1rem' }}
+          type="submit"
+          className="px-6 py-2 bg-blue-600 rounded hover:bg-blue-700"
         >
-          {loading ? 'Loading...' : 'Send'}
+          Send
         </button>
       </form>
 
       {response && (
-        <div style={{ 
-          marginTop: '2rem', 
-          padding: '1rem', 
-          background: '#222',
-          borderRadius: '8px'
-        }}>
-          {response}
+        <div className="p-4 bg-gray-900 rounded mb-8">
+          <p>{response}</p>
         </div>
       )}
+
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold mb-4">Your GitHub Projects</h2>
+        {repos.length === 0 ? (
+          <p className="text-gray-500">Loading...</p>
+        ) : (
+          <ul className="space-y-2">
+            {repos.map(repo => (
+              <li key={repo} className="p-3 bg-gray-900 rounded hover:bg-gray-800">
+                📁 {repo}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
