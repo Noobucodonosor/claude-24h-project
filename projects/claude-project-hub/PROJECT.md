@@ -1,643 +1,890 @@
-# 🗺️ Claude Project Hub - Development Roadmap
+# 🏗️ Claude Project Hub - System Architecture
 
-> **Checkpoint-based progression for Hub agentic system development**
+> **Complete architectural design for agentic AI-powered project management system**
 
-**Project**: Claude Project Hub (Meta-project)  
-**Type**: Progressive Web App with AI Agent System  
-**Last Updated**: 2025-10-07  
-**Overall Progress**: 5% (Phase 0 starting)
-
----
-
-## 📍 CURRENT CHECKPOINT
-
-**ID**: 0.1 - Project Setup  
-**Status**: ⬜ Not Started  
-**Phase**: Foundation (Phase 0)  
-**Estimated Time**: 1-3 hours (splittable in 20min chunks)
-
-### Tasks
-- [ ] Create Vite + React + TypeScript project
-- [ ] Basic folder structure (src/, components/, lib/)
-- [ ] Configure Tailwind CSS
-- [ ] Deploy to Vercel (empty app)
-- [ ] Test on iPhone Safari
-
-### Deliverable
-**What "done" looks like**: 
-- Open `hub-yourname.vercel.app` on iPhone Safari
-- See "Hello Claude Project Hub" message
-- App loads in <3 seconds
-- Can install as PWA (Add to Home Screen works)
-
-### Next Session Goal
-Complete all 5 tasks, see app running on iPhone
+**Version**: 2.0 (Agentic Architecture)  
+**Last Updated**: 2025-10-01  
+**Status**: Design Phase → Implementation Starting
 
 ---
 
-## ✅ COMPLETED CHECKPOINTS
+## 🎯 VISION STATEMENT
 
-*None yet - first checkpoint starting!*
+**Claude Project Hub is not a project manager - it's an autonomous AI ecosystem that learns, automates, and evolves with you.**
 
----
+### Core Principles
 
-## 🚀 ALL CHECKPOINTS (Phase 0-6)
-
-### **PHASE 0: Foundation** 🏗️
-
-#### Checkpoint 0.1: Project Setup ⚡ (Current)
-**Goal**: React app skeleton deployed  
-**Tasks**: Setup Vite, deploy to Vercel, test on iPhone  
-**Deliverable**: Empty app accessible from iPhone  
-**Est**: 1-3h
-
-#### Checkpoint 0.2: First API Call 🔌
-**Goal**: Claude API responds in browser  
-**Tasks**: Serverless function, Anthropic SDK, UI display  
-**Deliverable**: Type message → Claude responds  
-**Est**: 2-4h
-
-#### Checkpoint 0.3: GitHub Integration 📂
-**Goal**: Bidirectional GitHub sync (read + write)  
-**Tasks**: Octokit setup, fetch projects, parse display, **test commit API**  
-**Deliverable**: See list of 4 projects + can commit test file  
-**Est**: 3-4h
+1. **Agentic First**: System executes operations autonomously based on context
+2. **Plugin Architecture**: Components are reusable across all projects (cascading features)
+3. **Intelligence Layer**: System learns from usage and predicts next actions
+4. **Mobile Native**: iPhone-first design, 5G-optimized PWA
+5. **Cloud Native**: Zero local filesystem, GitHub as single source of truth
+6. **Context Aware**: Deep integration with PROJECT.md structure for intelligent automation
 
 ---
 
-### **PHASE 1: Core Agentic System** 🤖
+## 📐 SYSTEM ARCHITECTURE OVERVIEW
 
-#### Checkpoint 1.1: Basic Agent 🧠
-**Goal**: Agent loads project context automatically  
-**Tasks**: Langchain setup, PROJECT.md parser, agent loop  
-**Deliverable**: Select project → context auto-loaded  
-**Est**: 3-5h  
-**Prerequisites**: 0.3 complete
-
-#### Checkpoint 1.2: Basic Automation (n8n Setup) ⚡
-**Goal**: n8n on Render (free tier), test with simple workflow  
-**Tasks**: 
-- [ ] Deploy n8n to Render free tier (1-click from render.com)
-- [ ] Setup webhook URL: `https://your-n8n.onrender.com/webhook/test`
-- [ ] Create test workflow: Webhook → Claude API → Response
-- [ ] Test from Hub: trigger workflow via HTTP call
-- [ ] Accept 30s cold start after 15min inactivity
-
-**Deliverable**: Cloud n8n operational, one working test workflow  
-**Est**: 2-3h (easier than local Docker)  
-**Prerequisites**: 1.1 complete  
-**Cost**: $0/month
-
-**Why now**: Enables dogfooding with Università PDF processing early
-
-**External Docs Needed**: None (n8n docs publicly available)
-
-#### Checkpoint 1.3: Context Optimization 📊
-**Goal**: Smart token management  
-**Tasks**: Token counter, context truncation, SESSION_HANDOFF priority  
-**Deliverable**: Context loads <128K tokens always  
-**Est**: 2-3h  
-**Prerequisites**: 1.1 complete
-
----
-
-### **PHASE 2: Plugin System** 🔌
-
-#### Checkpoint 2.1: Plugin Registry 📦
-**Goal**: Can load and execute plugins  
-**Tasks**: Plugin interface, loader, test with dummy plugin  
-**Deliverable**: Plugin appears in UI, executes on click  
-**Est**: 3-5h  
-**Prerequisites**: 1.2 complete
-
-#### Checkpoint 2.2: PDF Processor Plugin 📄
-**Goal**: First real plugin working  
-**Tasks**: PDF parsing, Claude integration, test on real PDF  
-**Deliverable**: Upload PDF → summary in 30 seconds  
-**Est**: 4-6h  
-**Prerequisites**: 2.1 complete
-
-#### Checkpoint 2.3: Notification Manager Plugin 🔔
-**Goal**: Universal notification system  
-**Tasks**: Push notification setup, email, webhook triggers  
-**Deliverable**: Notification sent to iPhone from Hub  
-**Est**: 3-4h  
-**Prerequisites**: 2.1 complete
-
-#### Checkpoint 2.4: Git Manager Plugin 📝
-**Goal**: Auto-commit code + PROJECT.md to GitHub  
-**Tasks**: GitHub API write, commit message generation, **code artifact detection**  
-**Deliverable**: Code generated → auto-committed to deliverables/code/  
-**Est**: 4-5h  
-**Prerequisites**: 2.1 complete
-
----
-
-### **PHASE 3: Advanced Automation** ⚙️
-
-#### Checkpoint 3.1: Workflow Engine 🔄
-**Goal**: Complex multi-step workflows  
-**Tasks**: n8n advanced setup, conditional logic, error handling  
-**Deliverable**: 3-step workflow executes successfully  
-**Est**: 4-6h  
-**Prerequisites**: 2.4 complete
-
-#### Checkpoint 3.2: Scheduled Operations ⏰
-**Goal**: Cron-like scheduled tasks  
-**Tasks**: BullMQ setup, Redis, task scheduler  
-**Deliverable**: Daily task runs automatically  
-**Est**: 3-4h  
-**Prerequisites**: 3.1 complete
-
-#### Checkpoint 3.3: First Complex Workflow 🎯
-**Goal**: Real multi-project workflow  
-**Tasks**: "Prepare for exam" workflow (Università)  
-**Deliverable**: 1 click → full study plan generated  
-**Est**: 5-7h  
-**Prerequisites**: 3.2 complete + test project needed
-
-**External Docs Needed**: Università PROJECT.md (upload when you get here)
-
----
-
-### **PHASE 4: Intelligence Layer** 🧠
-
-#### Checkpoint 4.1: Usage Analytics 📊
-**Goal**: Track what user does most  
-**Tasks**: Event logging, pattern detection, database setup  
-**Deliverable**: Dashboard shows usage stats  
-**Est**: 4-5h  
-**Prerequisites**: 3.3 complete
-
-#### Checkpoint 4.2: Predictive Suggestions 🔮
-**Goal**: System suggests next actions  
-**Tasks**: Pattern analysis, suggestion engine, UI prompts  
-**Deliverable**: "You usually work on X now. Continue?"  
-**Est**: 5-6h  
-**Prerequisites**: 4.1 complete + 1 month usage data
-
-#### Checkpoint 4.3: Smart Context Builder 🎯
-**Goal**: Optimize context based on task  
-**Tasks**: Task classification, selective loading, token optimization  
-**Deliverable**: Context loads 2x faster, 30% fewer tokens  
-**Est**: 4-5h  
-**Prerequisites**: 4.2 complete
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     USER INTERFACE LAYER                     │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │  Web App     │  │  Mobile PWA  │  │  CLI Tool    │      │
+│  │  (React)     │  │  (iPhone)    │  │  (Optional)  │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                      API GATEWAY LAYER                       │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │  Vercel Edge Functions (Global CDN)                  │  │
+│  │  - Authentication & Authorization                    │  │
+│  │  - Rate Limiting & Caching                          │  │
+│  │  - Request Routing                                  │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                   CORE AGENTIC LAYER                         │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │           Agent Orchestrator (Langchain)             │  │
+│  │  - Context Builder (PROJECT.md → Agent Context)     │  │
+│  │  - Task Planner (Break down user intent)            │  │
+│  │  - Execution Engine (Run autonomous operations)     │  │
+│  │  - Memory System (Session persistence)              │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                              ↓                               │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │         Claude API Integration (Anthropic SDK)       │  │
+│  │  - Streaming responses                               │  │
+│  │  - Context optimization (200K token management)     │  │
+│  │  - Artifact extraction (code, docs, data)           │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                  PLUGIN SYSTEM LAYER                         │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │ PDF Parser   │  │  Notifier    │  │ Git Manager  │      │
+│  │ Plugin       │  │  Plugin      │  │ Plugin       │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │ Scheduler    │  │  Analytics   │  │ Custom       │      │
+│  │ Plugin       │  │  Plugin      │  │ Plugins...   │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+│                                                               │
+│  Plugin Registry: Dynamic loading, dependency management    │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│               WORKFLOW AUTOMATION LAYER                      │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │          n8n Workflow Engine (Self-hosted)           │  │
+│  │  - Event-driven workflows                            │  │
+│  │  - Multi-step automations                            │  │
+│  │  - Error handling & retry logic                      │  │
+│  │  - Webhook management                                │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                              ↓                               │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │            Task Queue (BullMQ + Redis)               │  │
+│  │  - Background job processing                         │  │
+│  │  - Scheduled tasks (cron-like)                       │  │
+│  │  - Priority queues                                   │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                  INTELLIGENCE LAYER                          │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │           Usage Analytics & Learning System          │  │
+│  │  - Pattern detection (what user does most)           │  │
+│  │  - Predictive suggestions (next likely action)       │  │
+│  │  - Context optimization (smart token management)     │  │
+│  │  - Performance metrics                               │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                      DATA LAYER                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │   GitHub     │  │  Supabase    │  │  IndexedDB   │      │
+│  │   (Source)   │  │  (Cloud DB)  │  │  (Local)     │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+│                                                               │
+│  - GitHub: PROJECT.md files (source of truth)               │
+│  - Supabase: User data, sessions, analytics                 │
+│  - IndexedDB: Offline cache, PWA data                       │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                 EXTERNAL INTEGRATIONS                        │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │  Push APIs   │  │  Email       │  │  Slack       │      │
+│  │  (Notifs)    │  │  (SendGrid)  │  │  (Optional)  │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-### **PHASE 5: PWA Polish** 📱
+## 🧩 CORE COMPONENTS DEEP DIVE
 
-#### Checkpoint 5.1: Network Error Handling ⚡
-**Goal**: Graceful connection loss handling  
-**Tasks**: 
-- [ ] Detect offline state (navigator.onLine)
-- [ ] Show reconnection banner
-- [ ] Queue writes during offline
-- [ ] Auto-retry when back online
-- [ ] User notification of queued operations
+### 1. Agent Orchestrator (Langchain-based)
 
-**Deliverable**: Shows "⚠️ Reconnecting..." when offline, resumes gracefully  
-**Est**: 2-3h  
-**Prerequisites**: 4.3 complete
+**Purpose**: Central intelligence that interprets user intent and executes autonomous operations
 
-#### Checkpoint 5.2: Service Worker 🔧
-**Goal**: PWA offline capabilities  
-**Tasks**: Workbox setup, cache strategies, background sync  
-**Deliverable**: App works offline for core features  
-**Est**: 3-4h  
-**Prerequisites**: 5.1 complete
+**Key Responsibilities**:
+- Parse PROJECT.md files and build agent context
+- Understand user commands (natural language → actions)
+- Plan multi-step operations
+- Execute tasks via plugin system
+- Maintain conversation memory across sessions
 
-#### Checkpoint 5.3: Install Prompt 📲
-**Goal**: PWA installable on home screen  
-**Tasks**: Manifest, icons, install prompt UI  
-**Deliverable**: "Add to Home Screen" works perfectly  
-**Est**: 2-3h  
-**Prerequisites**: 5.2 complete
-
----
-
-### **PHASE 6: Production Hardening** 🛡️
-
-#### Checkpoint 6.1: Error Monitoring 🐛
-**Goal**: Production-grade error handling  
-**Tasks**: Sentry setup, error boundaries, logging  
-**Deliverable**: All errors tracked and recoverable  
-**Est**: 3-4h  
-**Prerequisites**: 5.3 complete
-
-#### Checkpoint 6.2: Performance Optimization ⚡
-**Goal**: Lighthouse score >95  
-**Tasks**: Bundle optimization, lazy loading, CDN  
-**Deliverable**: <2s load time, perfect Lighthouse  
-**Est**: 4-5h  
-**Prerequisites**: 6.1 complete
-
-#### Checkpoint 6.3: Documentation 📚
-**Goal**: Complete user + dev docs  
-**Tasks**: User guide, plugin dev guide, architecture docs  
-**Deliverable**: Anyone can use/extend Hub  
-**Est**: 5-7h  
-**Prerequisites**: 6.2 complete
-
----
-
-### **PHASE 7: Knowledge Weaver Integration** 🧠🔗
-
-**Prerequisites**: Checkpoints 0.1 through 6.3 complete, KW validated as external client
-
-**External Docs Required**: Upload Knowledge Weaver PROJECT.md to your claude.ai Project before starting Phase 7
-
-**What is Knowledge Weaver**: A learning discovery system where interests (like "nautica", "cooking") converge to create new meta-interests recursively. Similar architecture to Hub but for learning domain instead of projects.
-
-**Goal**: Migrate Knowledge Weaver from external client to internal Hub module, leveraging mature infrastructure.
-
-#### Checkpoint 7.1: KW Module Structure 🏗️
-**Goal**: Restructure KW as Hub internal module  
-**Est**: 4-6h  
-**Tasks**:
-- [ ] Create hub/src/modules/knowledge/ directory
-- [ ] Migrate interests data (JSON → Supabase)
-- [ ] Integrate with existing vector store
-- [ ] UI: Add "Knowledge" navigation tab
-- [ ] Test: Seamless switching Projects ↔ Knowledge
-
-#### Checkpoint 7.2: Unified Data Layer 🗄️
-**Goal**: Single database serving Projects + Interests  
-**Est**: 3-5h  
-**Tasks**:
-- [ ] Extend Supabase schema for interests
-- [ ] Migration script: KW JSON → Supabase
-- [ ] Single vector store for all entity types
-- [ ] Test cross-domain semantic search
-
-#### Checkpoint 7.3: Shared Plugin System 🔌
-**Goal**: Zero plugin duplication, works on any entity type  
-**Est**: 2-3h  
-**Tasks**:
-- [ ] Update plugin interface (generic Entity type)
-- [ ] Test plugins on both projects and interests
-- [ ] Validate reusability across domains
-
-#### Checkpoint 7.4: Cross-Domain Workflows 🔄
-**Goal**: n8n workflows connecting Projects ↔ Interests  
-**Est**: 4-6h  
-**Tasks**:
-- [ ] Workflow: "Study Optimizer"
-- [ ] Workflow: "Project Enrichment"
-- [ ] Test: 2+ cross-domain workflows operational
-
-#### Checkpoint 7.5: Unified Intelligence Layer 🧠
-**Goal**: Pattern detection across Projects + Interests  
-**Est**: 3-4h  
-**Tasks**:
-- [ ] Analytics across both domains
-- [ ] Meta-pattern detection
-- [ ] Proactive cross-domain suggestions
-- [ ] Dashboard: Holistic view
-
----
-
-## 📝 SESSION LOG
-
-### 2025-10-07 (Documentation Optimization)
-**Checkpoint**: Pre-0.1 (docs optimization)  
-**Time**: 1h  
-**Work Done**:
-- Optimized PROJECT.md, ARCHITECTURE.md, ROADMAP.md
-- Removed external dependencies where possible
-- Made Phase 7 self-explanatory with context
-- Added "External Docs Needed" notes
-- 98% smooth workflow guaranteed
-
-**Next Session**: 
-- Commit optimized docs
-- Start Checkpoint 0.1 (React setup)
-
-### 2025-10-01 (Planning)
-**Checkpoint**: Pre-0.1 (architecture phase)  
-**Time**: 3h  
-**Work Done**:
-- Generated complete ARCHITECTURE.md
-- Designed checkpoint system
-- Created roadmap structure (this file)
-- Defined all phases and checkpoints
-
-**Blockers**: None  
-**Learnings**: 
-- Two-tier roadmap system makes sense
-- Checkpoint-based better than sprints for flexible time
-- 30+ checkpoints total = realistic 6-month timeline
-
-**Next Session**: 
-- Start Checkpoint 0.1
-- Setup Vite project
-- Deploy to Vercel
-
----
-
-## 🔧 TECHNICAL DECISIONS
-
-### Stack Choices
-
-**Frontend**
+**Technology Stack**:
 ```typescript
-Framework: React 18 (hooks, functional components)
-Language: TypeScript (strict mode)
-Build: Vite (fast, modern)
-Styling: Tailwind CSS (utility-first)
-State: Zustand (lightweight)
+// Core
+- LangChain.js (agent framework)
+- Claude API (Anthropic SDK)
+- Vercel AI SDK (streaming helpers)
+
+// Memory
+- Upstash Redis (serverless KV store)
+- IndexedDB (client-side persistence)
+
+// Context Management
+- tiktoken (token counting)
+- Custom PROJECT.md parser
 ```
 
-**Backend**
-```typescript
-Platform: Vercel Serverless Functions
-Runtime: Node.js 20
-Database: Supabase (PostgreSQL)
-Cache: Upstash Redis
-```
+**Agent Types**:
 
-**AI/ML**
-```typescript
-LLM: Claude 3.5 Sonnet (Anthropic API)
-Framework: Langchain.js
-Automation: n8n (self-hosted on Render)
-Queue: BullMQ + Redis
-```
+1. **Context Agent**: Loads and optimizes PROJECT.md context
+2. **Task Agent**: Breaks down complex requests into steps
+3. **Execution Agent**: Runs operations via plugins
+4. **Learning Agent**: Analyzes usage patterns, suggests improvements
 
-**PWA**
-```typescript
-Service Worker: Workbox
-Offline: IndexedDB
-Manifest: Complete PWA spec
+**Example Flow**:
 ```
-
-### Code Conventions
-
-**File Structure**
-```
-hub/
-├── src/
-│   ├── components/     # React components
-│   ├── lib/           # Utilities, helpers
-│   ├── agents/        # Langchain agents
-│   ├── plugins/       # Plugin system
-│   └── api/           # API client wrappers
-├── api/               # Vercel functions
-└── public/            # Static assets
-```
-
-**Naming**
-- Components: PascalCase (`ProjectCard.tsx`)
-- Functions: camelCase (`loadProject()`)
-- Constants: UPPER_SNAKE_CASE (`API_BASE_URL`)
-- Files: kebab-case for non-components (`context-builder.ts`)
-
-**Git Commits**
-```
-Format: "Hub: [Checkpoint X.Y] [what]"
-Examples:
-- "Hub: [0.1] Setup Vite + React project"
-- "Hub: [1.2] Add n8n webhook integration"
-- "Hub: [2.1] Implement plugin registry"
+User: "Start working on MTG project"
+    ↓
+Context Agent: Fetches mtg-webapp/PROJECT.md from GitHub
+    ↓
+Task Agent: Plans session (load context → suggest next steps)
+    ↓
+Execution Agent: Prepares Claude with optimized context
+    ↓
+User sees: Instant project load + intelligent suggestions
 ```
 
 ---
 
-## 🐛 KNOWN ISSUES & TECHNICAL DEBT
+### 2. Plugin System Architecture
 
-### Current Issues
-*None - project just starting*
+**Purpose**: Reusable components that provide functionality across all projects (cascading features)
 
-### Anticipated Challenges
+**Design Pattern**: Registry + Factory + Dependency Injection
 
-**Phase 1**
-- **Langchain learning curve**: First time using agent framework
-  - Mitigation: Study examples, start simple
-- **n8n Render setup**: Cold starts after 15min
-  - Mitigation: Accept delay, free tier trade-off
+**Plugin Structure**:
+```typescript
+interface Plugin {
+  id: string;
+  name: string;
+  version: string;
+  description: string;
+  
+  // Lifecycle hooks
+  init(): Promise<void>;
+  execute(context: PluginContext): Promise<PluginResult>;
+  cleanup(): Promise<void>;
+  
+  // Dependencies
+  dependencies?: string[];
+  
+  // Configuration
+  config: PluginConfig;
+  schema: JSONSchema;
+}
+```
 
-**Phase 2**
-- **Plugin hot-reload**: Complex state management
-  - Mitigation: Research dynamic imports in React
-- **Plugin dependencies**: Version conflicts
-  - Mitigation: Strict version pinning
+**Core Plugins (Phase 1-2)**:
 
-**Phase 3**
-- **Workflow error handling**: Many failure points
-  - Mitigation: Comprehensive retry logic from start
-- **Background jobs**: Redis connection management
-  - Mitigation: Use Upstash (managed Redis)
+#### **PDF Processor Plugin**
+```typescript
+{
+  id: "pdf-processor",
+  capabilities: [
+    "Extract text from PDFs",
+    "Send to Claude for summarization",
+    "Generate structured output (markdown/JSON)"
+  ],
+  usedBy: ["università", "mtg-webapp", "cucina-vegana"]
+}
+```
 
-**Phase 4**
-- **Analytics privacy**: GDPR compliance
-  - Mitigation: No PII collection, transparent logging
-- **Prediction accuracy**: Need significant usage data
-  - Mitigation: Start simple, improve over time
+#### **Notification Manager Plugin**
+```typescript
+{
+  id: "notifier",
+  capabilities: [
+    "Push notifications (web + mobile)",
+    "Email notifications",
+    "Slack messages",
+    "Custom webhook triggers"
+  ],
+  usedBy: ["all-projects"]
+}
+```
 
-**Phase 5**
-- **iOS Safari quirks**: PWA limitations
-  - Mitigation: Test early and often on real device
-- **Offline sync conflicts**: Data consistency
-  - Mitigation: Last-write-wins + manual conflict resolution
+#### **GitHub Auto-Committer Plugin**
+```typescript
+{
+  id: "git-manager",
+  capabilities: [
+    "Auto-commit PROJECT.md updates",
+    "Create branches for experiments",
+    "Generate commit messages via Claude"
+  ],
+  usedBy: ["all-projects"]
+}
+```
 
-**Phase 7**
-- **KW integration complexity**: Two systems merging
-  - Mitigation: Wait until Hub mature (Checkpoint 4.3+)
-  - External docs: Upload KW PROJECT.md when starting Phase 7
+**Plugin Installation Flow**:
+```
+1. User discovers plugin in marketplace UI
+2. Click "Install" → Plugin downloaded from registry
+3. Plugin dependencies resolved automatically
+4. Plugin initialized with project-specific config
+5. Plugin available in project context menu
+6. Usage tracked for analytics
+```
+
+**Cascading Features Example**:
+```
+Scenario: User working on Università discovers need for
+          "Auto-schedule study sessions" feature
+
+1. Develops "Scheduler" plugin in Hub
+2. Tests with Università project
+3. Realizes MTG WebApp needs same for tournament scheduling
+4. Installs Scheduler plugin in MTG project
+5. Plugin works out-of-the-box (cascading validated!)
+6. Later: Cucina project uses it for meal prep scheduling
+```
 
 ---
 
-## 📊 METRICS & TARGETS
+### 3. Workflow Automation Engine (n8n)
 
-### Performance Targets
-- **First Load**: <3s (3G network)
+**Purpose**: Complex multi-step automations with visual workflow editor
+
+**Why n8n**:
+- Self-hosted (data privacy)
+- Visual workflow builder (no code for simple flows)
+- 300+ pre-built integrations
+- Webhook support
+- Error handling + retry logic built-in
+
+**Deployment**:
+```bash
+# n8n runs as separate service
+docker run -d \
+  --name n8n \
+  -p 5678:5678 \
+  -v ~/.n8n:/home/node/.n8n \
+  n8nio/n8n
+```
+
+**Integration with Hub**:
+```typescript
+// Hub sends webhook to n8n to trigger workflow
+await fetch('http://localhost:5678/webhook/process-pdf', {
+  method: 'POST',
+  body: JSON.stringify({
+    projectId: 'università',
+    pdfUrl: 'https://...',
+    action: 'summarize'
+  })
+});
+
+// n8n workflow:
+// 1. Download PDF
+// 2. Extract text
+// 3. Send to Claude API
+// 4. Save summary to GitHub
+// 5. Trigger notification
+// 6. Update PROJECT.md progress
+```
+
+**Example Workflows**:
+
+**Università: "Prepare for Exam"**
+```
+Trigger: User clicks "Prepare for Exam: Fisica 2"
+    ↓
+Step 1: Gather all lecture notes (GitHub API)
+    ↓
+Step 2: Send to Claude for comprehensive summary
+    ↓
+Step 3: Generate flashcards (Anki format)
+    ↓
+Step 4: Create study schedule (spaced repetition)
+    ↓
+Step 5: Send push notification: "Study plan ready!"
+    ↓
+Result: 1 click → full exam prep automated
+```
+
+**MTG WebApp: "Generate & Test Deck"**
+```
+Trigger: User provides collection CSV
+    ↓
+Step 1: Parse collection → send to Claude
+    ↓
+Step 2: Generate 3 deck options
+    ↓
+Step 3: Simulate matches (vs meta decks)
+    ↓
+Step 4: Rank decks by win rate
+    ↓
+Step 5: Generate deck PDF + sideboard guide
+    ↓
+Step 6: Notify user with results
+```
+
+---
+
+### 4. Intelligence Layer
+
+**Purpose**: System that learns from usage and becomes smarter over time
+
+**Components**:
+
+#### **Usage Analytics**
+```typescript
+interface UsageEvent {
+  userId: string;
+  projectId: string;
+  action: string;
+  timestamp: Date;
+  context: {
+    timeOfDay: string;
+    dayOfWeek: string;
+    sessionDuration: number;
+    pluginsUsed: string[];
+  };
+}
+```
+
+**Tracked Metrics**:
+- Most used projects
+- Common action sequences
+- Peak usage times
+- Plugin popularity
+- Context loading times
+- Claude API token usage
+
+#### **Predictive Suggestions**
+```typescript
+// After 1 month of usage, system detects patterns
+
+Pattern detected: Every Sunday evening user works on Università
+Suggestion: "Want to auto-open Università project on Sundays?"
+
+Pattern detected: User always uses PDF Processor → Notifier
+Suggestion: "Create workflow to chain these automatically?"
+
+Pattern detected: MTG project work correlates with weekends
+Suggestion: "Schedule MTG notifications for Saturdays?"
+```
+
+#### **Context Optimization**
+```typescript
+// Smart context builder learns which sections of PROJECT.md
+// are most relevant for different task types
+
+Task: "Generate code"
+Optimized Context: Load STACK + CURRENT_PHASE + SESSION_HANDOFF
+Skip: LOG, RESOURCES (saves 40% tokens)
+
+Task: "Review progress"
+Optimized Context: Load PROGRESS + LOG + DELIVERABLES
+Skip: STACK details (saves 30% tokens)
+
+Result: Faster responses + lower API costs
+```
+
+---
+
+### 5. Data Layer Architecture
+
+**Cloud-First Storage Strategy**:
+
+#### **Tier 1: GitHub (Source of Truth)**
+```
+Repository Structure:
+projects/
+  mtg-webapp/
+    PROJECT.md          ← Single source of truth
+    context/
+    deliverables/
+      code/             ← Generated code auto-committed here
+        auth.py
+        models.py
+```
+
+**Read Operations**: Via Octokit (GitHub API)  
+**Write Operations**: Direct commits via GitHub API  
+**Rate Limit Monitoring**: 
+- Track usage per hour (5000 req/h authenticated)
+- Warning at 80% quota (4000 req)
+- Queue writes if near limit
+
+**Code Commit Flow**:
+```typescript
+// When user clicks "Commit to GitHub"
+1. Check if file exists (GET /repos/.../contents/path)
+2. If exists: use existing SHA for update
+3. If new: create file
+4. Commit with auto-generated message
+5. Return commit URL to user
+```
+
+#### **Tier 2: Supabase (Session & Analytics)**
+```sql
+-- User sessions (ephemeral, cloud-synced)
+CREATE TABLE sessions (
+  id UUID PRIMARY KEY,
+  user_id UUID REFERENCES users(id),
+  project_id TEXT,
+  started_at TIMESTAMP,
+  last_active TIMESTAMP,
+  context_snapshot JSONB,
+  conversation_history JSONB[]
+);
+
+-- Claude API usage tracking
+CREATE TABLE api_usage (
+  id UUID PRIMARY KEY,
+  user_id UUID,
+  month TEXT, -- '2025-10'
+  tokens_used INTEGER,
+  cost_usd DECIMAL,
+  created_at TIMESTAMP
+);
+```
+
+**Budget Protection**:
+```typescript
+// Check every 6h via Vercel Cron
+if (monthlySpend > 100) showWarning();
+if (monthlySpend > 150) disableAPI();
+```
+
+#### **Tier 3: Browser Session Cache (Temporary Only)**
+```typescript
+// In-memory only, NO IndexedDB for persistence
+const sessionCache = {
+  conversationBuffer: [],    // Last 10 messages (performance)
+  projectList: null,          // Cached for 1 hour
+  apiResponses: new Map()     // Dedupe, 5min TTL
+};
+
+// Clears on:
+// - Page refresh
+// - App close
+// - Session timeout (30min inactive)
+```
+
+**Connection Handling**:
+```typescript
+// Network status
+if (navigator.onLine === false) {
+  showBanner("⚠️ Offline - Reconnecting...");
+  queueWrites(); // Auto-retry when back online
+}
+```
+
+---
+
+## 📱 iOS PWA CONSTRAINTS
+
+### Known Limitations
+
+**Storage**:
+- 50MB quota (iOS clears if exceeded)
+- Compression required for large contexts
+- No persistent IndexedDB across sessions >1 week
+
+**Notifications**:
+- ❌ NO push notifications on iOS Safari
+- ✅ Fallback: Email notifications via SendGrid
+
+**Background Sync**:
+- Only works if app opened weekly
+- Otherwise: queue operations, sync on next open
+
+**Session Persistence**:
+- iOS may kill PWA after inactivity
+- Supabase stores session, recovers on reopen
+
+**Mitigation Strategy**:
+- Design for email notifications (iOS)
+- Compress PROJECT.md contexts (gzip)
+- Warn user if >45MB cached data
+- Auto-save to Supabase every 30s
+
+## 🔐 SECURITY ARCHITECTURE
+
+### Authentication & Authorization
+
+**Auth Provider**: Supabase Auth (supports GitHub OAuth)
+
+```typescript
+// User flow
+1. User signs in with GitHub
+2. Supabase creates JWT token
+3. Token stored in httpOnly cookie
+4. Every API call validates token
+5. GitHub permissions inherited (can only access own repos)
+```
+
+**Authorization Levels**:
+```typescript
+enum Permission {
+  READ_PROJECTS = "read:projects",
+  WRITE_PROJECTS = "write:projects",
+  MANAGE_PLUGINS = "manage:plugins",
+  ADMIN = "admin"
+}
+```
+---
+
+### API Security
+
+**Rate Limiting** (Vercel Edge Config):
+```typescript
+const limits = {
+  claude_api: "100 req/hour",
+  github_api: "5000 req/hour",
+  plugin_execution: "50 req/hour"
+};
+```
+
+**Input Validation**:
+```typescript
+// All user inputs sanitized
+import { z } from 'zod';
+
+const ProjectInputSchema = z.object({
+  name: z.string().min(1).max(100),
+  description: z.string().max(500),
+  // ... strict validation
+});
+```
+
+**Secrets Management**:
+```bash
+# Environment variables (Vercel)
+ANTHROPIC_API_KEY=sk-ant-...
+GITHUB_TOKEN=ghp_...
+SUPABASE_URL=https://...
+SUPABASE_ANON_KEY=eyJ...
+
+# Never exposed to client
+# Accessed only in serverless functions
+```
+
+---
+
+## 📱 PWA ARCHITECTURE
+
+### Service Worker Strategy
+
+```typescript
+// service-worker.ts
+import { precacheAndRoute } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { CacheFirst, NetworkFirst } from 'workbox-strategies';
+
+// Precache static assets
+precacheAndRoute(self.__WB_MANIFEST);
+
+// Cache-first for assets
+registerRoute(
+  /\.(?:js|css|png|jpg|svg)$/,
+  new CacheFirst({ cacheName: 'assets' })
+);
+
+// Network-first for API calls (with fallback)
+registerRoute(
+  /\/api\/.*/,
+  new NetworkFirst({ cacheName: 'api', networkTimeoutSeconds: 3 })
+);
+
+// Background sync for offline operations
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-operations') {
+    event.waitUntil(syncPendingOperations());
+  }
+});
+```
+
+### Offline Capabilities
+
+**What Works Offline**:
+- ✅ View cached projects
+- ✅ Read conversation history
+- ✅ Edit PROJECT.md (queued for sync)
+- ✅ Browse plugin marketplace (cached)
+
+**What Requires Online**:
+- ❌ Claude API calls (no offline LLM in V1.0)
+- ❌ GitHub commits (queued)
+- ❌ Plugin installations (cached after first install)
+
+---
+
+## 🚀 DEPLOYMENT ARCHITECTURE
+
+### Production Infrastructure
+
+```
+┌─────────────────────────────────────────┐
+│  Vercel Edge Network (Global CDN)       │
+│  - Static assets (React build)          │
+│  - Edge functions (API routes)          │
+│  - Automatic HTTPS                       │
+└─────────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────┐
+│  Vercel Serverless Functions             │
+│  - Node.js runtime                       │
+│  - Auto-scaling (0 → 1000+ concurrent)  │
+│  - Cold start: ~300ms                    │
+└─────────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────┐
+│  External Services                       │
+│  ┌──────────────┐  ┌──────────────┐    │
+│  │  Supabase    │  │  Upstash     │    │
+│  │  (Database)  │  │  (Redis)     │    │
+│  └──────────────┘  └──────────────┘    │
+└─────────────────────────────────────────┘
+```
+
+### CI/CD Pipeline
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy Hub
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
+```
+
+**Deployment Flow**:
+```
+1. Push to main branch
+2. GitHub Actions triggered
+3. Run tests + type checks
+4. Build production bundle
+5. Deploy to Vercel
+6. Automatic preview URL
+7. Health checks
+8. Promote to production
+9. Purge CDN cache
+
+Total time: ~2 minutes
+```
+
+---
+
+## 📊 SCALABILITY CONSIDERATIONS
+
+### Current Targets (V1.0)
+- **Users**: 1 (you) → 10 (friends) → 100 (beta)
+- **Projects per user**: 10-20
+- **Concurrent sessions**: 50
+- **API calls/day**: ~10,000
+
+### Future Scale (V2.0+)
+- **Users**: 1,000 → 10,000
+- **Projects per user**: 50+
+- **Concurrent sessions**: 1,000+
+- **API calls/day**: 1M+
+
+### Scaling Strategy
+
+**Database**:
+```
+Phase 1: Supabase free tier (500MB)
+Phase 2: Supabase Pro ($25/mo, 8GB)
+Phase 3: Self-hosted PostgreSQL + read replicas
+```
+
+**Claude API**:
+```
+Phase 1: Direct API calls (pay per use)
+Phase 2: Request batching + caching
+Phase 3: Local LLM fallback (Ollama) for simple tasks
+```
+
+**Redis/Cache**:
+```
+Phase 1: Upstash free tier (10k commands/day)
+Phase 2: Upstash Pro (unlimited)
+Phase 3: Self-hosted Redis cluster
+```
+
+---
+
+## 🔧 TECHNOLOGY STACK SUMMARY
+
+### Frontend
+```typescript
+- React 18 (UI library)
+- TypeScript (type safety)
+- Vite (build tool)
+- TailwindCSS (styling)
+- Zustand (state management)
+- React Query (server state)
+- Workbox (PWA/service worker)
+```
+
+### Backend
+```typescript
+- Vercel Serverless Functions (hosting)
+- Node.js 20 (runtime)
+- Anthropic SDK (Claude API)
+- Octokit (GitHub API)
+- LangChain.js (agent framework)
+- Zod (validation)
+```
+
+### Database & Cache
+```typescript
+- Supabase (PostgreSQL + Auth)
+- Upstash Redis (KV store)
+- IndexedDB (client storage)
+```
+
+### Automation
+```typescript
+- n8n (workflow engine)
+- BullMQ (job queue)
+- node-cron (scheduling)
+```
+
+### DevOps
+```typescript
+- GitHub Actions (CI/CD)
+- Sentry (error monitoring)
+- Vercel Analytics (performance)
+- Lighthouse CI (quality gates)
+```
+
+---
+
+## 📈 PERFORMANCE TARGETS
+
+### Load Times
+- **First Load**: <3s (3G connection)
 - **Repeat Load**: <1s (cached)
 - **Time to Interactive**: <5s
 - **Lighthouse Score**: >90 (all categories)
 
-### API Targets
-- **Claude API**: 2-5s response (streaming)
-- **GitHub API**: <500ms
-- **Database**: <100ms queries
-- **Plugin Execution**: <2s
+### API Response Times
+- **Claude API**: 2-5s (streaming)
+- **GitHub API**: 100-500ms
+- **Database queries**: <100ms
+- **Plugin execution**: <2s
 
-### Resource Limits
-- **Bundle Size**: <500KB gzipped
-- **Memory Usage**: <100MB browser
-- **Token Usage**: <128K per context load
-
-### Business Metrics
-- **Cost per Month**: <$60 (Vercel + Claude API)
-- **Uptime**: >99.5%
-- **Error Rate**: <1%
+### Resource Usage
+- **Bundle Size**: <500KB (gzipped)
+- **Memory**: <100MB (browser)
+- **Battery**: Minimal impact (PWA optimized)
 
 ---
 
-## 🎯 VALIDATION CHECKPOINTS
+## 🎯 ARCHITECTURE VALIDATION CHECKLIST
 
-**Mandatory validation points before moving to next phase**:
+Before implementation, validate:
 
-### After Phase 0 (Foundation)
-- [ ] Can deploy changes to Vercel in <2 min
-- [ ] iPhone Safari works perfectly
-- [ ] GitHub integration fetches all projects
-- [ ] Ready to build on solid foundation
-
-### After Phase 1 (Agentic Core)
-- [ ] Agent loads context automatically
-- [ ] One automation works end-to-end
-- [ ] No manual context copy/paste needed
-- [ ] Dogfooding: Using Hub to build Hub
-
-### After Phase 2 (Plugins)
-- [ ] 3 plugins installed and working
-- [ ] Plugin used across 2+ projects (cascading validated)
-- [ ] Plugin marketplace UI functional
-- [ ] Real time saved vs manual approach
-
-### After Phase 3 (Automation)
-- [ ] Complex workflow (5+ steps) executes successfully
-- [ ] Scheduled task runs for 1 week without errors
-- [ ] Test on real project (Università)
-- [ ] Workflows save significant time (>30 min/week)
-
-### After Phase 4 (Intelligence)
-- [ ] System predicts next action with >60% accuracy
-- [ ] Context loads 2x faster than Phase 1
-- [ ] Usage analytics show clear patterns
-- [ ] Suggestions actually useful (not annoying)
-
-### After Phase 5 (PWA)
-- [ ] Works offline for core features
-- [ ] Installable on iPhone home screen
-- [ ] Feels native (not web app)
-- [ ] Used daily from iPhone without friction
-
-### After Phase 6 (Production)
-- [ ] Zero critical bugs for 2 weeks
-- [ ] Lighthouse score >90
-- [ ] Error monitoring catching all issues
-- [ ] Performance targets met
-
-### Before Phase 7 (KW Integration)
-- [ ] All Phase 0-6 checkpoints complete
-- [ ] Hub used for 1 full project cycle
-- [ ] KW developed and validated as external client
-- [ ] KW PROJECT.md uploaded to claude.ai Project
-
-### Before declaring V1.0 Complete
-- [ ] Used exclusively for 1 full project cycle
-- [ ] 3+ plugins cascaded across projects
-- [ ] No critical bugs for 2 weeks
-- [ ] All validation checkpoints passed
-- [ ] Would recommend to others
+- [ ] **Scalability**: Can handle 10x users without refactor?
+- [ ] **Security**: All sensitive data encrypted + validated?
+- [ ] **Reliability**: Graceful degradation when services fail?
+- [ ] **Performance**: Meets all targets on slow connections?
+- [ ] **Maintainability**: Clear separation of concerns?
+- [ ] **Extensibility**: Easy to add new plugins/features?
+- [ ] **Cost**: Stays within budget at projected scale?
+- [ ] **User Experience**: Feels fast and native on iPhone?
 
 ---
 
-## 🚨 EMERGENCY PIVOTS
+## 🚀 IMPLEMENTATION PHASES
 
-**When to stop and reconsider**:
+This architecture will be built in 6 phases (see PROJECT.md for timeline):
 
-### Red Flags
-- **Checkpoint taking >10h**: Scope too large, split it
-- **Not using Hub after 2 weeks**: Design problem
-- **Claude API costs >$100/month**: Optimize or reconsider approach
-- **Complexity overwhelming**: Simplify, cut features
-- **Other projects blocked >1 month**: Hub not providing value yet
-
-### Pivot Options
-- **Simplify**: Cut Phase 4-6, ship Phase 0-3 as V1.0
-- **Hybrid**: Keep legacy dashboard + limited Hub features
-- **Refocus**: Pause Hub, complete 1 real project, then resume
-- **Restart**: Radical simplification, rebuild from learnings
+**Phase 0**: Foundation (architecture + skeleton) ← **NOW**  
+**Phase 1**: Core Agentic System (Langchain + Claude)  
+**Phase 2**: Plugin Architecture (cascading features)  
+**Phase 3**: Workflow Automation (n8n integration)  
+**Phase 4**: Intelligence Layer (analytics + learning)  
+**Phase 5**: PWA Polish (mobile optimization)  
+**Phase 6**: Production Hardening (monitoring + docs)
 
 ---
 
-## 🎓 LEARNING GOALS
+## 📚 REFERENCES & RESOURCES
 
-### Phase 0-1 Learning
-- [ ] React 18 patterns (hooks, context)
-- [ ] TypeScript advanced types
-- [ ] Vercel deployment workflow
-- [ ] Claude API streaming responses
-- [ ] Langchain agent basics
-
-### Phase 2-3 Learning
-- [ ] Plugin architecture patterns
-- [ ] Dynamic module loading
-- [ ] n8n workflow design
-- [ ] Job queue management
-- [ ] Error handling strategies
-
-### Phase 4-5 Learning
-- [ ] Analytics implementation
-- [ ] Pattern detection algorithms
-- [ ] Service workers
-- [ ] PWA optimization
-- [ ] iOS Safari quirks
-
-### Phase 6-7 Learning
-- [ ] Production monitoring
-- [ ] Performance profiling
-- [ ] Technical documentation
-- [ ] System integration (KW)
-- [ ] Multi-domain architecture
-
----
-
-## 📚 RESOURCES
-
-### Documentation (Self-Contained)
-- **This File**: Current checkpoint, session log
-- **ARCHITECTURE.md**: System design, components
-- **PROJECT.md**: Overall project context
-
-### External Resources
-- **Langchain**: https://js.langchain.com/docs/
+### Technical Documentation
+- **LangChain**: https://js.langchain.com/docs/
+- **Anthropic API**: https://docs.anthropic.com/
 - **n8n**: https://docs.n8n.io/
 - **Vercel**: https://vercel.com/docs
-- **Claude API**: https://docs.anthropic.com/
-- **Render**: https://render.com/docs
+- **Supabase**: https://supabase.com/docs
 
-### Code Examples
-- **Langchain Agents**: https://github.com/langchain-ai/langchainjs/tree/main/examples/src/agents
+### Architecture Patterns
+- **Hexagonal Architecture**: Ports & Adapters pattern for plugins
+- **Event-Driven Architecture**: For workflow automation
+- **CQRS**: Command Query Responsibility Segregation for scaling
+
+### Learning Resources
+- **Agentic Systems**: https://www.deeplearning.ai/short-courses/
 - **PWA**: https://web.dev/progressive-web-apps/
-- **Plugin Systems**: Research hexagonal architecture
-
----
-
-## 🔄 CHANGELOG
-
-### 2025-10-07
-- Optimized ROADMAP.md for standalone use
-- Removed external cross-references
-- Added "External Docs Needed" notes for Phase 7
-- Made KW integration self-explanatory with context
-- 98% smooth workflow guaranteed
-
-### 2025-10-01
-- Created Hub-specific ROADMAP.md
-- Defined 30+ checkpoints across 6 phases
-- Established technical decisions and conventions
-- Set validation criteria and learning goals
+- **Serverless**: https://www.serverless.com/learn/
 
 ---
 
 <div align="center">
 
-**🗺️ HUB ROADMAP v1.1**
+**🏗️ CLAUDE PROJECT HUB - ARCHITECTURE v2.0**
 
-*Checkpoint-based development for agentic AI system*
+*Agentic AI System for Autonomous Project Management*
 
-**Current**: Checkpoint 0.1 - Project Setup  
-**Progress**: 5% (Phase 0 starting)  
-**Target**: V1.0 in 6+ months
-
-**Optimized for**: Standalone use in claude.ai Projects  
-**External Docs**: Only needed for Phase 7 (KW integration)
+**Status**: Design Complete → Ready for Implementation  
+**Next**: Phase 0 - Foundation Setup  
+**Timeline**: 6+ months to V1.0 complete
 
 ---
 
-*Build • Learn • Validate • Iterate*
+*Built with intelligence, designed for evolution*
 
 </div>
